@@ -1,16 +1,33 @@
 header {
-    background: lightcyan;
+    /* background-color: #1a0dab; */
+    /* color: white; */
     border-bottom: 2px solid white;
 }
 
 .app-header {
     display: flex;
     justify-content: space-between;
-    padding: 20px 0;
+    padding: 20px 50px;
+    background: #f1f1f1;
+}
+
+.img-logo {
+    width: 60px;
+    height: 60px;
+    /* object-fit: cover; */
+
+}
+
+.text-logo {
+    vertical-align: -80%;
+    color: #34A853;
+    padding-left: 2.5px;
 }
 
 nav a {
     margin: .5em;
+    vertical-align: -50%;
+    color: #555555;
 }
 
 nav a:active {
@@ -18,7 +35,7 @@ nav a:active {
 }
 
 nav a.active {
-    color: darkblue;
+    color: #1a0dab;
     font-weight: bold;
     text-decoration: overline;
 }

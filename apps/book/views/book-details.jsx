@@ -103,37 +103,44 @@ export class BookDetails extends React.Component {
             publishedDate, description, pageCount,
             categories, language, listPrice, thumbnail } = book
 
-        return <section className="book-details">
-            <h1 className="book-header">{title}</h1>
-            <p className="details-subtitle">Subtitle: {subtitle}</p>
-            <p className="details-authors">{authors}</p>
-            <p className="details-publish-at">{this.getFormattedDate(publishedDate)}</p>
-
-            {!isLongTxtShown && <p className="details-description">
-                Description:{this.getShortTxt(description)}
-                {isLongTxt && <span className="span-toggle-txt" onClick={this.toggleTxt}>Show more</span>}
-            </p>}
+            console.log('book', book)
+        return <section className="book-details-container">
+            <div className="book-details flex">
+                <div className="text-book-details">
 
 
-            {isLongTxtShown && <LongTxt text={description} toggleTxt={this.toggleTxt} isLongTxtShown={isLongTxtShown} />}
+                    <h1 className="book-header">{title}</h1>
+                    <p className="details-subtitle">Subtitle: {subtitle}</p>
+                    <p className="details-authors">{authors}</p>
+                    <p className="details-publish-at">{this.getFormattedDate(publishedDate)}</p>
+
+                    {!isLongTxtShown && <p className="details-description">
+                        Description:{this.getShortTxt(description)}
+                        {isLongTxt && <span className="span-toggle-txt" onClick={this.toggleTxt}>Show more</span>}
+                    </p>}
 
 
-            <p className="details-pageCount">{this.getFormattedPageCount(pageCount)}</p>
-            <p className="details-categories">{categories}</p>
-            <p className="details-language">{language}</p>
-            <p className={"details-price " + this.getPriceColor(listPrice)}>
-                {bookService.getFormattedPrice(listPrice)}
-                {this.getOnSaleSymbol(listPrice)}
-            </p>
-
-            <ReviewsList book={book} />
-            <button className="btn-add-review" onClick={this.toggleReviewEditor}>Add Review!</button>
-            {isAddReview && <ReviewAdd close={this.toggleReviewEditor} book={book} />}
+                    {isLongTxtShown && <LongTxt text={description} toggleTxt={this.toggleTxt} isLongTxtShown={isLongTxtShown} />}
 
 
-            <div className="img-book-details">
-                <img src={thumbnail} alt="" />
+                    <p className="details-pageCount">{this.getFormattedPageCount(pageCount)}</p>
+                    <p className="details-categories">{categories}</p>
+                    <p className="details-language">{language}</p>
+                    <p className={"details-price " + this.getPriceColor(listPrice)}>
+                        {bookService.getFormattedPrice(listPrice)}
+                        {this.getOnSaleSymbol(listPrice)}
+                    </p>
+
+                    <button className="btn-add-review" onClick={this.toggleReviewEditor}>Add Review!</button>
+                    {isAddReview && <ReviewAdd close={this.toggleReviewEditor} book={book} />}
+                </div>
+
+
+                <div className="img-book-details">
+                    <img src={thumbnail} alt="" />
+                </div>
             </div>
+            <ReviewsList book={book} />
 
             <Link to="/book">
                 <button

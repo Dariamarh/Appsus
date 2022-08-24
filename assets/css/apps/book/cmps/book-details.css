@@ -1,6 +1,24 @@
+.book-details-container {
+    background: var(--color-yellow);
+    border-radius: 0px 0px 15px 15px;
+}
+
+.book-details {
+    flex-direction: row-reverse;
+    padding: 25px;
+}
+
+.text-book-details {
+    padding-left: 15px;
+    flex: 1;
+}
+
 .img-book-details {
-    height: 500px;
-    width: 500px;
+    flex: 1;
+}
+
+.book-header{
+    font-size: 1.5rem;
 }
 
 .details-price.red {
@@ -11,12 +29,12 @@
     color: green;
 }
 
-.on-sale-img{
+.on-sale-img {
     height: 5px;
     width: 15px;
 }
 
-.span-toggle-txt{
+.span-toggle-txt {
     text-decoration: underline;
     cursor: pointer;
     font-weight: 600;

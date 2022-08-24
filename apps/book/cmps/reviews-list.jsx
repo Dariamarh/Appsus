@@ -1,6 +1,5 @@
-import { bookService } from "../services/book.service.js"
 import { BookReview } from "./book-review.jsx"
-import { storageService } from "../services/storage.service.js"
+import { storageService } from "../../../services/storage.service.js"
 
 export class ReviewsList extends React.Component {
     state = {

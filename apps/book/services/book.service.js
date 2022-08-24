@@ -1,6 +1,6 @@
 import { booksDB } from './data.service.js'
-import { storageService } from './storage.service.js'
-import { utilService } from './util.service.js'
+import { storageService } from '../../../services/storage.service.js'
+import { utilService } from '../../../services/util.service.js'
 
 const STORAGE_KEY = 'booksDB'
 
@@ -17,7 +17,6 @@ export const bookService = {
     STORAGE_KEY
 }
 
-// let books
 
 function query(filterBy) {
     let books = _loadFromStorage()
@@ -84,7 +83,8 @@ function findGoogleBooks(searchTerm) {
 }
 
 function addGoogleBook(book, id) {
-    book.listPrice = { amount: 'N\nA', currencyCode: 'N\nA', isOnSale: false }
+ 
+    book.listPrice = { amount: 150, currencyCode: 'USD', isOnSale: false }
     const altImg = 'assets/img/no-image-icon.png'
     book.thumbnail = altImg
     if (book.imageLinks) book.thumbnail = book.imageLinks.thumbnail

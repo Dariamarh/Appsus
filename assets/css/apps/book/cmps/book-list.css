@@ -1,9 +1,10 @@
 .books-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    grid-template-columns: repeat(auto-fit, minmax(150px, 250px));
     gap: 15px;
     text-decoration: none;
     color: red;
+    justify-content: center;
 }
 
 /* .books-gallery .book-preview:hover{

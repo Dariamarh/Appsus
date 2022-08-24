@@ -1,5 +1,9 @@
 .search-container {
-    margin: 50px;
+    margin: 10px 0;
+    background: #FDD35A;
+    padding: 25px;
+    display: flex;
+border-radius: 25px;
 }
 
 .label-container {
@@ -19,21 +23,29 @@
     font-size: 1.85rem;
 
 }
+.search-bar-container{
+    position: relative;
+}
 
 .search-bar {
     width: 350px;
     height: 45px;
     font-size: 1.5rem;
-    padding-inline-start: 5px;
+    padding-inline-start: 15px;
+    margin-inline-start: 5px;
+    border-radius: 15px;
 }
 
 .google-book-container {
+    position: absolute;
     margin: 0;
     padding: 0;
     background-color: #f6f6f6;
-    width: 350px;
+    width: 330px;
     border: 1px solid #ddd;
     display: block;
+    z-index: 20;
+    left: 4.28%;
 }
 
 .google-book {

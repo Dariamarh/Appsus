@@ -1,5 +1,5 @@
-/* Setup */
 
+/* Setup */
 @import './setup/variables.css';
 @import './setup/fonts.css';
 
@@ -15,6 +15,8 @@
 @import './apps/note/views/note-app.css';
 
 @import './apps/mail/views/mail-app.css';
+
+@import './apps/book/views/book-index.css';
 
 /* Cmps */
 

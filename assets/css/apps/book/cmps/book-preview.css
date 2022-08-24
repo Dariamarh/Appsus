@@ -2,14 +2,16 @@
     border: 1px solid black;
     padding: 10px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.43);
-    /* color: red; */
+    /* background: #34A853; */
+    background-color: #1a0dab;
+    color: white;
     z-index: 10;
 }
 
 .book-preview:hover {
     box-shadow: -2px 1px 20px 20px rgb(255 244 244 / 43%);
     /* margin: 50px; */
-    background-color: #f5deb3;
+    background-color: var(--color-red);
     transform: scale(1.2);
     opacity: 1;
     z-index: 20;

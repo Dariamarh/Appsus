@@ -25,3 +25,15 @@ img {
     width: 100%;
     object-fit: cover;
 }
+
+.main-layout {
+    width: 80%;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+}
+
+.main-layout>* {
+    width: 80%;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+}

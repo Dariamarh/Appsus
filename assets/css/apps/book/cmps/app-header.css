@@ -1,18 +1,10 @@
-.main-layout {
-    width: 70%;
-    margin-inline-end: auto;
-    margin-inline-start: auto;
-}
-
 .main-nav-bar>*:not(:last-child) {
     margin-inline-end: 10px;
 }
 
 
 .main-header {
-    /* text-align: center; */
     font-size: 2rem;
-    font-family: Aboreto, sans-serif;
 }
 
 .main-header-container {
