@@ -1,5 +1,6 @@
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../book/services/util.service.js'
+
 const EMAIL_KEY = 'emailDB'
 
 
@@ -60,42 +61,50 @@ const emailsData = [
     },
 
 ]
-
-_createEmails()
+const loggedinUser = {
+    email: 'user@appsus.com',
+    fullname: 'Mahatma Appsus'
+}
 
 export const mailService = {
     query,
     remove,
-    get,
     save,
+    getMailById,
+    loadMails,
 }
 
-
-
-function query() {
-    return storageService.query(EMAIL_KEY)
+function query(filterBy) {
+    let emails = _loadMailsFromStorage()
+    if (!emails) {
+        emails = emailsData
+        _saveToStorage(emails)
+    }
+    return emails
 }
 
 function remove(emailId) {
     return storageService.remove(EMAIL_KEY, emailId)
 }
 
-function get(emailId) {
-    return storageService.get(EMAIL_KEY, emailId)
+function save(emails) {
+    _saveMailsToStorage(emails)
 }
 
-function save(email) {
-    if (email.id) return storageService.put(EMAIL_KEY, email)
-    else return storageService.post(EMAIL_KEY, email)
+function loadMails() {
+    return _loadMailsFromStorage()
 }
 
-function _createEmails() {
-    const emails = storageService.loadFromStorage(EMAIL_KEY)
-    if (!emails || !emails.length) {
-        emails = emailsData
-        storageService.saveToStorage(EMAIL_KEY, emails)
-    }
-    return emails
+function getMailById(emailId) {
+    const emails = _loadMailsFromStorage()
+    let email = emails.find((email) => emailId === email.id)
+    return Promise.resolve(email)
 }
 
+function _saveMailsToStorage(emails) {
+    storageService.saveToStorage(EMAIL_KEY, emails)
+}
 
+function _loadMailsFromStorage() {
+    return storageService.loadFromStorage(EMAIL_KEY)
+}
