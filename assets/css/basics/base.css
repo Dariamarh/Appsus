@@ -1,3 +1,7 @@
+html{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
 body {
     margin: 0;
 }
@@ -27,7 +31,7 @@ img {
 }
 
 .main-layout {
-    width: 80%;
+    width: 100%;
     margin-inline-end: auto;
     margin-inline-start: auto;
 }
