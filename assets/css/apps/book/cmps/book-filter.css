@@ -10,8 +10,8 @@
     position: relative;
     inset-inline-start: 50%;
     transform: translate(-50%);
-    border: 1px solid black;
-    border-radius: 15px;
+    /* border: 1px solid black; */
+    border-radius: 0px 0px 15px 15px ;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.43);
 
 }

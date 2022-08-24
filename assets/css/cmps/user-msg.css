@@ -1,21 +1,36 @@
 .user-msg {
-    background-color: lightgray;
     padding: 1em;
     position: absolute;
-    top: 1em;
-    right: 1em;
+    color: white;
+    top: 6.8rem;
+    right: 14.5em;
+    height: 75px;
+    width: 175px;
+    border-radius: 25px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.1rem;
+    z-index: 30;
+}
+
+.user-msg-txt-container{
+    text-align: center;
 }
 
 .user-msg.success {
-    background-color: lightgreen;
+    background-color: var(--color-green);
 }
 
 .user-msg.error {
-    background-color: lightpink;
+    background-color: var(--color-red);
 }
 
 
-.user-msg button{
+.user-msg button {
     float: right;
     margin: 1em;
 }

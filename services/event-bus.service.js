@@ -25,6 +25,12 @@ export function showUserMsg(msg) {
 export function showSuccessMsg(txt) {
     showUserMsg({ txt, type: 'success' })
 }
+
+export function showAddBookSuccessMsg(txt, id) {
+    console.log('im a working msg');
+    showUserMsg({txt, type: 'success',id})
+}
+
 export function showErrorMsg(txt) {
     showUserMsg({ txt, type: 'error' })
 }

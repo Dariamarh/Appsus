@@ -1,9 +1,9 @@
 .search-container {
-    margin: 10px 0;
+    /* margin: 10px 0; */
     background: #FDD35A;
     padding: 25px;
     display: flex;
-border-radius: 25px;
+/* border-radius: 25px; */
 }
 
 .label-container {

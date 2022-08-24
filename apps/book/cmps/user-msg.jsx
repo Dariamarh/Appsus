@@ -29,9 +29,16 @@ export class UserMsg extends React.Component {
 
         if (!msg) return <span></span>
         return <section className={'user-msg ' + msg.type}>
-            <Link to={"/book/" + msg.id}
-            >Book details</Link>
-            {msg.txt}
+            <div className="user-msg-txt-container">
+                {msg.txt}
+            </div>
+
+            {msg.type === 'succes' &&
+                <Link
+                    className="user-msg-link"
+                    to={"/book/" + msg.id}>
+                    👉Book details</Link>
+            }
         </section>
 
     }

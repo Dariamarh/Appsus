@@ -1,0 +1,5 @@
+.btn-note-type-container {
+    list-style: none;
+    gap: 5px;
+    cursor: pointer;
+}
