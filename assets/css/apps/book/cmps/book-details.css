@@ -1,0 +1,23 @@
+.img-book-details {
+    height: 500px;
+    width: 500px;
+}
+
+.details-price.red {
+    color: red;
+}
+
+.details-price.green {
+    color: green;
+}
+
+.on-sale-img{
+    height: 5px;
+    width: 15px;
+}
+
+.span-toggle-txt{
+    text-decoration: underline;
+    cursor: pointer;
+    font-weight: 600;
+}

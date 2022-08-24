@@ -1,0 +1,54 @@
+.search-container {
+    margin: 50px;
+}
+
+.label-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.google-pic {
+    height: 1.5625rem;
+    width: 4.6875rem;
+    vertical-align: -15%;
+
+}
+
+.search-label {
+    font-size: 1.85rem;
+
+}
+
+.search-bar {
+    width: 350px;
+    height: 45px;
+    font-size: 1.5rem;
+    padding-inline-start: 5px;
+}
+
+.google-book-container {
+    margin: 0;
+    padding: 0;
+    background-color: #f6f6f6;
+    width: 350px;
+    border: 1px solid #ddd;
+    display: block;
+}
+
+.google-book {
+    list-style: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.google-book:hover {
+    background-color: rgb(243 198 114 / 73%);
+}
+
+.btn-add-book {
+    padding-left: 5px;
+    cursor: pointer;
+}

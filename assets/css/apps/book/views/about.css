@@ -1,0 +1,18 @@
+.about-container {
+    display: flex;
+    gap: 5px;
+    height: 50vh;
+    padding: 50px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.about-img {
+    flex: 1;
+}
+
+.lorem-ipsum-container {
+    flex: 2;
+    overflow: hidden;
+}

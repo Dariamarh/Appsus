@@ -1,0 +1,16 @@
+.books-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 350px));
+    gap: 15px;
+    text-decoration: none;
+    color: red;
+}
+
+/* .books-gallery .book-preview:hover{
+    gap: 30px;
+} */
+
+img {
+    height: 100%;
+    width: 100%;
+}
