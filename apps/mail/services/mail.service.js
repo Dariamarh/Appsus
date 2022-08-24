@@ -10,7 +10,8 @@ const emailsData = [
         subject: "Miss you!",
         body: "Would love to catch up sometimes",
         isRead: false,
-        sentAt: 1551133930594,
+        from:"user@appsus.com",
+        sentAt: "1551133930594",
         to: "momo@momo.com",
         state: 'inbox'
     },
@@ -19,6 +20,7 @@ const emailsData = [
         subject: "Hi Darling!",
         body: "Coffee break?",
         isRead: false,
+        from:"momo11@momo.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'sent'
@@ -28,6 +30,7 @@ const emailsData = [
         subject: "Google Cloud",
         body: "Learn the funfamentals with this tutorial - and see what else you can do for free on Google Cloud with our Always Free tier.",
         isRead: false,
+        from:"user@appsus.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'sent'
@@ -37,6 +40,7 @@ const emailsData = [
         subject: "Confirm your email address",
         body: "Verify your e-mail to finish signing up for Avocode",
         isRead: false,
+        from:"user@appsus.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'inbox'
@@ -46,6 +50,7 @@ const emailsData = [
         subject: "Google Maps Platform",
         body: "Welcome to Google Maps Platform",
         isRead: false,
+        from:"user@appsus.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'trash'
@@ -55,6 +60,7 @@ const emailsData = [
         subject: "We noticed a new sign in to your Dropbox",
         body: "A new web browser just signed in to your Dropbox account. To help keep your account secure, let us know if this is you. Is this you?",
         isRead: false,
+        from:"user@appsus.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'trash'
@@ -78,7 +84,7 @@ function query(filterBy) {
     let emails = _loadMailsFromStorage()
     if (!emails) {
         emails = emailsData
-        _saveToStorage(emails)
+        _saveMailsToStorage(emails)
     }
     return emails
 }

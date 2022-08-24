@@ -1,4 +1,4 @@
-export class BookFilter extends React.Component {
+export class MailFilter extends React.Component {
 
     state = {
         filterBy: {

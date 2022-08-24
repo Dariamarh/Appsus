@@ -11,11 +11,13 @@ export class MailIndex extends React.Component {
             txt: null,
             to: null,
             subject: null,
+            from: null,
             body: null,
             dateFrom: null,
             dateTo: null,
             state: 'inbox',
             starred: false,
+            mailSearch: ''
         },
     }
 
@@ -25,10 +27,7 @@ export class MailIndex extends React.Component {
     }
 
     loadMails = () => {
-        // mailService
-        //     .query(this.state.filterBy)
-        //     ((emails) => this.setState({ emails }))
-        this.setState({emails:mailService.query()})
+        this.setState({ emails: mailService.query() })
     }
 
     onSetFilter = (filterBy) => {
@@ -36,14 +35,37 @@ export class MailIndex extends React.Component {
             this.loadMails()
         })
     }
+    handleChange = ({ target }) => {
+        const field = target.name
+        const value = target.value
+        this.setState((prevState) => ({ ...prevState, [field]: value }))
+    };
 
+    getFilter = (ev) => {
+        ev.preventDefault()
+        this.props.onSetFilter(this.state)
+        this.clearForm()
+    }
+    clearForm = () => {
+        this.setState({ mailSearch: '' })
+      }
+    
 
     render() {
-        const { emails } = this.state
+        const { emails, mailSearch } = this.state
 
         return (
             <section className="mail-index">
-                <p>email</p>
+                <form onSubmit={this.getFilter} className="search-mail">
+                    {/* <label htmlFor="search"></label> */}
+                    <input
+                        type="search"
+                        id="searchMail"
+                        placeholder="Search in emails"
+                        value={mailSearch}
+                        onChange={this.handleChange}
+                    />
+                </form>
                 <MailList emails={emails} />
                 {/* <MailFilter onSetFilter={this.onSetFilter} /> */}
 

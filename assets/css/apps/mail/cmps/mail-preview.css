@@ -1,0 +1,10 @@
+.mail-preview {
+    display: flex;
+    padding: 10px;
+    justify-content: space-between;
+}
+
+h3 {
+    font-size: 18px;
+    font-weight: normal;
+}
