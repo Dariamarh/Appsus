@@ -3,16 +3,48 @@ import { utilService } from "../../../services/util.service.js";
 
 export const noteService = {
     getNotes,
-    createNote,
-    getById
+    createNoteTxt,
+    getById,
+    createNoteImg,
+    createNoteVideo
 }
 
 function getNotes() {
     return notes
 }
 
+function createNoteVideo(title, videoUrl) {
+    const currNote = {
+        id: utilService.makeId(),
+        type: "note-video",
+        info: {
+            title,
+            videoUrl,
+        },
+        style: {
+            backgroundColor: "#00d"
+        }
+    }
+    return currNote
+}
 
-function createNote(title, txt) {
+
+function createNoteImg(title, imgUrl) {
+    const currNote = {
+        id: utilService.makeId(),
+        type: "note-img",
+        info: {
+            title,
+            imgUrl,
+        },
+        style: {
+            backgroundColor: "#00d"
+        }
+    }
+    return currNote
+}
+
+function createNoteTxt(title, txt) {
     const currNote = {
         id: utilService.makeId(),
         type: "note-txt",
@@ -22,7 +54,6 @@ function createNote(title, txt) {
             txt
         }
     }
-
     return currNote
 }
 
@@ -39,7 +70,7 @@ const notes = [
         type: "note-txt",
         isPinned: true,
         info: {
-            title:"TITLE",
+            title: "TITLE",
             txt: "Fullstack Me Baby!"
         }
     },
@@ -47,8 +78,8 @@ const notes = [
         id: "n102",
         type: "note-img",
         info: {
-            url: "assets/img/click-here.png",
-            title: "Bobi and Me"
+            imgUrl: "assets/img/white-horse.png",
+            title: "APPSUS🦾"
         },
         style: {
             backgroundColor: "#00d"
@@ -69,11 +100,11 @@ const notes = [
         id: "n104",
         type: "note-video",
         info: {
-            label: "Video killed the radio",
-            todos: [
-                { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
-            ]
+            videoUrl: "https://www.youtube.com/embed/tgbNymZ7vqY",
+            title: "Video killed the radio"
+        },
+        style: {
+            backgroundColor: "#00d"
         }
     }
 ];

@@ -1,58 +1,35 @@
-import { utilService } from '../../../services/util.service.js'
-
 export class NoteTxt extends React.Component {
 
     state = {
-        notes: [],
-        inputExit: null,
-        inputEntry: null,
-        editState: null
+        editState: null,
     }
 
     componentDidMount() {
-        if (this.props.note) {
             const { info } = this.props.note
             const { title, txt } = info
             this.setState({ title, txt })
-        }
-
     }
 
     componentDidUpdate(prevProps, prevState) {
-        const { isNoteTxtUpdate } = this.props
-
-        if (isNoteTxtUpdate) {
+        // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
+        const { isNoteUpdate } = this.props
+        if (isNoteUpdate) {
             if (this.props.note) {
                 const { info } = this.props.note
                 const { title, txt } = info
                 this.setState({ title, txt })
             }
         }
-        console.log('this.state.title NOTE TEXT ', this.state.title)
     }
 
-    // addNoteTxt = (ev) => {
-    //     if (ev) ev.preventDefault()
+    onEditState = () => {
+        this.setState({ editState: true })
+    }
 
-    //     // const { inputExit, inputEntry } = this.state
-    //     // console.log('BEFORE', this.state)
-    //     // if (!inputEntry && inputExit) {
-    //     //     console.log('AFTER', this.state)
-    //     // }
-    //     // if (inputExit) console.log('AFTER', inputExit);
-
-    //     const { title, txt } = this.state
-
-    //     const { notes } = this.props
-    //     notes.push(currNote)
-    // }
-
-
-    //Two way Data Binding
-    // handleChange = ({ target }) => {
-    //     const { value, name } = target
-    //     this.setState({ [name]: value })
-    // }
+    offEditState = (id) => {
+        this.setState({ editState: null })
+        this.props.updateNoteTxt(id)
+    }
 
     //Blur detectors
     isInputExit = () => {
@@ -72,69 +49,37 @@ export class NoteTxt extends React.Component {
         // this.state.inputExit = null
     }
 
-    onEditState = () => {
-        this.setState({ editState: true })
-
-    }
-
-    offEditState = (id) => {
-        this.setState({ editState: null })
-        this.props.updateNoteTxt(id)
-    }
-
-
     render() {
-        const { isInputEntry, isInputExit, onEditState, offEditState } = this
-        const { addNoteTxt, removeNote, note, handleChange } = this.props
+        const { onEditState, offEditState, isInputEntry, isInputExit } = this
+        const { removeNote, note, handleChange } = this.props
         const { title, txt, editState } = this.state
 
-
-        return <section className="note-text-container">
-            <div className="note-text">
-                {!note &&
-                    <form onSubmit={addNoteTxt} className="form-note-txt flex column">
-                        <input
-                            type="text"
-                            className="input-note-title"
-                            name="title"
-                            onChange={handleChange}
-                            onClick={isInputEntry}
-                            onBlur={isInputExit} />
-                        <input
-                            type="text"
-                            className="input-note-text"
-                            name="text"
-                            onChange={handleChange}
-                            onClick={isInputEntry}
-                            onBlur={isInputExit} />
-
-                        <button>Add Note</button>
-                    </form>}
-
-                {(note && !editState) &&
+        return <section className="note-txt-container">
+            <div className="note-txt">
+                {!editState &&
                     <div
-                        className="note-text-content-container"
+                        className="note-txt-content-container"
                         onClick={onEditState}>
-
-                        <div className="rendered-note-text-container">
+                        <div className="rendered-note-txt-container">
                             <div className="rendered-note-title">{title}</div>
                             <div className="rendered-note-txt">{txt}</div>
                         </div>
-
                     </div>}
 
-                {(editState && note) && <div className="edit-container form-note-txt flex column">
+                {editState && <div className="edit-container form-note-txt flex column">
                     <input
-                        type="text"
+                        type="txt"
                         className="input-note-title"
                         name="title"
+                        defaultValue={title}
                         onChange={handleChange}
                         onClick={isInputEntry}
                         onBlur={isInputExit} />
                     <input
-                        type="text"
-                        className="input-note-text"
-                        name="text"
+                        type="txt"
+                        className="input-note-txt"
+                        name="txt"
+                        defaultValue={txt}
                         onChange={handleChange}
                         onClick={isInputEntry}
                         onBlur={isInputExit} />
@@ -144,9 +89,9 @@ export class NoteTxt extends React.Component {
                     >Update</button>
                 </div>}
 
-                {note && <button
+                <button
                     onClick={() => removeNote(note.id)}
-                    className="btn-remove-note">🗑️</button>}
+                    className="btn-remove-note">🗑️</button>
             </div>
         </section>
     }

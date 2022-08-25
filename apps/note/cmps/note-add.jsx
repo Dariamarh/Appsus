@@ -1,26 +1,39 @@
-import { NoteImg } from "./note-img.jsx";
-import { NoteTodos } from "./note-todos.jsx";
-import { NoteTxt } from "./note-txt.jsx";
-import { NoteVideo } from "./note-video.jsx";
+import { NoteAddVideo } from "./note-add-video.jsx";
+import { NoteAddTxt } from "./note-add-txt.jsx";
+import { NoteAddImg } from "./note-add-img.jsx";
+import { NoteAddTodos } from "./note-add-todos.jsx";
+
 
 export class NoteAdd extends React.Component {
     state = {
-        noteType: 'note-txt'
+        noteType: 'note-img',
     }
 
+
     DynamicCmp = (props) => {
-        const { addNoteTxt, handleChange } = this.props
-        switch (this.state.noteType) {
+        const { addNoteTxt, addNoteImg, adNoteVideo,
+            handleChange, clearInputs } = this.props
+        const { noteType } = this.state
+        switch (noteType) {
             case 'note-txt':
-                return <NoteTxt
+                return <NoteAddTxt
+                    clearInputs={clearInputs}
                     handleChange={handleChange}
                     addNoteTxt={addNoteTxt} />
             case 'note-img':
-                return <NoteImg />
+                return <NoteAddImg
+                    clearInputs={clearInputs}
+                    addNoteImg={addNoteImg}
+                    handleChange={handleChange}
+                />
             case 'note-todos':
-                return <NoteTodos />
+                return <NoteAddTodos />
             case 'note-video':
-                return <NoteVideo />
+                return <NoteAddVideo
+                    clearInputs={clearInputs}
+                    adNoteVideo={adNoteVideo}
+                    handleChange={handleChange}
+                />
         }
     }
 
@@ -28,6 +41,8 @@ export class NoteAdd extends React.Component {
         // console.log('target.id', target.id)
         this.setState({ noteType: target.id })
     }
+
+
 
     render() {
         const { DynamicCmp, switchNoteType } = this
@@ -39,7 +54,7 @@ export class NoteAdd extends React.Component {
                     <li
                         onClick={switchNoteType}
                         id="note-txt"
-                        className="btn-note-text">✏️</li>
+                        className="btn-note-txt">✏️</li>
                     <li
                         onClick={switchNoteType}
                         id="note-img"

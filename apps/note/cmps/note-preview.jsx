@@ -12,18 +12,24 @@ export class NotePreview extends React.Component {
 
     DynamicCmp = () => {
         const { noteType } = this.state
-        const { note, isNoteTxtUpdate, updateNoteTxt, removeNote, handleChange } = this.props
+        const { note, removeNote, handleChange,
+            isNoteUpdate, updateNoteTxt, updateNoteImg,
+            updateNoteVideo } = this.props
+
         switch (noteType) {
             case 'note-txt':
                 return <NoteTxt
                     handleChange={handleChange}
-                    isNoteTxtUpdate={isNoteTxtUpdate}
+                    isNoteUpdate={isNoteUpdate}
                     updateNoteTxt={updateNoteTxt}
                     removeNote={removeNote}
                     note={note}
                 />
             case 'note-img':
                 return <NoteImg
+                    isNoteUpdate={isNoteUpdate}
+                    handleChange={handleChange}
+                    updateNoteImg={updateNoteImg}
                     removeNote={removeNote}
                     note={note}
                 />
@@ -34,6 +40,9 @@ export class NotePreview extends React.Component {
                 />
             case 'note-video':
                 return <NoteVideo
+                    isNoteUpdate={isNoteUpdate}
+                    handleChange={handleChange}
+                    updateNoteVideo={updateNoteVideo}
                     removeNote={removeNote}
                     note={note}
                 />
