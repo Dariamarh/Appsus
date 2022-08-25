@@ -13,7 +13,6 @@ export class MailFilter extends React.Component {
             starred: false,
             mailSearch: ''
         },
-// elipse css
     }
     inputRef = React.createRef()
 
@@ -53,8 +52,8 @@ export class MailFilter extends React.Component {
                 <input className="search-mail"
                     type="search"
                     id="searchMail"
-                    placeholder="Search in emails"
-                    value={body}
+                    placeholder=" Search in emails"
+                    value={getFilter}
                     onChange={this.handleChange}
                 />
 
