@@ -29,3 +29,19 @@
 .mail-date {
     text-align: right;
 }
+
+.mail-btn-trash,
+.mail-star {
+    border: none;
+    text-align: right;
+    cursor: pointer;
+    background: none;
+}
+
+.mail-btn-trash {
+    margin-left: 10px;
+}
+
+.mail-star {
+    margin-right: 10px;
+}

@@ -1,0 +1,60 @@
+.mail-letter{
+    position:absolute;
+    right: 0;
+    bottom: 0;
+    width: 450px;
+    height: 500px;
+    box-shadow: 2px 2px 2px 2px rgb(153 149 149);
+    z-index: 1;
+}
+
+.mail-new-msg{
+    background-color: white;
+    color: rgb(133, 131, 131);
+    text-align: left;
+    
+}
+
+.mail-letter input{
+    width: 100%;
+    border: none;
+    border-bottom: 1px solid rgb(211, 211, 211);
+    flex-basis: 100%;
+}
+
+.msg-title{
+    font-size: .875rem;
+    font-weight: 600;
+    background-color: rgb(237, 246, 252);
+    color: rgba(12, 44, 133, 0.918);
+    padding: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ .mail-to, .mail-subj{
+    margin-left: 10px;
+    justify-content: center;
+    display: flex;
+    justify-content: left;
+    padding-top: 10px;
+}
+
+textarea{
+    height: 300px;
+    width: 400px;
+    border: none;
+}
+
+.email-send{
+    background: #2b7bf1;
+    width: 60px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    border: none;
+    color: #ffffff;
+    font-size: 13px;
+    padding: 10px 20px 10px 20px;
+    margin-top: 30px;
+    margin-left: 10px;
+}

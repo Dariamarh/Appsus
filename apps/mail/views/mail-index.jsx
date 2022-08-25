@@ -13,7 +13,6 @@ export class MailIndex extends React.Component {
 
     componentDidMount() {
         this.loadMails()
-
     }
 
     loadMails = () => {
@@ -25,7 +24,6 @@ export class MailIndex extends React.Component {
             this.loadMails()
         })
     }
-
 
     render() {
         const { emails, mailSearch } = this.state
