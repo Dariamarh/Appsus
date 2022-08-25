@@ -19,7 +19,16 @@ export class NoteTxt extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log("UPDATE");
+        const { isNoteTxtUpdate } = this.props
+
+        if (isNoteTxtUpdate) {
+            if (this.props.note) {
+                const { info } = this.props.note
+                const { title, txt } = info
+                this.setState({ title, txt })
+            }
+        }
+        console.log('this.state.title NOTE TEXT ', this.state.title)
     }
 
     // addNoteTxt = (ev) => {
@@ -68,9 +77,14 @@ export class NoteTxt extends React.Component {
 
     }
 
+    offEditState = (id) => {
+        this.setState({ editState: null })
+        this.props.updateNoteTxt(id)
+    }
+
 
     render() {
-        const { isInputEntry, isInputExit, onEditState } = this
+        const { isInputEntry, isInputExit, onEditState, offEditState } = this
         const { addNoteTxt, removeNote, note, handleChange } = this.props
         const { title, txt, editState } = this.state
 
@@ -93,10 +107,10 @@ export class NoteTxt extends React.Component {
                             onChange={handleChange}
                             onClick={isInputEntry}
                             onBlur={isInputExit} />
-                        {!note &&
-                            <button>Add Note</button>
-                        }
+
+                        <button>Add Note</button>
                     </form>}
+
                 {(note && !editState) &&
                     <div
                         className="note-text-content-container"
@@ -109,8 +123,25 @@ export class NoteTxt extends React.Component {
 
                     </div>}
 
-                {editState && <div className="edit-container">
-                    EDIT DIV
+                {(editState && note) && <div className="edit-container form-note-txt flex column">
+                    <input
+                        type="text"
+                        className="input-note-title"
+                        name="title"
+                        onChange={handleChange}
+                        onClick={isInputEntry}
+                        onBlur={isInputExit} />
+                    <input
+                        type="text"
+                        className="input-note-text"
+                        name="text"
+                        onChange={handleChange}
+                        onClick={isInputEntry}
+                        onBlur={isInputExit} />
+                    <button
+                        onClick={() => offEditState(note.id)}
+                        className="btn-exit-edit-mode"
+                    >Update</button>
                 </div>}
 
                 {note && <button

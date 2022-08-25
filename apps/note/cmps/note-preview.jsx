@@ -11,32 +11,36 @@ export class NotePreview extends React.Component {
     }
 
     DynamicCmp = () => {
-        switch (this.state.noteType) {
+        const { noteType } = this.state
+        const { note, isNoteTxtUpdate, updateNoteTxt, removeNote, handleChange } = this.props
+        switch (noteType) {
             case 'note-txt':
                 return <NoteTxt
-                    removeNote={this.props.removeNote}
-                    note={this.props.note}
+                    handleChange={handleChange}
+                    isNoteTxtUpdate={isNoteTxtUpdate}
+                    updateNoteTxt={updateNoteTxt}
+                    removeNote={removeNote}
+                    note={note}
                 />
             case 'note-img':
                 return <NoteImg
-                    removeNote={this.props.removeNote}
-                    note={this.props.note}
+                    removeNote={removeNote}
+                    note={note}
                 />
             case 'note-todos':
                 return <NoteTodos
-                    removeNote={this.props.removeNote}
-                    note={this.props.note}
+                    removeNote={removeNote}
+                    note={note}
                 />
             case 'note-video':
                 return <NoteVideo
-                    removeNote={this.props.removeNote}
-                    note={this.props.note}
+                    removeNote={removeNote}
+                    note={note}
                 />
         }
     }
 
     render() {
-        // console.log('this.props PREVIEW', this.props)
         const { note } = this.props
         const { DynamicCmp } = this
         return <section className="note-preview">
