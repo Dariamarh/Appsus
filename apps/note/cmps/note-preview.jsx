@@ -1,4 +1,4 @@
-import { noteService } from "../services/note.service.jsx";
+// import { noteService } from "../services/note.service.jsx";
 import { NoteImg } from "./note-img.jsx";
 import { NoteTodos } from "./note-todos.jsx";
 import { NoteTxt } from "./note-txt.jsx";
@@ -10,24 +10,36 @@ export class NotePreview extends React.Component {
         noteType: this.props.note.type
     }
 
-    DynamicCmp = (props) => {
+    DynamicCmp = () => {
         switch (this.state.noteType) {
             case 'note-txt':
-                return <NoteTxt />
+                return <NoteTxt
+                    removeNote={this.props.removeNote}
+                    note={this.props.note}
+                />
             case 'note-img':
-                return <NoteImg />
+                return <NoteImg
+                    removeNote={this.props.removeNote}
+                    note={this.props.note}
+                />
             case 'note-todos':
-                return <NoteTodos />
+                return <NoteTodos
+                    removeNote={this.props.removeNote}
+                    note={this.props.note}
+                />
             case 'note-video':
-                return <NoteVideo />
+                return <NoteVideo
+                    removeNote={this.props.removeNote}
+                    note={this.props.note}
+                />
         }
     }
 
     render() {
+        // console.log('this.props PREVIEW', this.props)
         const { note } = this.props
         const { DynamicCmp } = this
         return <section className="note-preview">
-            {note.id}
             <br />
             <DynamicCmp />
             <hr />

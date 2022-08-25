@@ -9,9 +9,12 @@ export class NoteAdd extends React.Component {
     }
 
     DynamicCmp = (props) => {
+        const { addNoteTxt, handleChange } = this.props
         switch (this.state.noteType) {
             case 'note-txt':
-                return <NoteTxt />
+                return <NoteTxt
+                    handleChange={handleChange}
+                    addNoteTxt={addNoteTxt} />
             case 'note-img':
                 return <NoteImg />
             case 'note-todos':
@@ -28,7 +31,7 @@ export class NoteAdd extends React.Component {
 
     render() {
         const { DynamicCmp, switchNoteType } = this
-
+        const { notes, addNoteTxt } = this.props
         return <section className="note-add-container">
             <div className="note-add flex">
                 <DynamicCmp />

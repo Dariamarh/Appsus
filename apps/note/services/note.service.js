@@ -1,10 +1,36 @@
-export const noteService = {
-    getNotes
+import { utilService } from "../../../services/util.service.js";
 
+
+export const noteService = {
+    getNotes,
+    createNote,
+    getById
 }
 
 function getNotes() {
     return notes
+}
+
+
+function createNote(title, txt) {
+    const currNote = {
+        id: utilService.makeId(),
+        type: "note-txt",
+        isPinned: false,
+        info: {
+            title,
+            txt
+        }
+    }
+
+    return currNote
+}
+
+function getById(array, id) {
+    if (!id) return
+    // const array = _loadFromStorage()
+    const item = array.find(item => id === item.id)
+    return item
 }
 
 const notes = [
@@ -13,6 +39,7 @@ const notes = [
         type: "note-txt",
         isPinned: true,
         info: {
+            title:"TITLE",
             txt: "Fullstack Me Baby!"
         }
     },
