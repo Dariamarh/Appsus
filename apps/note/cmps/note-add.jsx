@@ -25,7 +25,7 @@ export class NoteAdd extends React.Component {
     }
 
     switchNoteType = ({ target }) => {
-        console.log('target.id', target.id)
+        // console.log('target.id', target.id)
         this.setState({ noteType: target.id })
     }
 
