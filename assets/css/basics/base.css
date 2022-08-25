@@ -1,4 +1,4 @@
-html{
+html {
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
@@ -30,6 +30,14 @@ img {
     object-fit: cover;
 }
 
-.main-layout {
-    width: 100%;
-}
+ /* .main-layout {
+    max-width: 100%;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+} */
+
+/* .main-layout>* {
+    max-width: 80%;
+    margin-inline-end: auto;
+    margin-inline-start: auto;
+} */

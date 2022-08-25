@@ -1,20 +1,33 @@
-ul{
+ul {
     list-style-type: none;
+
 }
 
-.mail-folders{
-    /* display: flex; */
+li {
+    padding: 5px;
 }
 
-.compose-btn{
+.mail-folders {
+    /* padding-left: 10px; */
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    justify-items: left;
+
+}
+
+.compose-btn {
+    display: flex;
+    width: 120px;
+    justify-content: center;
     background-color: white;
     box-shadow: 2px 2px 2px 2px rgb(153 149 149);
     border: none;
     font-size: 18px;
     border-radius: 35px;
     padding: 0.6rem;
-    margin-block-end: 1rem;
-    display: flex;
-    flex-direction: column;
     cursor: pointer;
 }

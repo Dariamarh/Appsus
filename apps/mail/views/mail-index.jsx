@@ -8,7 +8,7 @@ export class MailIndex extends React.Component {
     state = {
         emails: [],
         sortBy: null,
-        
+
     }
 
     componentDidMount() {
@@ -25,18 +25,20 @@ export class MailIndex extends React.Component {
             this.loadMails()
         })
     }
-   
+
 
     render() {
         const { emails, mailSearch } = this.state
-        const { onSetFilter,getFilter } = this
+        const { onSetFilter, getFilter } = this
         return (
             <section className="mail-index">
-                
-                <MailFilter onSetFilter={onSetFilter} />
-                <MailFolders />
-                <MailList emails={emails} />
-
+                <div className="search-filter">
+                    <MailFilter onSetFilter={onSetFilter} />
+                </div>
+                <div className="mail-main">
+                    <MailFolders />
+                    <MailList emails={emails} />
+                </div>
             </section>
         )
     }

@@ -1,4 +1,16 @@
-/* body{
-    color: red;
+.mail-main {
+    display: flex;
+    /* margin: 0 auto; */
+
+
+    /* display: flex;
+    flex-direction: column;
+    padding: 10px; */
 }
- */
+
+.mail-index {
+   display: flex;
+    flex-direction: column;
+    width: 100%;
+    position: relative;
+}

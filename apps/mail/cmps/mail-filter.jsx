@@ -13,7 +13,7 @@ export class MailFilter extends React.Component {
             starred: false,
             mailSearch: ''
         },
-
+// elipse css
     }
     inputRef = React.createRef()
 
