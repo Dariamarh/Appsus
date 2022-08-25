@@ -1,5 +1,5 @@
 import { storageService } from '../../../services/storage.service.js'
-// import { utilService } from '../../book/services/util.service.js'
+import { utilService } from '../../../services/util.service.js'
 
 const EMAIL_KEY = 'emailDB'
 
@@ -11,7 +11,7 @@ const emailsData = [
         body: "Would love to catch up sometimes",
         isRead: false,
         from:"user@appsus.com",
-        sentAt: "1551133930594",
+        sentAt: 1661372169155,
         to: "momo@momo.com",
         state: 'inbox'
     },
@@ -21,26 +21,26 @@ const emailsData = [
         body: "Coffee break?",
         isRead: false,
         from:"momo11@momo.com",
-        sentAt: 1551133930594,
+        sentAt: 1641372169155,
         to: "momo@momo.com",
         state: 'sent'
     },
     {
         id: 'e103',
         subject: "Google Cloud",
-        body: "Learn the funfamentals with this tutorial - and see what else you can do for free on Google Cloud with our Always Free tier.",
+        body: "Learn the funfamentals with this tutorial - and see what else you can do",
         isRead: false,
-        from:"user@appsus.com",
+        from:"koko@gmail.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'sent'
     },
     {
         id: 'e104',
-        subject: "Confirm your email address",
+        subject: "Confirm your email",
         body: "Verify your e-mail to finish signing up for Avocode",
         isRead: false,
-        from:"user@appsus.com",
+        from:"avocado@appsus.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'inbox'
@@ -50,18 +50,18 @@ const emailsData = [
         subject: "Google Maps Platform",
         body: "Welcome to Google Maps Platform",
         isRead: false,
-        from:"user@appsus.com",
+        from:"google@gmail.com",
         sentAt: 1551133930594,
         to: "momo@momo.com",
         state: 'trash'
     },
     {
         id: 'e106',
-        subject: "We noticed a new sign in to your Dropbox",
-        body: "A new web browser just signed in to your Dropbox account. To help keep your account secure, let us know if this is you. Is this you?",
+        subject: "Dropbox",
+        body: "A new web browser just signed in to your Dropbox account.",
         isRead: false,
-        from:"user@appsus.com",
-        sentAt: 1551133930594,
+        from:"dropbox@appsus.com",
+        sentAt: 1457293308000,
         to: "momo@momo.com",
         state: 'trash'
     },

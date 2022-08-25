@@ -2,9 +2,25 @@
     display: flex;
     padding: 10px;
     justify-content: space-between;
+    /* border-top: 1px solid rgb(190, 190, 190); */
+    cursor: pointer;
+    background-color: #faf9f9;
+    box-shadow: inset 0 -1px 0 0 rgb(100 121 143 / 12%);
+
+
 }
 
-h3 {
-    font-size: 18px;
+/* .mail-preview.mail-preview:first-child{
+    border-bottom: #faf9f9;
+} */
+
+
+
+.mail-preview h3 {
+    font-size: 16px;
     font-weight: normal;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+
 }

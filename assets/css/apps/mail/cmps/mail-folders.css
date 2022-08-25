@@ -1,0 +1,20 @@
+ul{
+    list-style-type: none;
+}
+
+.mail-folders{
+    /* display: flex; */
+}
+
+.compose-btn{
+    background-color: white;
+    box-shadow: 2px 2px 2px 2px rgb(153 149 149);
+    border: none;
+    font-size: 18px;
+    border-radius: 35px;
+    padding: 0.6rem;
+    margin-block-end: 1rem;
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
