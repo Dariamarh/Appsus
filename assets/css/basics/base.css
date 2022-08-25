@@ -31,13 +31,13 @@ img {
 }
 
 .main-layout {
-    width: 100%;
+    width: 70%;
     margin-inline-end: auto;
     margin-inline-start: auto;
 }
 
 .main-layout>* {
-    width: 100%;
+    width: 70%;
     margin-inline-end: auto;
     margin-inline-start: auto;
 }
