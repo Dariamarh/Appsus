@@ -37,7 +37,7 @@ img {
 }
 
 .main-layout>* {
-    width: 100%;
+    width: 90%;
     margin-inline-end: auto;
     margin-inline-start: auto;
 }
