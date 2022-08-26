@@ -29,6 +29,9 @@ export class MailFolders extends React.Component {
                 <NavLink to="/mail/drafts">
                     <button className="mail-drafts"><i className="fa-brands fa-firstdraft"></i>Drafts</button>
                 </NavLink>
+                <NavLink to="/mail/trash">
+                    <button className="mail-drafts"> <i className="fa-solid fa-trash-can"></i>Trash</button>
+                </NavLink>
             </div>
             {compose && <MailCompose />}
         </section>

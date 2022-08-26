@@ -80,6 +80,7 @@ export const mailService = {
     loadMails,
     sendNewMail,
     toggleIsRead,
+    setEmailStatus
 }
 
 function query(filterBy) {
@@ -100,42 +101,43 @@ function query(filterBy) {
         } else {
             switch (folder) {
                 case 'inbox':
-                    emails = emails.filter(email => email.to === 'user@appsus.com')
+                    emails = emails.filter(email => email.from === 'user@appsus.com')
                     break;
 
                 case 'starred':
-                    emails = emails.filter(email => email.status === 'starred')
+                    emails = emails.filter(email => email.state === 'starred')
                     break;
 
                 case 'sent':
                     emails = emails.filter(email => email.to !== 'user@appsus.com')
                     break;
                 case 'drafts':
-                    emails = emails.filter(email => email.status === 'drafts')
+                    emails = emails.filter(email => email.state === 'drafts')
                     break;
 
                 case 'trash':
-                    emails = emails.filter(email => email.status === 'trash')
-                    break;
-                case 'unread':
-                    emails = emails.filter(email => email.isRead === false)
+                    emails = emails.filter(email => email.state === 'trash')
                     break;
 
-                case 'read':
-                    emails = emails.filter(email => email.isRead === true)
-                    break;
             }
         }
     }
     return emails
 }
+function setEmailStatus(emailId, state) {
+    let emails = _loadFromStorage()
+    const emailIdx = emails.findIndex(email => email.id === emailId)
+    emails[emailIdx].state = (emails[emailIdx].state === state) ? null : state
+    _saveMailsToStorage(emails)
+    return Promise.resolve()
+}
 
 function remove(emailId) {
     let emails = _loadMailsFromStorage()
     const emailIdx = emails.findIndex(email => email.id === emailId)
-    emails[emailIdx].status = (emails[emailIdx].status !== 'trash') ? 'trash' : 'remove'
+    emails[emailIdx].state = (emails[emailIdx].state !== 'trash') ? 'trash' : 'remove'
 
-    if (emails[emailIdx].status === 'remove') {
+    if (emails[emailIdx].state === 'remove') {
         emails = emails.filter(email => email.id !== emailId)
     }
     _saveMailsToStorage(emails)

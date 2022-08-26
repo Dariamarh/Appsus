@@ -12,6 +12,7 @@ export class MailIndex extends React.Component {
         filterBy: {
             folder: 'inbox'
         },
+        isModalOpened: false,
     }
 
     componentDidMount() {
@@ -23,7 +24,7 @@ export class MailIndex extends React.Component {
             }
         }), () => this.loadMails())
     }
-    
+
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.folder !== this.props.match.params.folder) {
             const { folder } = this.props.match.params
@@ -33,12 +34,18 @@ export class MailIndex extends React.Component {
                     folder
                 }
             }), () => this.loadMails())
+            this.loadUser()
         }
     }
     loadMails = () => {
         this.setState({ emails: mailService.query(this.state.filterBy) })
     }
-
+    loadUser = () => {
+        mailService.getLoggedInUser()
+            .then(loggedInUser => {
+                this.setState({ loggedInUser })
+            })
+    }
     onSetFilter = (filterBy) => {
         this.setState({ filterBy }, () => {
             this.loadMails()
@@ -53,7 +60,20 @@ export class MailIndex extends React.Component {
                 this.setState({ emails })
             })
     }
-
+    toggleModal = () => {
+        const { isModalOpened } = this.state
+        this.setState({ isModalOpened: !isModalOpened })
+    }
+    composeEmail = ({ to, subject, body }) => {
+        mailService.add(to, subject, body)
+            .then((email) => {
+                if (this.state.filterBy.folder === 'sent') {
+                    const { emails } = this.state
+                    emails.unshift(email)
+                    this.setState({ emails })
+                }
+            })
+    }
     onRemoveEmail = (emailId) => {
         mailService.remove(emailId)
             .then(() => {
@@ -63,11 +83,19 @@ export class MailIndex extends React.Component {
             .catch(err => {
             })
     }
+    setStar = (emailId) => {
+        mailService.setEmailStatus(emailId, 'starred')
+            .then(() => {
+                const { emails } = this.state
+                const emailIdx = emails.findIndex(email => email.id === emailId)
+                emails[emailIdx].status = (emails[emailIdx].status === 'starred') ? null : 'starred'
+            })
+    }
 
 
     render() {
-        const { emails, mailSearch } = this.state
-        const { onSetFilter, getFilter, onToggleIsRead, onRemoveEmail } = this
+        const { emails, loggedInUser, mailSearch } = this.state
+        const { onSetFilter, onToggleIsRead, onRemoveEmail, setStar, toggleModal } = this
         return (
             <section className="mail-index">
                 <div className="search-filter">
@@ -78,6 +106,9 @@ export class MailIndex extends React.Component {
                     <MailList
                         emails={emails}
                         onRemoveEmail={onRemoveEmail}
+                        setStar={setStar}
+                        loggedInUser={loggedInUser}
+                        toggleModal={toggleModal}
                         onToggleIsRead={onToggleIsRead} />
 
                 </div>
