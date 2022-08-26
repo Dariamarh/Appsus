@@ -13,14 +13,14 @@ export function About() {
                         odio alias adipisci doloribus voluptate rem. Animi magnam alias aut
                         excepturi ullam.
                     </p>
-                    <span className="about-contacts">
-                        <p>Contant me on:</p>
+                    {/* <span className="about-contacts">
+                        <p>Contact me on:</p>
                         <div>
-                            {/* <img src='https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/f.svg'>
+                            <img src='https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/f.svg'>
                         <img src='https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/g.svg'>
-                        <img src='https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/l.svg' > */}
+                        <img src='https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/l.svg' >
                         </div>
-                    </span>
+                    </span> */}
                 </span>
                 <span className='about-team-container'>
                     <img className='about-pic' src='./assets/img/daria.png' />
@@ -31,15 +31,15 @@ export function About() {
                         odio alias adipisci doloribus voluptate rem. Animi magnam alias aut
                         excepturi ullam.
                     </p>
-                    <span className="about-contacts">
-                        <p>Contant me on:</p>
+                    {/* <span className="about-contacts">
+                        <p>Contact me on:</p>
                         <div>
-                            {/* <img src="https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/f.svg" alt="">
+                            <img src="https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/f.svg" alt="">
                         <img src="https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/g.svg" alt="">
-                        <img src="https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/l.svg" alt=""> */}
+                        <img src="https://raw.githubusercontent.com/Noga-Ran/Appsus/536f8c10d62d7056a97525a0e2ad9f87777216f2/images/about/l.svg" alt="">
                         </div>
 
-                    </span>
+                    </span> */}
                 </span>
             </span>
         </section>

@@ -1,7 +1,8 @@
 import { mailService } from "../services/mail.service.js"
 
-export class MailCompose extends React.Component {
 
+export class MailCompose extends React.Component {
+    
     state = {
         compose: {
             to: '',
@@ -13,11 +14,9 @@ export class MailCompose extends React.Component {
     onComposeEmail = (ev) => {
         ev.preventDefault()
         console.log(this.state)
-
         this.props.toggleModal()
         this.props.composeEmail(this.state.compose)
     }
-
 
     handleChange = ({ target }) => {
         const field = target.name
@@ -33,7 +32,9 @@ export class MailCompose extends React.Component {
 
     render() {
         const { onComposeEmail } = this
+        console.log('111')
         const { to, subject, body } = this.state.compose
+        console.log('222')
         // const { toggleModal } = this.props
 
         return <section className="mail-compose">
@@ -63,7 +64,7 @@ export class MailCompose extends React.Component {
                     ></textarea>
                 </form>
 
-                <button className="email-send" onClick={onComposeEmail}>Send</button>
+                <button onClick={onComposeEmail} className="email-send" >Send</button>
             </div>
         </section>
     }

@@ -1,6 +1,15 @@
 import { storageService } from '../../../services/storage.service.js'
 import { utilService } from '../../../services/util.service.js'
-
+export const mailService = {
+    query,
+    remove,
+    save,
+    getMailById,
+    loadMails,
+    sendNewMail,
+    toggleIsRead,
+    setEmailStatus
+}
 const EMAIL_KEY = 'emailDB'
 
 
@@ -72,16 +81,7 @@ const loggedinUser = {
     fullname: 'Mahatma Appsus'
 }
 
-export const mailService = {
-    query,
-    remove,
-    save,
-    getMailById,
-    loadMails,
-    sendNewMail,
-    toggleIsRead,
-    setEmailStatus
-}
+
 
 function query(filterBy) {
     let emails = _loadMailsFromStorage()
@@ -173,7 +173,6 @@ function sendNewMail(to, subject, body) {
         isRead: utilService.getRandomIntInclusive(0, 2),
         sentAt: Date.now(),
         star: false,
-        fromEmail: loggedinUser.email,
         to: to,
         from: loggedinUser.fullname,
     }
