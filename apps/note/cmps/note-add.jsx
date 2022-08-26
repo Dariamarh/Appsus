@@ -6,13 +6,13 @@ import { NoteAddTodos } from "./note-add-todos.jsx";
 
 export class NoteAdd extends React.Component {
     state = {
-        noteType: 'note-img',
+        noteType: 'note-todos',
     }
 
 
     DynamicCmp = (props) => {
-        const { addNoteTxt, addNoteImg, adNoteVideo,
-            handleChange, clearInputs } = this.props
+        const { addNoteTxt, addNoteImg, addNoteVideo,
+            handleChange, clearInputs, setVideoUrl } = this.props
         const { noteType } = this.state
         switch (noteType) {
             case 'note-txt':
@@ -30,8 +30,9 @@ export class NoteAdd extends React.Component {
                 return <NoteAddTodos />
             case 'note-video':
                 return <NoteAddVideo
+                    setVideoUrl={setVideoUrl}
                     clearInputs={clearInputs}
-                    adNoteVideo={adNoteVideo}
+                    addNoteVideo={addNoteVideo}
                     handleChange={handleChange}
                 />
         }

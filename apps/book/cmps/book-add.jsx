@@ -31,8 +31,8 @@ export class BookAdd extends React.Component {
                         className="google-pic"
                     /> for books:</label>
             </div>
-            <div className="search-bar-container">
 
+            <div className="search-bar-container">
                 <input
                     type="search"
                     name="google-books"
@@ -41,7 +41,6 @@ export class BookAdd extends React.Component {
                     onBlur={debounce(clearSearch, 500)}
                     onChange={debounce(handleChange, 1000)}
                 />
-
                 {googleBooks && <ul className="google-book-container">
                     {googleBooks.items.map(book => {
                         const { volumeInfo, id } = book
@@ -52,8 +51,8 @@ export class BookAdd extends React.Component {
                             <i className="fa-solid fa-circle-plus btn-add-book" onClick={() => this.props.onAddBook(volumeInfo, id)}></i>
                         </li>
                     })}
-                </ul>
-                }
+                </ul>}
+                
             </div>
         </section>
     }

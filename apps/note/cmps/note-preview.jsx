@@ -14,7 +14,7 @@ export class NotePreview extends React.Component {
         const { noteType } = this.state
         const { note, removeNote, handleChange,
             isNoteUpdate, updateNoteTxt, updateNoteImg,
-            updateNoteVideo } = this.props
+            updateNoteVideo, setVideoUrl } = this.props
 
         switch (noteType) {
             case 'note-txt':
@@ -40,6 +40,7 @@ export class NotePreview extends React.Component {
                 />
             case 'note-video':
                 return <NoteVideo
+                    setVideoUrl={setVideoUrl}
                     isNoteUpdate={isNoteUpdate}
                     handleChange={handleChange}
                     updateNoteVideo={updateNoteVideo}

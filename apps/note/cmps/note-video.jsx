@@ -1,7 +1,12 @@
+import { noteService } from "../services/note.service.js"
+import { utilService } from "../../../services/util.service.js"
+
+
 export class NoteVideo extends React.Component {
 
     state = {
         editState: null,
+        youTubeVideos: null
     }
 
     componentDidMount() {
@@ -51,25 +56,38 @@ export class NoteVideo extends React.Component {
         // this.state.inputEntry = true
         // this.state.inputExit = null
     }
+    
+    handleSearchChange = ({ target }) => {
+        // console.log('HANDLE SEARCH CHANGE');
+        // console.log('target.value', target.value)
+        noteService.getVideos(target.value)
+            .then((res) => {
+                this.setState({ youTubeVideos: res })
+            })
+    }
 
+    clearSearch = ({ target }) => {
+        target.value = '👇 Press Update to change the Video 👇'
+        this.setState({ youTubeVideos: null })
+    }
 
     render() {
-        const { removeNote, handleChange, note } = this.props
-        const { onEditState, offEditState, isInputEntry, isInputExit } = this
-        const { editState, title, videoUrl } = this.state
+        const { removeNote, handleChange, note, setVideoUrl } = this.props
+        const { onEditState, offEditState, isInputEntry, isInputExit,
+            handleSearchChange, clearSearch } = this
+        const { editState, youTubeVideos, title, videoUrl } = this.state
+        const { debounce } = utilService
 
         return <section className="note-img-container">
-            {!editState && <div
-                className="note-txt-content-container"
-            >
-
-                <div className="note-img-title">{title}</div>
+            {!editState && <div className="note-video-title">{title}</div>}
 
 
-                <iframe width="420" height="315"
-                    src={videoUrl}>
-                </iframe>
-            </div>}
+            <iframe
+                className="video-container"
+                width="420"
+                height="315"
+                src={videoUrl}>
+            </iframe>
 
             {editState && <div className="edit-container form-note-video flex column">
                 <input
@@ -80,19 +98,38 @@ export class NoteVideo extends React.Component {
                     onChange={handleChange}
                     onClick={isInputEntry}
                     onBlur={isInputExit} />
-                <input
-                    type="txt"
-                    className="input-note-video"
-                    name="videoUrl"
-                    defaultValue={videoUrl}
-                    onChange={handleChange}
-                    onClick={isInputEntry}
-                    onBlur={isInputExit} />
+
+                <div className="search-user-msg">search for youTube videos here👇</div>
+                <div className="video-search-bar-container">
+                    <input
+                        type="search"
+                        className="input-note-video"
+                        name="videoUrl"
+                        defaultValue={videoUrl}
+                        onBlur={debounce(clearSearch, 500)}
+                        onChange={debounce(handleSearchChange, 1000)}
+                    />
+                    {youTubeVideos && <ul className="youtube-video-container">
+                        {youTubeVideos.map(video => {
+                            const { title, id } = video
+                            return <li key={id}
+                                className="youtube-video">
+                                {title}
+                                <i className="fa-solid fa-circle-plus btn-add-book"
+                                    onClick={() => setVideoUrl(id)}></i>
+                            </li>
+                        })}
+                    </ul>}
+                </div>
+
+
                 <button
                     onClick={() => offEditState(note.id)}
                     className="btn-exit-edit-mode"
                 >Update</button>
             </div>}
+
+
 
             <button
                 className="btn-edit-video"

@@ -7,7 +7,8 @@ export const utilService = {
     getDayName,
     getMonthName,
     debounce,
-    createdAt
+    createdAt,
+    getById
 }
 
 function makeId(length = 6) {
@@ -19,6 +20,13 @@ function makeId(length = 6) {
     }
 
     return txt
+}
+
+function getById(array, id) {
+    if (!id) return
+    // const array = _loadFromStorage()
+    const item = array.find(item => id === item.id)
+    return item
 }
 
 function makeLorem(size = 100) {

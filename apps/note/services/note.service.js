@@ -1,16 +1,45 @@
 import { utilService } from "../../../services/util.service.js";
-
+import { storageService } from "../../../services/storage.service.js"
 
 export const noteService = {
     getNotes,
     createNoteTxt,
-    getById,
     createNoteImg,
-    createNoteVideo
+    createNoteVideo,
+    getVideos,
+    createNoteTodos
 }
+
+const YT_API_Key = 'AIzaSyDY1FSaJrD0PrUG8bPx8Q1lC4g3j9RT9P0'
+const KEY = 'videosDB'
 
 function getNotes() {
     return notes
+}
+
+
+function getVideos(term) {
+    const termVideosMap = storageService.loadFromStorage(KEY) || {}
+    if (termVideosMap[term]) return Promise.resolve(termVideosMap[term])
+    console.log('Getting from Network')
+
+    return axios.get(`https://www.googleapis.com/youtube/v3/search?part=snippet&videoEmbeddable=true&type=video&key=${YT_API_Key}&q=${term}`)
+        .then(res => res.data.items)
+        .then(ytVideos => ytVideos.map(ytVideo => ({
+            id: ytVideo.id.videoId,
+            title: ytVideo.snippet.title,
+            img: {
+                url: ytVideo.snippet.thumbnails.default.url,
+                width: ytVideo.snippet.thumbnails.default.width,
+                height: ytVideo.snippet.thumbnails.default.height,
+            }
+        })))
+        .then(videos => {
+            termVideosMap[term] = videos
+            storageService.saveToStorage(KEY, termVideosMap)
+            return videos
+        })
+
 }
 
 function createNoteVideo(title, videoUrl) {
@@ -57,12 +86,18 @@ function createNoteTxt(title, txt) {
     return currNote
 }
 
-function getById(array, id) {
-    if (!id) return
-    // const array = _loadFromStorage()
-    const item = array.find(item => id === item.id)
-    return item
+function createNoteTodos(title, todos) {
+    const currNote = {
+        id: utilService.makeId(),
+        type: "note-todos",
+        info: {
+            title,
+            todos
+        }
+    }
+    return currNote
 }
+
 
 const notes = [
     {
@@ -89,10 +124,17 @@ const notes = [
         id: "n103",
         type: "note-todos",
         info: {
-            label: "Get my stuff together",
+            title: "Sprint🥉 Todos",
             todos: [
-                { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
+                { txt: "Finish Todos list", doneAt: null },
+                { txt: "Other required Features", doneAt: 187111111 },
+                { txt: "Integration", doneAt: 187111111 },
+                { txt: "CSS Design 🧑‍🎨", doneAt: 187111111 },
+                { txt: "Canvas Note 🖌️", doneAt: 187111111 },
+                { txt: "Drag&Drop 🤚", doneAt: 187111111 },
+                { txt: "Add note by blur 👆", doneAt: 187111111 },
+                { txt: "Clean Code 🧹", doneAt: 187111111 },
+                { txt: "Smoke a little something something 🚬🤠", doneAt: 187111111 },
             ]
         }
     },
@@ -100,7 +142,7 @@ const notes = [
         id: "n104",
         type: "note-video",
         info: {
-            videoUrl: "https://www.youtube.com/embed/tgbNymZ7vqY",
+            videoUrl: "https://www.youtube.com/embed/FWy_LbhHtug",
             title: "Video killed the radio"
         },
         style: {

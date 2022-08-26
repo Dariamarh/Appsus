@@ -18,8 +18,7 @@ export class NoteImg extends React.Component {
             if (this.props.note) {
                 const { info } = this.props.note
                 const { title, imgUrl } = info
-                this.setState({ title, imgUrl },
-                    () => { console.log('this.state', this.state) })
+                this.setState({ title, imgUrl })
             }
         }
     }

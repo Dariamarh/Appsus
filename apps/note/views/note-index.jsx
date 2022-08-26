@@ -1,6 +1,7 @@
 import { NoteList } from "../cmps/note-list.jsx"
 import { noteService } from "../services/note.service.js"
 import { NoteAdd } from "../cmps/note-add.jsx";
+import { utilService } from "../../../services/util.service.js";
 
 export class NoteIndex extends React.Component {
     state = {
@@ -9,7 +10,18 @@ export class NoteIndex extends React.Component {
         txt: 'Click to update text 👋',
         isNoteUpdate: null,
         imgUrl: 'assets/img/white-horse.png',
-        videoUrl: 'https://www.youtube.com/watch?v=Z3TIhMGQ_8k&'
+        videoUrl: 'https://www.youtube.com/embed/FWy_LbhHtug',
+        todos: [
+            { txt: "Finish Todos list", doneAt: null },
+            { txt: "Other required Features", doneAt: 187111111 },
+            { txt: "Integration", doneAt: 187111111 },
+            { txt: "CSS Design 🧑‍🎨", doneAt: 187111111 },
+            { txt: "Canvas Note 🖌️", doneAt: 187111111 },
+            { txt: "Drag&Drop 🤚", doneAt: 187111111 },
+            { txt: "Add note by blur 👆", doneAt: 187111111 },
+            { txt: "Clean Code 🧹", doneAt: 187111111 },
+            { txt: "Smoke a little something something 🚬🤠", doneAt: 187111111 },
+        ]
     }
 
     componentDidMount() {
@@ -18,13 +30,12 @@ export class NoteIndex extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         // console.log('COMPONENT DID UPDATE');
-        // console.log('this.state.imgUrl', this.state.imgUrl)
+        // console.log('this.state.videoUrl', this.state.videoUrl)
         if (this.state.isNoteUpdate) {
             this.loadNotes()
             this.setState({ isNoteUpdate: null })
         }
     }
-
 
     loadNotes = () => {
         // console.log('LOAD NOTES');
@@ -33,17 +44,47 @@ export class NoteIndex extends React.Component {
         this.setState({ notes: currNotes })
     }
 
-    // NOTE VIDEO FUNCS
+    // NOTE TODOS FUNCS
+    addNoteTodos = (ev) => {
+        // console.log('ADD NOTE TEXT');
+        if (ev) ev.preventDefault()
+        const { title, todos } = this.state
+        const { notes } = this.state
+        const { createNoteTodos } = noteService
+        this.setState({ notes: [createNoteTodos(title, todos), ...notes] },
+            this.setState({
+                title: 'Click to update title 👋',
+                todos: 'Click to update text 👋'
+            }))
+    }
 
+    updateNoteTodos = (id) => {
+        const { notes, title, todos } = this.state
+        const currIdx = notes.findIndex(note => note.id === id)
+        const currNote = utilService.getById(notes, id)
+        currNote.info.title = title
+        currNote.info.todos = todos
+        notes[currIdx] = currNote
+        this.setState(notes[currIdx],
+            () => {
+                this.setState({
+                    isNoteUpdate: true,
+                    title: 'Click to update title 👋',
+                    todos: 'Click to update text 👋'
+                })
+            })
+    }
+
+    // NOTE VIDEO FUNCS
     addNoteVideo = (ev) => {
         // console.log('ADD NOTE IMG');
         ev.preventDefault()
         const { title, videoUrl } = this.state
         const { notes } = this.state
-        const { createNoteImg } = noteService
+        const { createNoteVideo } = noteService
 
         this.setState({
-            notes: [createNoteImg(title, videoUrl), ...notes]
+            notes: [createNoteVideo(title, videoUrl), ...notes]
         },
             this.setState({
                 title: 'Click to update title 👋',
@@ -55,7 +96,7 @@ export class NoteIndex extends React.Component {
     updateNoteVideo = (id) => {
         const { notes, title, videoUrl } = this.state
         const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = noteService.getById(notes, id)
+        const currNote = utilService.getById(notes, id)
         currNote.info.title = title
         currNote.info.videoUrl = videoUrl
         notes[currIdx] = currNote
@@ -67,7 +108,17 @@ export class NoteIndex extends React.Component {
                     txt: 'Click to update text 👋'
                 })
             })
-    }
+        }
+        
+        setVideoUrl = (id) => {
+            const currLink = "https://www.youtube.com/embed/" + id
+            console.log('currLink', currLink)
+            console.log("https://www.youtube.com/embed/" + id);
+            // const { info } = this.props.note
+            // const { videoUrl } = info
+            this.setState({ videoUrl: currLink },
+                () => console.log('this.state.videoUrl', this.state.videoUrl))
+        }
 
     // NOTE IMAGE FUNCS
     addNoteImg = (ev) => {
@@ -90,7 +141,7 @@ export class NoteIndex extends React.Component {
     updateNoteImg = (id) => {
         const { notes, title, imgUrl } = this.state
         const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = noteService.getById(notes, id)
+        const currNote = utilService.getById(notes, id)
         currNote.info.title = title
         currNote.info.imgUrl = imgUrl
         notes[currIdx] = currNote
@@ -121,7 +172,7 @@ export class NoteIndex extends React.Component {
     updateNoteTxt = (id) => {
         const { notes, title, txt } = this.state
         const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = noteService.getById(notes, id)
+        const currNote = utilService.getById(notes, id)
         currNote.info.title = title
         currNote.info.txt = txt
         notes[currIdx] = currNote
@@ -134,6 +185,8 @@ export class NoteIndex extends React.Component {
                 })
             })
     }
+
+    // GENERAL FUNCS
 
     removeNote = (id) => {
         let notes = this.state.notes
@@ -156,14 +209,16 @@ export class NoteIndex extends React.Component {
         if (elInputImgUrl) elInputImgUrl.value = ''
     }
 
+
     render() {
         const { notes, title, txt, isNoteUpdate } = this.state
         const { addNoteTxt, addNoteImg, addNoteVideo,
             updateNoteTxt, updateNoteImg, updateNoteVideo,
             removeNote, handleChange,
-            clearInputs } = this
+            clearInputs, setVideoUrl } = this
         return <section className="note-app">
             <NoteAdd
+                setVideoUrl={setVideoUrl}
                 clearInputs={clearInputs}
                 handleChange={handleChange}
                 addNoteVideo={addNoteVideo}
@@ -171,6 +226,7 @@ export class NoteIndex extends React.Component {
                 addNoteTxt={addNoteTxt} />
             <hr />
             <NoteList
+                setVideoUrl={setVideoUrl}
                 handleChange={handleChange}
                 isNoteUpdate={isNoteUpdate}
                 updateNoteVideo={updateNoteVideo}

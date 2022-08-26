@@ -3,10 +3,11 @@ import { NotePreview } from "./note-preview.jsx"
 export function NoteList(props) {
     const { notes, removeNote,
         updateNoteTxt, updateNoteImg, updateNoteVideo,
-        isNoteUpdate, handleChange } = props
+        isNoteUpdate, handleChange, setVideoUrl } = props
     return <section>
         <div className="notes-galley">
             {notes.map(note => <NotePreview
+                setVideoUrl={setVideoUrl}
                 handleChange={handleChange}
                 isNoteUpdate={isNoteUpdate}
                 updateNoteTxt={updateNoteTxt}
