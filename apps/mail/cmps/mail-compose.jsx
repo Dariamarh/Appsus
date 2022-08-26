@@ -22,7 +22,8 @@ export class MailCompose extends React.Component {
         ev.preventDefault()
         console.log(this.state)
         mailService.sendNewMail(this.state)
-        this.setState({ to: '', subject: '', text: '' })
+        // this.setState({ to: '', subject: '', text: '' })
+        this.setState({sentMails:[currMail,...sentMails]})
         this.onSelectToggle()
 
     }
@@ -47,6 +48,7 @@ export class MailCompose extends React.Component {
     render() {
         const { to, subject, body } = this.state
         const { onSendMail } = this
+        const {sentMails} = this.props
 
         return <section className="mail-compose">
             <div className="mail-letter">

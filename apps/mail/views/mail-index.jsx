@@ -8,6 +8,7 @@ import { MailCompose } from "../cmps/mail-compose.jsx"
 export class MailIndex extends React.Component {
     state = {
         emails: [],
+        sentMails:[],
         loggedInUser: null,
         filterBy: {
             folder: 'inbox'

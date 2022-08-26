@@ -1,4 +1,5 @@
 import { MailCompose } from "./mail-compose.jsx"
+import { MailSent } from "../views/mail-sent.jsx"
 const { NavLink } = ReactRouterDOM
 
 export class MailFolders extends React.Component {
