@@ -3,11 +3,9 @@ import { mailService } from "../services/mail.service.js"
 export class MailCompose extends React.Component {
 
     state = {
-        email: {
-            to: '',
-            subject: '',
-            body: '',
-        }
+        to: '',
+        subject: '',
+        body: '',
     }
     componentDidMount() {
         this.loadMails()
@@ -18,23 +16,38 @@ export class MailCompose extends React.Component {
     }
 
     loadMails = () => {
-
     }
+
     onSendMail = (ev) => {
         ev.preventDefault()
         console.log(this.state)
         mailService.sendNewMail(this.state)
         this.setState({ to: '', subject: '', text: '' })
+        this.onSelectToggle()
+
     }
 
+
     handleChange = ({ target }) => {
-        const field = target.name
-        const value = target.value
+        const field = target.name;
+        const value = target.value;
         this.setState((prevState) => ({ ...prevState, [field]: value }))
     }
 
+    composeEmail = ({ to, subject, body }) => {
+        mailService.add(to, subject, body)
+            .then((email) => {
+                if (this.state.filterBy.folder === 'sent') {
+                    const { emails } = this.state
+                    emails.unshift(email)
+                    this.setState({ emails })
+                }
+            })
+    }
     render() {
-        const { to, subject, body } = this.state.email
+        const { to, subject, body } = this.state
+        const { onSendMail } = this
+
         return <section className="mail-compose">
             <div className="mail-letter">
                 <form className="mail-new-msg">
@@ -62,7 +75,7 @@ export class MailCompose extends React.Component {
                     ></textarea>
                 </form>
 
-                <button className="email-send" onClick={this.onSendMail}>Send</button>
+                <button className="email-send" onClick={onSendMail}>Send</button>
             </div>
         </section>
     }
