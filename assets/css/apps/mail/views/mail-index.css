@@ -3,9 +3,12 @@
   
 }
 
-/* .mail-index {
-   display: flex;
-    flex-direction: column;
-    width: 100%;
-    position: relative;
-} */
+@media only screen and (max-width: 500px) {
+    h3 {
+        font-size: 10px;
+    }
+.mail-list h3{
+
+    font-size: 10px;
+}
+}

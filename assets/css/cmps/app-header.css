@@ -1,11 +1,7 @@
-header {
-    /* background-color: #1a0dab; */
-    /* color: white; */
-    /* border-bottom: 2px solid white; */
-}
 
 .app-header {
     display: flex;
+    min-width: 100%;
     justify-content: space-between;
     padding: 20px 50px;
     background: #f1f1f1;

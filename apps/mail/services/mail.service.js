@@ -8,10 +8,12 @@ export const mailService = {
     loadMails,
     sendNewMail,
     toggleIsRead,
-    setEmailStatus
+    setEmailStatus,
+    add,
+    getLoggedInUser,
+
 }
 const EMAIL_KEY = 'emailDB'
-
 
 const emailsData = [
     {
@@ -20,7 +22,7 @@ const emailsData = [
         body: "Would love to catch up sometimes",
         isRead: false,
         from: "user@appsus.com",
-        sentAt: 1661372169155,
+        sentAt: 1641372169155,
         to: "momo@momo.com",
         state: 'inbox'
     },
@@ -80,9 +82,9 @@ const loggedinUser = {
     email: 'user@appsus.com',
     fullname: 'Mahatma Appsus'
 }
-
-
-
+function getLoggedInUser() {
+    return Promise.resolve(loggedinUser)
+}
 function query(filterBy) {
     let emails = _loadMailsFromStorage()
     if (!emails) {
@@ -101,7 +103,7 @@ function query(filterBy) {
         } else {
             switch (folder) {
                 case 'inbox':
-                    emails = emails.filter(email => email.from === 'user@appsus.com')
+                    emails = emails.filter(email => email.from !== 'user@appsus.com')
                     break;
 
                 case 'starred':
@@ -109,7 +111,7 @@ function query(filterBy) {
                     break;
 
                 case 'sent':
-                    emails = emails.filter(email => email.to !== 'user@appsus.com')
+                    emails = emails.filter(email => email.to === 'user@appsus.com')
                     break;
                 case 'drafts':
                     emails = emails.filter(email => email.state === 'drafts')
@@ -118,14 +120,20 @@ function query(filterBy) {
                 case 'trash':
                     emails = emails.filter(email => email.state === 'trash')
                     break;
+                case 'unread':
+                    emails = emails.filter(email => email.isRead === false)
+                    break;
 
+                case 'read':
+                    emails = emails.filter(email => email.isRead === true)
+                    break;
             }
         }
     }
     return emails
 }
 function setEmailStatus(emailId, state) {
-    let emails = _loadFromStorage()
+    let emails = _loadMailsFromStorage()
     const emailIdx = emails.findIndex(email => email.id === emailId)
     emails[emailIdx].state = (emails[emailIdx].state === state) ? null : state
     _saveMailsToStorage(emails)
@@ -143,6 +151,14 @@ function remove(emailId) {
     _saveMailsToStorage(emails)
     return Promise.resolve()
 }
+function add(to, subject, body) {
+    const email = sendNewMail(to, subject, body)
+    let emails = _loadMailsFromStorage()
+    emails.unshift(email)
+    _saveMailsToStorage(emails)
+    return Promise.resolve(email)
+}
+
 
 function save(emails) {
     _saveMailsToStorage(emails)

@@ -1,5 +1,4 @@
 import { MailCompose } from "./mail-compose.jsx"
-import { MailSent } from "../views/mail-sent.jsx"
 const { NavLink } = ReactRouterDOM
 
 export class MailFolders extends React.Component {
@@ -7,16 +6,13 @@ export class MailFolders extends React.Component {
     state = {
         compose: false,
     }
-    onComposeToggle = () => {
-        this.setState({ compose: !this.state.compose })
-    }
 
     render() {
         const { compose } = this.state
-        const { onComposeToggle } = this
+        const { toggleModal } = this
 
         return <section className="mail-menu">
-            <button className="compose-btn" onClick={onComposeToggle}>+ Compose</button>
+            <button className="compose-btn" onClick={toggleModal}>+ Compose</button>
             <div className="mail-folders">
                 <NavLink to={`/mail/`}>
                     <button className="mail-inbox"> <i className="fa-solid fa-inbox"></i>Inbox</button>
