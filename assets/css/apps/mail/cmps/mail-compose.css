@@ -5,7 +5,7 @@
     width: 450px;
     height: 500px;
     box-shadow: 2px 2px 2px 2px rgb(153 149 149);
-    z-index: 1;
+    z-index: 20;
     background-color: white;
 }
 
@@ -57,7 +57,6 @@ textarea {
     color: #ffffff;
     font-size: 13px;
     padding: 10px 20px 10px 20px;
-    margin-top: 30px;
     margin-left: 10px;
     cursor: pointer;
 }
@@ -68,6 +67,7 @@ textarea {
         width: 300px;
         height: 320px;
         font-size: 0.8rem;
+        margin-bottom: 90px;
     }
 
     .msg-title {
@@ -78,5 +78,7 @@ textarea {
         width: 290px;
         height: 200px;
     }
-
+    .email-send {
+        padding: 5px 8px 5px 8px;
+    }
 }

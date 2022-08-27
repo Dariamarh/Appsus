@@ -1,8 +1,8 @@
 import { mailService } from "../services/mail.service.js"
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailFilter } from '../cmps/mail-filter.jsx'
-import { MailFolders } from "../cmps/mail-folders.jsx"
 import { MailCompose } from "../cmps/mail-compose.jsx"
+import { MailFolders } from "../cmps/mail-folders.jsx"
 
 export class MailIndex extends React.Component {
     state = {
@@ -107,17 +107,17 @@ export class MailIndex extends React.Component {
                 </div>
                 <div className="mail-main">
                     <MailFolders />
+                    {/* <MailCompose 
+                        toggleModal={toggleModal}
+                        isModalOpened={isModalOpened}
+                        composeEmail={composeEmail}
+                    /> */}
                     <MailList
                         emails={emails}
                         onRemoveEmail={onRemoveEmail}
                         setStar={setStar}
                         loggedInUser={loggedInUser}
                         onToggleIsRead={onToggleIsRead} />
-                    <MailCompose
-                        toggleModal={toggleModal}
-                        isModalOpened={isModalOpened}
-                        composeEmail={composeEmail}
-                    />
 
                 </div>
             </section>
