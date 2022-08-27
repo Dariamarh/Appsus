@@ -4,6 +4,7 @@ import { MailFilter } from '../cmps/mail-filter.jsx'
 import { MailCompose } from "../cmps/mail-compose.jsx"
 import { MailFolders } from "../cmps/mail-folders.jsx"
 
+
 export class MailIndex extends React.Component {
     state = {
         emails: [],
@@ -106,12 +107,13 @@ export class MailIndex extends React.Component {
                     <MailFilter onSetFilter={onSetFilter} />
                 </div>
                 <div className="mail-main">
-                    <MailFolders />
-                    {/* <MailCompose 
+                    <MailFolders 
+                    />
+                    <MailCompose 
                         toggleModal={toggleModal}
                         isModalOpened={isModalOpened}
                         composeEmail={composeEmail}
-                    /> */}
+                    />
                     <MailList
                         emails={emails}
                         onRemoveEmail={onRemoveEmail}

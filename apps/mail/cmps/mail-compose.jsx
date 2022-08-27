@@ -31,9 +31,10 @@ export class MailCompose extends React.Component {
     render() {
         const { onComposeEmail } = this
         const { to, subject, body } = this.state.compose
-        const { toggleModal } = this.props
+        const { toggleModal, isModalOpened } = this.props
+        const modalClass = isModalOpened ? 'modal-opened' : 'mail-letter'
 
-        return <section className="mail-compose">
+        return <section className={`mail-compose ${modalClass}`}>
             <div className="mail-letter">
                 <form className="mail-new-msg">
                     <h3 className="msg-title">New Message</h3>

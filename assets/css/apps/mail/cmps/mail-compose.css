@@ -3,10 +3,12 @@
     right: 0;
     bottom: 0;
     width: 450px;
-    height: 500px;
+    height: 450px;
     box-shadow: 2px 2px 2px 2px rgb(153 149 149);
     z-index: 20;
     background-color: white;
+    display: block;
+    
 }
 
 .mail-new-msg {
@@ -61,13 +63,17 @@ textarea {
     cursor: pointer;
 }
 
+.mail-compose.modal-opened {
+   display:none;
+}
+
 @media only screen and (max-width: 570px) {
 
     .mail-letter {
         width: 300px;
         height: 320px;
         font-size: 0.8rem;
-        margin-bottom: 90px;
+        /* margin-bottom: 90px; */
     }
 
     .msg-title {
