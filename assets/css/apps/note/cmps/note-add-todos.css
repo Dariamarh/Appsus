@@ -4,5 +4,7 @@
 }
 
 .input-note-todos-list{
-    width: 350px;
-}
+    width: 400px;
+    height: 100px;
+    background-color: var(--color-yellow);
+    margin-top: 5px;}

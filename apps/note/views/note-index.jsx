@@ -4,8 +4,7 @@ import { noteService } from "../services/note.service.js"
 import { NoteAdd } from "../cmps/note-add.jsx";
 import { utilService } from "../../../services/util.service.js";
 import { NoteFilter } from "../cmps/note-filter.jsx";
-import { LabelPicker } from "../../../cmps/label-picker.jsx";
-
+import { storageService } from "../../../services/storage.service.js";
 export class NoteIndex extends React.Component {
     state = {
         notes: [],
@@ -26,7 +25,6 @@ export class NoteIndex extends React.Component {
 
     componentDidUpdate(prevProps, prevState) {
         console.log('COMPONENT DID UPDATE');
-
     }
 
     loadNotes = () => {
@@ -38,6 +36,7 @@ export class NoteIndex extends React.Component {
 
     onSetFilter = (filterBy) => {
         this.setState({ filterBy }, () => {
+            console.log('this.state.filterBy', this.state.filterBy)
             this.loadNotes()
         })
     }
@@ -120,9 +119,7 @@ export class NoteIndex extends React.Component {
         this.setState({ notes })
     }
 
-    setLabel = (labelType) => {
-        console.log('labelType', labelType)
-    }
+
 
     handleChange = ({ target }) => {
         // console.log('HANDLE CHANGE');
@@ -167,10 +164,12 @@ export class NoteIndex extends React.Component {
         this.setState({ notes, pinnedNotes })
     }
 
+
+
     render() {
         const { notes, pinnedNotes, videoUrl, filterBy } = this.state
         const { addNoteTxt, addNoteImg, addNoteVideo, addNoteTodos,
-            removeNote, clearInputs, setVideoUrl, handleChange, pinNote, duplicateNote, onSetFilter, setLabel } = this
+            removeNote, clearInputs, setVideoUrl, handleChange, pinNote, duplicateNote, onSetFilter } = this
         return <section className="note-app">
             <NoteAdd
                 addNoteTodos={addNoteTodos}
@@ -194,7 +193,6 @@ export class NoteIndex extends React.Component {
                 pinnedNotes={pinnedNotes} />
             <hr />
             <NoteList
-                setLabel={setLabel}
                 duplicateNote={duplicateNote}
                 pinNote={pinNote}
                 removeNote={removeNote}

@@ -38,7 +38,8 @@ export class NoteAddTxt extends React.Component {
                 onChange={handleChange}
                 onClick={isInputEntry}
                 onBlur={isInputExit} />
-            <input
+
+            <textarea
                 type="txt"
                 className="input-note-txt"
                 name="txt"
@@ -46,11 +47,29 @@ export class NoteAddTxt extends React.Component {
                 placeholder="Enter text here"
                 onChange={handleChange}
                 onClick={isInputEntry}
-                onBlur={isInputExit} />
+                onBlur={isInputExit}>
+
+            </textarea>
+
+            {/* <input
+                type="txt"
+                className="input-note-txt"
+                name="txt"
+                ref={elInputTxt}
+                placeholder="Enter text here"
+                onChange={handleChange}
+                onClick={isInputEntry}
+                onBlur={isInputExit} /> */}
+            <i className="fa-solid fa-message-plus"></i>
             <button
                 className="btn-add-note"
-                onClick={clearInputs}
-            >Add Note</button>
+                onClick={clearInputs} >
+                <img
+                    className="btn-add-note-img"
+                    src="assets/img/add-icon.png" alt="" srcset="" />
+            </button>
+
+
         </form>
     }
 }

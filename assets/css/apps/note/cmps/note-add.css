@@ -1,9 +1,6 @@
-.btn-note-type-container {
-    list-style: none;
-    gap: 5px;
-    cursor: pointer;
-}
+@import '../cmps/note-add-base.css';
+@import '../cmps/note-add-txt.css';
+@import '../cmps/note-add-img.css';
+@import '../cmps/note-add-video.css';
+@import '../cmps/note-add-todos.css';
 
-.form-note-add-img {
-    gap: 7.5px;
-}

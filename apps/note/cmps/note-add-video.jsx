@@ -62,10 +62,19 @@ export class NoteAddVideo extends React.Component {
                         })}
                     </ul>}
                 </div>
+
                 <button
                     className="btn-add-note"
+                    onClick={clearInputs} >
+                    <img
+                        className="btn-add-note-img"
+                        src="assets/img/add-icon.png" alt="" srcset="" />
+                </button>
+
+                {/* <button
+                    className="btn-add-note"
                     onClick={clearInputs}
-                >Add Note</button>
+                >Add Note</button> */}
             </form>
         </section>
     }

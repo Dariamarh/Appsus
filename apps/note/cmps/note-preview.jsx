@@ -1,23 +1,22 @@
-// import { noteService } from "../services/note.service.jsx";
 import { NoteImg } from "./note-img.jsx";
 import { NoteTodos } from "./note-todos.jsx";
 import { NoteTxt } from "./note-txt.jsx";
 import { NoteVideo } from "./note-video.jsx";
 
+
 export class NotePreview extends React.Component {
 
     state = {
-        noteType: this.props.note.type
+        noteType: this.props.note.type,
     }
 
     DynamicCmp = () => {
         const { noteType } = this.state
-        const { notes, note, removeNote, pinNote, duplicateNote, setLabel } = this.props
+        const { notes, note, removeNote, pinNote, duplicateNote } = this.props
 
         switch (noteType) {
             case 'note-txt':
                 return <NoteTxt
-                    setLabel={setLabel}
                     duplicateNote={duplicateNote}
                     pinNote={pinNote}
                     notes={notes}
@@ -26,7 +25,6 @@ export class NotePreview extends React.Component {
                 />
             case 'note-img':
                 return <NoteImg
-                    setLabel={setLabel}
                     duplicateNote={duplicateNote}
                     pinNote={pinNote}
                     notes={notes}
@@ -35,7 +33,6 @@ export class NotePreview extends React.Component {
                 />
             case 'note-todos':
                 return <NoteTodos
-                    setLabel={setLabel}
                     duplicateNote={duplicateNote}
                     pinNote={pinNote}
                     notes={notes}
@@ -44,7 +41,6 @@ export class NotePreview extends React.Component {
                 />
             case 'note-video':
                 return <NoteVideo
-                    setLabel={setLabel}
                     duplicateNote={duplicateNote}
                     pinNote={pinNote}
                     notes={notes}
