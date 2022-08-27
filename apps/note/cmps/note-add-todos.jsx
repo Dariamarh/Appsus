@@ -6,44 +6,33 @@ export class NoteAddTodos extends React.Component {
 
     //Blur detectors
     isInputExit = () => {
-        // console.log('EXIT');
-        // this.setState({ inputExit: true }, () => {
-        //     this.addNoteTxt()
-        // })
-        // this.state.inputExit = true
-        // this.state.inputEntry = null
-        // this.addNoteTxt()
     }
 
     isInputEntry = ({ target }) => {
-        // console.log('ENTRY');
-        // this.setState({ inputEntry: true })
-        // this.state.inputEntry = true
-        // this.state.inputExit = null
     }
-
 
     render() {
         const { addNoteTodos, handleChange, clearInputs, elInputTitle, elInputTodosList } = this.props
         const { isInputEntry, isInputExit } = this
-
-        return <form onSubmit={addNoteTodos} id="add-note-todo-form" className="form-note-txt flex column">
+        return <form
+            onSubmit={addNoteTodos}
+            id="add-note-todo-form"
+            className="form-note-txt flex column">
             <input
                 type="txt"
-                className="input-note-title"
                 name="title"
-                ref={elInputTitle}
+                className="input-note-title"
                 placeholder="Enter title here"
+                ref={elInputTitle}
                 onChange={handleChange}
                 onClick={isInputEntry}
                 onBlur={isInputExit} />
             <textarea
                 type="todos-list"
-                className="input-note-todos-list"
                 name="userAddTodos"
-                ref={elInputTodosList}
-                id="userAddTodos"
+                className="input-note-todos-list"
                 placeholder="Enter text here"
+                ref={elInputTodosList}
                 onChange={handleChange}
                 onClick={isInputEntry}
                 onBlur={isInputExit}>
@@ -53,13 +42,8 @@ export class NoteAddTodos extends React.Component {
                 onClick={clearInputs} >
                 <img
                     className="btn-add-note-img"
-                    src="assets/img/add-icon.png" alt="" srcset="" />
+                    src="assets/img/add-icon.png" />
             </button>
-
-            {/* <button
-                className="btn-add-note"
-                onClick={clearInputs}
-            >Add Note</button> */}
         </form>
     }
 }

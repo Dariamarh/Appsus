@@ -1,5 +1,31 @@
-.note-filter-form{
+@font-face {
+    font-family: DMSerifDisplay;
+    src: url(/assets/fonts/DMSerifDisplay-Regular.ttf);
+}
+
+
+.note-filter-form {
     display: flex;
     gap: 25px;
-    
+    font-family: DMSerifDisplay, sans-serif;
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
+
+    padding: 15px;
+    padding-inline-start: 25px;
+    padding-inline-end: 25px;
+    border-radius: 25px;
+    margin-bottom: 10px;
+}
+
+.input-note-filter{
+    background-color: #faf9f9;
+    border-radius: 15px;
+    padding-inline-start: 5px;
+    padding-inline-end: 5px;
+}
+
+.input-note-filter::placeholder{
+    color: black;
+
 }

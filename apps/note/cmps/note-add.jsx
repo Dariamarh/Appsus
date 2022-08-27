@@ -26,89 +26,85 @@ export class NoteAdd extends React.Component {
         }
     }
 
+    // INPUTS
     elInputTitle = React.createRef()
     elInputTxt = React.createRef()
     elInputImgUrl = React.createRef()
     elInputVideoUrl = React.createRef()
     elInputTodosList = React.createRef()
 
-
-
     DynamicCmp = () => {
         const { addNoteTxt, addNoteImg, addNoteVideo,
             handleChange, setVideoUrl, addNoteTodos, videoUrl } = this.props
         const { noteType } = this.state
-        const { elInputTitle, elInputTxt, elInputImgUrl, elInputVideoUrl, elInputTodosList, clearInputs } = this
+        const { elInputTitle, elInputTxt, elInputImgUrl,
+            elInputVideoUrl, elInputTodosList, clearInputs } = this
         switch (noteType) {
             case 'note-txt':
                 return <NoteAddTxt
-                    elInputTxt={elInputTxt}
                     elInputTitle={elInputTitle}
+                    elInputTxt={elInputTxt}
+                    addNoteTxt={addNoteTxt}
                     clearInputs={clearInputs}
                     handleChange={handleChange}
-                    addNoteTxt={addNoteTxt} />
+                />
             case 'note-img':
                 return <NoteAddImg
                     elInputTitle={elInputTitle}
                     elInputImgUrl={elInputImgUrl}
-                    clearInputs={clearInputs}
                     addNoteImg={addNoteImg}
+                    clearInputs={clearInputs}
                     handleChange={handleChange}
                 />
             case 'note-todos':
                 return <NoteAddTodos
-                    elInputTodosList={elInputTodosList}
                     elInputTitle={elInputTitle}
+                    elInputTodosList={elInputTodosList}
                     handleChange={handleChange}
                     addNoteTodos={addNoteTodos}
                 />
             case 'note-video':
                 return <NoteAddVideo
-                    videoUrl={videoUrl}
-                    elInputVideoUrl={elInputVideoUrl}
                     elInputTitle={elInputTitle}
+                    elInputVideoUrl={elInputVideoUrl}
                     setVideoUrl={setVideoUrl}
-                    clearInputs={clearInputs}
+                    videoUrl={videoUrl}
                     addNoteVideo={addNoteVideo}
+                    clearInputs={clearInputs}
                     handleChange={handleChange}
                 />
         }
     }
 
     switchNoteType = ({ target }) => {
-        // console.log('target.id', target.id)
         this.setState({ noteType: target.id })
     }
 
-
-
     render() {
         const { DynamicCmp, switchNoteType } = this
-        // const { clearInputs } = this.props
-        return <section className="note-add-container">
-            <div className="note-add flex">
+        return <section
+            className="note-add-container">
+            <div
+                className="note-add flex">
                 <DynamicCmp />
-                <ul className="btn-note-type-container flex">
-                    {/* <li
-                        onClick={clearInputs}
-                        id="note-txt"
-                        className="btn-note-add">➕</li> */}
+                <ul
+                    className="btn-note-type-container flex">
                     <li
                         onClick={switchNoteType}
                         id="note-txt"
-                        className="btn-note-add-txt">✏️</li>
+                        className="btn-note-add txt">✏️</li>
                     <li
                         onClick={switchNoteType}
                         id="note-img"
-                        className="btn-note-add-img">🖼️</li>
+                        className="btn-note-add img">🖼️</li>
                     <li
                         onClick={switchNoteType}
                         id="note-video"
-                        className="btn-note-add-video">🎥</li>
+                        className="btn-note-add video">🎥</li>
                     <li
                         onClick={switchNoteType}
                         id="note-todos"
-                        className="btn-note-add-todos">📋</li>
+                        className="btn-note-add todos">📋</li>
                 </ul>
             </div>
         </section>

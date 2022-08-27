@@ -1,6 +1,7 @@
 .input-note-add-video {
     width: 400px;
     height: 25px;
-    background-color: var(--color-yellow);
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
     margin-top: 5px;
 }

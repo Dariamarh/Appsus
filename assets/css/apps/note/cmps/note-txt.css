@@ -1,3 +1,46 @@
+.note-txt-container {
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.note-title {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.note-txt-txt {
+    padding-inline-start: 10px;
+}
+
+.note-btn-container{
+    justify-content: end;
+    align-items: center;
+}
+
+.color-picker-container {
+    position: relative;
+    height: 30px;
+    width: 30px;
+}
+
 .color-picker {
+    height: 25px;
+    width: 25px;
     opacity: 0;
+    z-index: 20;
+    cursor:pointer;
+}
+
+.color-picker-icon {
+    position: relative;
+    left: 25px;
+
+}
+
+.btn-note {
+    height: 25px;
+    width: 25px;
+    background-color: rgba(255, 255, 255, 0);
+    border: none;
+    cursor:pointer;
 }

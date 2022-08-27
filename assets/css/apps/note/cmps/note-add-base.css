@@ -2,20 +2,42 @@
     justify-content: center;
     align-items: center;
     margin: 10px 0px;
-    background-color: var(--color-green);
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
     border-radius: 15px;
 }
 
 .btn-note-type-container {
+    padding-inline-start: 10px;
     list-style: none;
-    gap: 5px;
+    /* gap: 1px; */
     cursor: pointer;
 }
 
+.btn-note-type-container>* {
+padding: 1px;
+}
+
 .input-note-title {
-    background-color: var(--color-yellow);
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
     margin-top: 20px;
 
+}
+
+.btn-add-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    margin: 5px;
+    /* border-radius: 50%; */
+    border: none;
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
+    cursor: pointer;
 }
 
 .btn-add-note-img {

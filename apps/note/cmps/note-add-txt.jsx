@@ -5,71 +5,45 @@ export class NoteAddTxt extends React.Component {
         inputEntry: null,
     }
 
-    //Blur detectors
+    //Blur detectors - I WILL COME BACK!
     isInputExit = () => {
-        // console.log('EXIT');
-        // this.setState({ inputExit: true }, () => {
-        //     this.addNoteTxt()
-        // })
-        // this.state.inputExit = true
-        // this.state.inputEntry = null
-        // this.addNoteTxt()
     }
 
     isInputEntry = ({ target }) => {
-        // console.log('ENTRY');
-        // this.setState({ inputEntry: true })
-        // this.state.inputEntry = true
-        // this.state.inputExit = null
     }
-
 
     render() {
         const { addNoteTxt, handleChange, clearInputs, elInputTitle, elInputTxt } = this.props
         const { isInputEntry, isInputExit } = this
-
-        return <form onSubmit={addNoteTxt} className="form-note-txt flex column">
+        return <form
+            onSubmit={addNoteTxt}
+            className="form-note-txt flex column">
             <input
                 type="txt"
-                className="input-note-title"
                 name="title"
-                ref={elInputTitle}
+                className="input-note-title"
                 placeholder="Enter title here"
+                ref={elInputTitle}
                 onChange={handleChange}
                 onClick={isInputEntry}
                 onBlur={isInputExit} />
-
             <textarea
                 type="txt"
-                className="input-note-txt"
                 name="txt"
-                ref={elInputTxt}
+                className="input-note-txt"
                 placeholder="Enter text here"
+                ref={elInputTxt}
                 onChange={handleChange}
                 onClick={isInputEntry}
                 onBlur={isInputExit}>
-
             </textarea>
-
-            {/* <input
-                type="txt"
-                className="input-note-txt"
-                name="txt"
-                ref={elInputTxt}
-                placeholder="Enter text here"
-                onChange={handleChange}
-                onClick={isInputEntry}
-                onBlur={isInputExit} /> */}
-            <i className="fa-solid fa-message-plus"></i>
             <button
                 className="btn-add-note"
                 onClick={clearInputs} >
                 <img
                     className="btn-add-note-img"
-                    src="assets/img/add-icon.png" alt="" srcset="" />
+                    src="assets/img/add-icon.png"/>
             </button>
-
-
         </form>
     }
 }

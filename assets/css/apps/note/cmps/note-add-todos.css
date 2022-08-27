@@ -1,10 +1,13 @@
-.input-note-todos{
+.input-note-todos {
 
     height: 200px;
 }
 
-.input-note-todos-list{
+.input-note-todos-list {
     width: 400px;
     height: 100px;
-    background-color: var(--color-yellow);
-    margin-top: 5px;}
+    background-color: #faf9f9;
+    color: rgb(15, 14, 14);
+    border: 1px solid black;
+    margin-top: 5px;
+}

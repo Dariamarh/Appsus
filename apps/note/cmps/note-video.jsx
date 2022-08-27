@@ -10,32 +10,14 @@ export class NoteVideo extends React.Component {
         youTubeVideos: null,
         labels: [],
         isLabelsList: false
-
-
     }
 
     gLabels = ['ciritcal', 'family', 'work', 'friends', 'spam', 'memories', 'romantic']
-
 
     componentDidMount() {
         const { info, backgroundColor } = this.props.note
         const { title, videoUrl } = info
         this.setState({ title, videoUrl, backgroundColor })
-
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
-        // const { isNoteUpdate } = this.props
-        // if (isNoteUpdate) {
-        //     if (this.props.note) {
-        //         const { info } = this.props.note
-        //         const { title, videoUrl } = info
-        //         this.setState({ title, videoUrl },
-        //             () => { console.log('this.state', this.state) })
-        //     }
-        // }
     }
 
     onEditState = () => {
@@ -49,25 +31,12 @@ export class NoteVideo extends React.Component {
 
     //Blur detectors
     isInputExit = () => {
-        // console.log('EXIT');
-        // this.setState({ inputExit: true }, () => {
-        //     this.addNoteTxt()
-        // })
-        // this.state.inputExit = true
-        // this.state.inputEntry = null
-        // this.addNoteTxt()
     }
 
     isInputEntry = ({ target }) => {
-        // console.log('ENTRY');
-        // this.setState({ inputEntry: true })
-        // this.state.inputEntry = true
-        // this.state.inputExit = null
     }
 
     handleSearchChange = ({ target }) => {
-        // console.log('HANDLE SEARCH CHANGE');
-        // console.log('target.value', target.value)
         noteService.getVideos(target.value)
             .then((res) => {
                 this.setState({ youTubeVideos: res })
@@ -79,35 +48,19 @@ export class NoteVideo extends React.Component {
         this.setState({ youTubeVideos: null })
     }
 
-
     updateNoteVideo = (id) => {
         const { title, videoUrl } = this.state
         this.setState({ title, videoUrl })
-        // const currIdx = notes.findIndex(note => note.id === id)
-        // const currNote = utilService.getById(notes, id)
-        // currNote.info.title = title
-        // currNote.info.videoUrl = videoUrl
-        // notes[currIdx] = currNote
-        // this.setState(notes[currIdx],
-        //     () => {
-        //         this.setState({
-        //             isNoteUpdate: true,
-        //             title: 'Click to update title 👋',
-        //             txt: 'Click to update text 👋'
-        //         })
-        //     })
     }
 
     handleChange = ({ target }) => {
         const { value, name } = target
         this.setState({ [name]: value })
-        // console.log('HANDLE CHANGE');
     }
 
     setVideoUrl = (id) => {
         this.setState({ videoUrl: "https://www.youtube.com/embed/" + id })
     }
-
 
     toggleLabel = () => {
         let { isLabelsList } = this.state
@@ -122,58 +75,54 @@ export class NoteVideo extends React.Component {
         this.setState({ labels })
     }
 
-
     removeLabel = (currLabel) => {
         let { labels } = this.state
         labels = labels.filter(label => label !== currLabel)
         this.setState({ labels })
     }
 
-
     render() {
         const { removeNote, note, pinNote, duplicateNote } = this.props
         const { onEditState, offEditState, isInputEntry, isInputExit,
             handleSearchChange, clearSearch, handleChange, setVideoUrl
             , toggleLabel, setLabel, removeLabel, gLabels } = this
-        const { editState, youTubeVideos, title, videoUrl, backgroundColor, labels, isLabelsList } = this.state
+        const { editState, youTubeVideos, title, videoUrl, backgroundColor,
+            labels, isLabelsList } = this.state
         const { debounce } = utilService
 
         return <section
-
             className="note-video-container">
             {!editState && <div
-                style={{ backgroundColor: backgroundColor }}
+                className="note-video-title"
                 onClick={onEditState}
-                className="note-video-title">{title}</div>}
-
-
+                style={{ backgroundColor: backgroundColor }}>
+                {title}
+            </div>}
             <iframe
                 className="video-container"
                 width="420"
                 height="315"
                 src={videoUrl}>
             </iframe>
-
-            {editState && <div className="edit-container form-note-video flex column">
+            {editState && <div
+                className="edit-container form-note-video flex column">
                 <input
                     type="txt"
-                    className="input-note-title"
                     name="title"
+                    className="input-note-title"
                     defaultValue={title}
                     onChange={handleChange}
                     onClick={isInputEntry}
                     onBlur={isInputExit} />
-
                 <div className="search-user-msg">Search for youTube videos here👇</div>
                 <div className="video-search-bar-container">
                     <input
                         type="search"
-                        className="input-note-video"
                         name="videoUrl"
+                        className="input-note-video"
                         defaultValue={videoUrl}
                         onBlur={debounce(clearSearch, 500)}
-                        onChange={debounce(handleSearchChange, 1000)}
-                    />
+                        onChange={debounce(handleSearchChange, 1000)} />
                     {youTubeVideos && <ul className="youtube-video-container">
                         {youTubeVideos.map(video => {
                             const { title, id } = video
@@ -186,36 +135,39 @@ export class NoteVideo extends React.Component {
                         })}
                     </ul>}
                 </div>
-
-
                 <button
                     onClick={() => offEditState(note.id)}
-                    className="btn-exit-edit-mode"
-                >Update</button>
+                    className="btn-exit-edit-mode">
+                    Update
+                </button>
             </div>}
+            <i className="color-picker-icon fa-solid fa-palette"></i>
             <input
-                // className="color-picker"
-                onChange={handleChange}
                 type="color"
                 name="backgroundColor"
-                id="" />
-
-
+                className="color-picker"
+                onChange={handleChange} />
             <button
-                className="btn-edit-video"
-                onClick={onEditState}
-            >✏️</button>
+                className="btn-note"
+                onClick={onEditState}>
+                <i className="fa-solid fa-pen-to-square"></i>
+            </button>
             <button
-                onClick={() => { pinNote(note) }}
-                className="btn-pin-note">📌</button>
+                className="btn-note"
+                onClick={() => { pinNote(note) }}>
+                <i class="fa-solid fa-thumbtack"></i>
+            </button>
             <button
-                onClick={() => { duplicateNote(note) }}
-                className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+                className="btn-note"
+                onClick={() => { duplicateNote(note) }}>
+                <i className="fa-solid fa-clone"></i>
+            </button>
             <button
-                onClick={() => { toggleLabel('work') }}
-            >Label</button>
+                className="btn-note"
+                onClick={() => { toggleLabel('work') }} >
+                <i className="fa-solid fa-tag"></i>
+            </button>
             {isLabelsList && <ul className="labels-list-container">
-
                 {gLabels.map(label => {
                     return <li
                         key={label}
@@ -225,15 +177,16 @@ export class NoteVideo extends React.Component {
                         {label}</li>
                 })}
             </ul>}
-
             {labels.map(label => <LabelPicker
                 key={label}
                 labels={labels}
-                removeLabel={removeLabel}
-                currLabel={label} />)}
+                currLabel={label}
+                removeLabel={removeLabel} />)}
             <button
-                onClick={() => removeNote(note.id)}
-                className="btn-remove-note">🗑️</button>
+                className="btn-note"
+                onClick={() => removeNote(note.id)}>
+                <i className="fa-solid fa-trash-can"></i>
+            </button>
         </section>
     }
 }

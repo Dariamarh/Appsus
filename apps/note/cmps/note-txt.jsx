@@ -1,6 +1,4 @@
 import { LabelPicker } from "../../../cmps/label-picker.jsx";
-import { noteService } from "../services/note.service.js"
-import { storageService } from "../../../services/storage.service.js";
 
 export class NoteTxt extends React.Component {
 
@@ -18,10 +16,6 @@ export class NoteTxt extends React.Component {
         this.setState({ title, txt, backgroundColor })
     }
 
-    componentDidUpdate(prevProps, prevState) {
-       
-    }
-
     onEditState = () => {
         this.setState({ editState: true })
     }
@@ -33,20 +27,9 @@ export class NoteTxt extends React.Component {
 
     //Blur detectors
     isInputExit = () => {
-        // console.log('EXIT');
-        // this.setState({ inputExit: true }, () => {
-        //     this.addNoteTxt()
-        // })
-        // this.state.inputExit = true
-        // this.state.inputEntry = null
-        // this.addNoteTxt()
     }
 
     isInputEntry = ({ target }) => {
-        // console.log('ENTRY');
-        // this.setState({ inputEntry: true })
-        // this.state.inputEntry = true
-        // this.state.inputExit = null
     }
 
     updateNoteTxt() {
@@ -55,7 +38,6 @@ export class NoteTxt extends React.Component {
     }
 
     handleChange = ({ target }) => {
-        // console.log('HANDLE CHANGE');
         const { value, name } = target
         this.setState({ [name]: value })
     }
@@ -73,7 +55,6 @@ export class NoteTxt extends React.Component {
         this.setState({ labels })
     }
 
-
     removeLabel = (currLabel) => {
         let { labels } = this.state
         labels = labels.filter(label => label !== currLabel)
@@ -81,63 +62,73 @@ export class NoteTxt extends React.Component {
     }
 
     render() {
-        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange, toggleLabel, setLabel, removeLabel, gLabels } = this
+        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange,
+            toggleLabel, setLabel, removeLabel, gLabels } = this
         const { removeNote, note, pinNote, duplicateNote } = this.props
         const { title, txt, editState, backgroundColor, labels, isLabelsList } = this.state
-        return <section className="note-txt-container">
-            <div
-                style={{ backgroundColor: backgroundColor }}
-                className="note-txt">
-                {!editState &&
-                    <div
-                        className="note-txt-content-container"
-                        onClick={onEditState}>
-                        <div className="rendered-note-txt-container">
-                            <div className="rendered-note-title">{title}</div>
-                            <div className="rendered-note-txt">{txt}</div>
-                        </div>
-                    </div>}
-
-                {editState && <div
-                    className="edit-container form-note-txt">
-                    <input
-                        type="txt"
-                        className="input-note-title"
-                        name="title"
-                        defaultValue={title}
-                        onChange={handleChange}
-                        onClick={isInputEntry}
-                        onBlur={isInputExit} />
-                    <input
-                        type="txt"
-                        className="input-note-txt"
-                        name="txt"
-                        defaultValue={txt}
-                        onChange={handleChange}
-                        onClick={isInputEntry}
-                        onBlur={isInputExit} />
-                    <button
-                        onClick={() => offEditState(note.id)}
-                        className="btn-exit-edit-mode"
-                    >Update</button>
+        return <section
+            style={{ backgroundColor: backgroundColor }}
+            className="note-txt-container">
+            {!editState &&
+                <div
+                    className="note-txt-content-container"
+                    onClick={onEditState}>
+                    <div className="note-title">{title}</div>
+                    <div className="note-txt-txt">{txt}</div>
                 </div>}
+            {editState && <div
+                className="edit-container form-note-txt">
                 <input
-                    // className="color-picker"
+                    type="txt"
+                    name="title"
+                    className="input-note-title"
+                    defaultValue={title}
                     onChange={handleChange}
+                    onClick={isInputEntry}
+                    onBlur={isInputExit} />
+                <input
+                    type="txt"
+                    name="txt"
+                    className="input-note-txt"
+                    defaultValue={txt}
+                    onChange={handleChange}
+                    onClick={isInputEntry}
+                    onBlur={isInputExit} />
+                <button
+                    onClick={() => offEditState(note.id)}
+                    className="btn-exit-edit-mode"
+                >Update</button>
+            </div>}
+            <div
+                className="note-btn-container flex">
+                <i
+                    className="color-picker-icon fa-solid fa-palette"></i>
+                <input
                     type="color"
                     name="backgroundColor"
-                    id="" />
+                    className="color-picker"
+                    onChange={handleChange} />
+                <button
+                    className="btn-note"
+                    onClick={onEditState}
+                ><i className="fa-solid fa-pen-to-square"></i>
+                </button>
                 <button
                     onClick={() => { pinNote(note) }}
-                    className="btn-pin-note">📌</button>
+                    className="btn-note">
+                    <i class="fa-solid fa-thumbtack"></i>
+                </button>
                 <button
                     onClick={() => { duplicateNote(note) }}
-                    className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+                    className="btn-note"><i className="fa-solid fa-clone"></i>
+                </button>
                 <button
+                    className="btn-note"
                     onClick={() => { toggleLabel('work') }}
-                >Label</button>
-                {isLabelsList && <ul className="labels-list-container">
+                ><i className="fa-solid fa-tag"></i>
+                </button>
 
+                {isLabelsList && <ul className="labels-list-container">
                     {gLabels.map(label => {
                         return <li
                             key={label}
@@ -151,12 +142,12 @@ export class NoteTxt extends React.Component {
                 {labels.map(label => <LabelPicker
                     key={label}
                     labels={labels}
-                    removeLabel={removeLabel}
-                    currLabel={label} />)}
+                    currLabel={label}
+                    removeLabel={removeLabel} />)}
                 <button
                     onClick={() => removeNote(note.id)}
-                    className="btn-remove-note">🗑️</button>
-
+                    className="btn-note"><i className="fa-solid fa-trash-can"></i>
+                </button>
             </div>
         </section>
     }

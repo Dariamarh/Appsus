@@ -1,14 +1,10 @@
 import { LabelPicker } from "../../../cmps/label-picker.jsx";
-import { noteService } from "../services/note.service.js"
-
 
 export class NoteImg extends React.Component {
     state = {
         editState: null,
         labels: [],
         isLabelsList: false
-
-
     }
 
     gLabels = ['ciritcal', 'family', 'work', 'friends', 'spam', 'memories', 'romantic']
@@ -17,13 +13,6 @@ export class NoteImg extends React.Component {
         const { info, backgroundColor } = this.props.note
         const { title, imgUrl } = info
         this.setState({ title, imgUrl, backgroundColor })
-
-
-    }
-
-    componentDidUpdate(prevProps, prevState) {
-        // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
-
     }
 
     onEditState = () => {
@@ -37,20 +26,9 @@ export class NoteImg extends React.Component {
 
     //Blur detectors
     isInputExit = () => {
-        // console.log('EXIT');
-        // this.setState({ inputExit: true }, () => {
-        //     this.addNoteTxt()
-        // })
-        // this.state.inputExit = true
-        // this.state.inputEntry = null
-        // this.addNoteTxt()
     }
 
     isInputEntry = ({ target }) => {
-        // console.log('ENTRY');
-        // this.setState({ inputEntry: true })
-        // this.state.inputEntry = true
-        // this.state.inputExit = null
     }
 
     updateNoteImg() {
@@ -58,11 +36,9 @@ export class NoteImg extends React.Component {
         this.setState({ title, imgUrl })
     }
 
-
     handleChange = ({ target }) => {
         const { value, name } = target
         this.setState({ [name]: value })
-        // console.log('HANDLE CHANGE');
     }
 
     toggleLabel = () => {
@@ -78,44 +54,42 @@ export class NoteImg extends React.Component {
         this.setState({ labels })
     }
 
-
     removeLabel = (currLabel) => {
         let { labels } = this.state
         labels = labels.filter(label => label !== currLabel)
         this.setState({ labels })
     }
 
-
     render() {
         const { removeNote, note, pinNote, duplicateNote } = this.props
         const { onEditState, offEditState, isInputEntry, isInputExit, handleChange
             , toggleLabel, setLabel, removeLabel, gLabels } = this
         const { editState, title, imgUrl, backgroundColor, labels, isLabelsList } = this.state
-
-        return <section className="note-img-container">
+        return <section
+            className="note-img-container"
+            style={{ backgroundColor: backgroundColor }} >
             {!editState && <div
-                style={{ backgroundColor: backgroundColor }}
                 className="note-img-content-container"
                 onClick={onEditState}>
-
-                <div className="note-img-title">{title}</div>
+                <div
+                    className="note-img-title">{title}</div>
                 <img
                     className="img-note"
                     src={imgUrl} /></div>}
-
-            {editState && <div className="edit-container form-note-txt flex column">
+            {editState && <div
+                className="edit-container form-note-txt flex column">
                 <input
                     type="txt"
-                    className="input-note-title"
                     name="title"
+                    className="input-note-title"
                     defaultValue={title}
                     onChange={handleChange}
                     onClick={isInputEntry}
                     onBlur={isInputExit} />
                 <input
                     type="txt"
-                    className="input-note-txt"
                     name="imgUrl"
+                    className="input-note-txt"
                     defaultValue={imgUrl}
                     onChange={handleChange}
                     onClick={isInputEntry}
@@ -125,23 +99,31 @@ export class NoteImg extends React.Component {
                     className="btn-exit-edit-mode"
                 >Update</button>
             </div>}
+            <i className="color-picker-icon fa-solid fa-palette"></i>
             <input
-                // className="color-picker"
+                className="color-picker"
                 onChange={handleChange}
                 type="color"
-                name="backgroundColor"
-                id="" />
+                name="backgroundColor" />
+            <button
+                className="btn-note"
+                onClick={onEditState}
+            ><i className="fa-solid fa-pen-to-square"></i>
+            </button>
             <button
                 onClick={() => { pinNote(note) }}
-                className="btn-pin-note">📌</button>
+                className="btn-note"><i class="fa-solid fa-thumbtack"></i>
+            </button>
             <button
                 onClick={() => { duplicateNote(note) }}
-                className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+                className="btn-note"><i className="fa-solid fa-clone"></i>
+            </button>
             <button
-                onClick={() => { toggleLabel('work') }}
-            >Label</button>
+                className="btn-note"
+                onClick={toggleLabel}
+            ><i className="fa-solid fa-tag"></i>
+            </button>
             {isLabelsList && <ul className="labels-list-container">
-
                 {gLabels.map(label => {
                     return <li
                         key={label}
@@ -151,15 +133,15 @@ export class NoteImg extends React.Component {
                         {label}</li>
                 })}
             </ul>}
-
             {labels.map(label => <LabelPicker
                 key={label}
                 labels={labels}
-                removeLabel={removeLabel}
-                currLabel={label} />)}
+                currLabel={label}
+                removeLabel={removeLabel} />)}
             <button
                 onClick={() => removeNote(note.id)}
-                className="btn-remove-note">🗑️</button>
+                className="btn-note"><i className="fa-solid fa-trash-can"></i>
+            </button>
         </section>
     }
 }

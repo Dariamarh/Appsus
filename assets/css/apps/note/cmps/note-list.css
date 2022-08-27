@@ -1,3 +1,14 @@
-body{
-    color: red;
+.notes-gallery {
+    column-count: 4;
+    column-width: 250px;
+}
+
+.notes-gallery .note-preview {
+    break-inside: avoid-column;
+
+}
+
+.note-preview {
+    /* background-color: red; */
+    column-span: none;
 }

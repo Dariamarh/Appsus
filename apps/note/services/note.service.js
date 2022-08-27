@@ -148,12 +148,26 @@ const notes = [
         labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
-            title: "TITLE",
+            title: "JS",
             txt: "Fullstack Me Baby!"
         }
     },
     {
         id: "n102",
+        type: "note-video",
+        backgroundColor: utilService.getRandomColor(),
+        isPinned: false,
+        labels: [],
+        info: {
+            title: "Big Brotha Man",
+            videoUrl: "https://www.youtube.com/embed/8xeRVCnxLVg"
+        },
+        style: {
+            backgroundColor: "#00d"
+        }
+    },
+    {
+        id: "n103",
         backgroundColor: utilService.getRandomColor(),
         type: "note-img",
         isPinned: false,
@@ -167,7 +181,7 @@ const notes = [
         }
     },
     {
-        id: "n103",
+        id: "n104",
         type: "note-todos",
         isPinned: false,
         labels: [],
@@ -181,14 +195,13 @@ const notes = [
                 { txt: "Debugging 🐛🐛🐛", doneAt: '08/27/2022 16:45', id: utilService.makeId() },
                 { txt: "CSS Design 🧑‍🎨 && Responsivity 📱", doneAt: null, id: utilService.makeId() },
                 { txt: "Integration", doneAt: null, id: utilService.makeId() },
-                { txt: "Drag&Drop 🤚", doneAt: null, id: utilService.makeId() },
                 { txt: "Add note by blur 👆", doneAt: null, id: utilService.makeId() },
                 { txt: "Clean Code 🧹", doneAt: null, id: utilService.makeId() },
             ]
         }
     },
     {
-        id: "n104",
+        id: "n105",
         type: "note-video",
         backgroundColor: utilService.getRandomColor(),
         isPinned: false,
@@ -200,5 +213,30 @@ const notes = [
         style: {
             backgroundColor: "#00d"
         }
-    }
+    },
+    {
+        id: "n106",
+        backgroundColor: utilService.getRandomColor(),
+        type: "note-img",
+        isPinned: false,
+        labels: [],
+        info: {
+            imgUrl: "assets/img/knight.png",
+            title: "APPSUS🦾"
+        },
+        style: {
+            backgroundColor: "#00d"
+        }
+    },
+    {
+        id: "n107",
+        type: "note-txt",
+        isPinned: false,
+        labels: [],
+        backgroundColor: utilService.getRandomColor(),
+        info: {
+            title: "Milk the milky way",
+            txt: "🌌"
+        }
+    },
 ];

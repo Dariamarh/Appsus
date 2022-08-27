@@ -6,32 +6,26 @@ export class NoteAddImg extends React.Component {
                 className="form-note-add-img flex column"
                 onSubmit={addNoteImg}>
                 <input
-                    className="input-note-title"
                     type="text"
-                    ref={elInputTitle}
                     name="title"
+                    className="input-note-title"
                     placeholder="Enter title here"
-                    onChange={handleChange}
-                />
+                    ref={elInputTitle}
+                    onChange={handleChange} />
                 <input
-                    className="input-note-img-url"
                     type="text"
                     name="imgUrl"
-                    ref={elInputImgUrl}
-                    id=""
+                    className="input-note-img-url"
                     placeholder="Enter image url"
-                    onChange={handleChange}
-                />
-
-
+                    ref={elInputImgUrl}
+                    onChange={handleChange} />
                 <button
                     className="btn-add-note"
                     onClick={clearInputs} >
                     <img
                         className="btn-add-note-img"
-                        src="assets/img/add-icon.png" alt="" srcset="" />
+                        src="assets/img/add-icon.png" />
                 </button>
-
             </form>
         </section>
     }

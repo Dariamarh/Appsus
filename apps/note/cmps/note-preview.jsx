@@ -3,7 +3,6 @@ import { NoteTodos } from "./note-todos.jsx";
 import { NoteTxt } from "./note-txt.jsx";
 import { NoteVideo } from "./note-video.jsx";
 
-
 export class NotePreview extends React.Component {
 
     state = {
@@ -17,34 +16,34 @@ export class NotePreview extends React.Component {
         switch (noteType) {
             case 'note-txt':
                 return <NoteTxt
-                    duplicateNote={duplicateNote}
-                    pinNote={pinNote}
                     notes={notes}
                     note={note}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
                     removeNote={removeNote}
                 />
             case 'note-img':
                 return <NoteImg
-                    duplicateNote={duplicateNote}
-                    pinNote={pinNote}
                     notes={notes}
                     note={note}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
                     removeNote={removeNote}
                 />
             case 'note-todos':
                 return <NoteTodos
-                    duplicateNote={duplicateNote}
-                    pinNote={pinNote}
                     notes={notes}
                     note={note}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
                     removeNote={removeNote}
                 />
             case 'note-video':
                 return <NoteVideo
-                    duplicateNote={duplicateNote}
-                    pinNote={pinNote}
                     notes={notes}
                     note={note}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
                     removeNote={removeNote}
                 />
         }
@@ -53,8 +52,8 @@ export class NotePreview extends React.Component {
     render() {
         const { note } = this.props
         const { DynamicCmp } = this
-        return <section className="note-preview">
-            <br />
+        return <section
+            className="note-preview">
             <DynamicCmp />
         </section>
     }

@@ -7,7 +7,6 @@ export class NoteFilter extends React.Component {
     }
 
     handleChange = ({ target }) => {
-        console.log('HANDLE CHANGE');
         const field = target.name
         const value = target.value
         this.setState((prevState) => ({
@@ -20,39 +19,36 @@ export class NoteFilter extends React.Component {
         })
     }
 
-    // onFilter = (ev) => {
-    //     ev.preventDefault()
-    //     this.props.onSetFilter(this.state.filterBy)
-    // }
-
-
     render() {
         const { title, noteType } = this.state.filterBy
         const { handleChange } = this
-        return <section className="note-filter-container flex justify-center">
-            <form onSubmit={this.onFilter} className="note-filter-form">
-                <label htmlFor="name-input"
+        return <section
+            className="note-filter-container flex justify-center">
+            <form
+                onSubmit={this.onFilter}
+                className="note-filter-form">
+                <label
+                    htmlFor="name-input"
                     className="note-filter-label"
                 >Title :
                     <input
                         type="text"
-                        placeholder="search by title"
-                        className="input-note-filter"
-                        id="name-input"
                         name="title"
-                        value={title}
+                        id="name-input"
+                        className="input-note-filter"
+                        placeholder="search by title"
                         onChange={handleChange}
+                        value={title}
                     /></label>
-
-
-                <label htmlFor="note-type-input"
+                <label
+                    htmlFor="note-type-input"
                     className="filter-note-type"
                 >Note Type:
                     <select
-                        placeholder="set min price.."
-                        className="input-note-filter"
-                        id="note-type-input"
                         name="noteType"
+                        id="note-type-input"
+                        className="input-note-filter"
+                        placeholder="set min price.."
                         value={noteType}
                         onChange={handleChange}>
                         <option value="note">Type</option>
@@ -62,29 +58,6 @@ export class NoteFilter extends React.Component {
                         <option value="note-todos">Todos list</option>
                     </select>
                 </label>
-{/* 
-                <label htmlFor="label-input"
-                    className="filter-label"
-                >Label:
-                    <select
-                        placeholder="set min price.."
-                        className="input-filter"
-                        id="label-input"
-                        name="label"
-                        value={label}
-                        onChange={handleChange}>
-                        <option value="label-">Label</option>
-                        <option value="label-critical">Critical</option>
-                        <option value="label-family">Family</option>
-                        <option value="label-work">Work</option>
-                        <option value="label-friends">Friends</option>
-                        <option value="label-spam">Spam</option>
-                        <option value="label-memories">Memories</option>
-                        <option value="label-romantic">Romantic</option>
-                    </select></label> */}
-
-                {/* <button>Filter!</button> */}
-
             </form>
         </section>
     }

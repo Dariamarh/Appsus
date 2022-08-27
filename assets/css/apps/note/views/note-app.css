@@ -1,18 +1,27 @@
-
-
 /* NOTE ADD CMPS */
+@import '../../../setup/fonts.css';
 @import '../cmps/note-add.css';
 
 
 @import '../cmps/note-filter.css';
+@import '../cmps/note-list.css';
 
-@import '../cmps/note-todos.css';
+@import '../cmps/note-preview.css';
 @import '../cmps/note-txt.css';
 @import '../cmps/note-img.css';
 @import '../cmps/note-video.css';
+@import '../cmps/note-todos.css';
 
-.note-app{
+@font-face {
+    font-family: DMSerifDisplay;
+    src: url(/assets/fonts/DMSerifDisplay-Regular.ttf);
+}
+
+
+.note-app {
     width: 80%;
     margin-inline-start: auto;
     margin-inline-end: auto;
+    font-family: DMSerifDisplay, sans-serif;
+    /* color: indigo; */
 }
