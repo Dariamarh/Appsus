@@ -64,12 +64,18 @@ i {
     margin-right: 5px;
 }
 
-@media only screen and (max-width: 500px) {
-.main-menu{
-    padding: 1px;
-}
+@media only screen and (max-width: 570px) {
+    .main-menu {
+        padding: 1px;
+    }
+
     .mail-menu .mail-folders {
         width: 30%;
+    }
+
+    .mail-menu .mail-folders {
+        margin: 0;
+
     }
 
     .compose-btn {
@@ -82,7 +88,7 @@ i {
     .mail-starred,
     .mail-sent,
     .mail-drafts {
-       
+
         font-size: 10px;
         font-weight: 600;
         text-align: left;
