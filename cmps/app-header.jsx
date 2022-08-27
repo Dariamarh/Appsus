@@ -7,12 +7,12 @@ export function AppHeader() {
             className="logo-container flex">
 
             <img src="assets/img/logo.svg"
-                height="60px" width="105px"
+                // height="60px" width="105px"
                 className="img-logo" />
             <h3 className="text-logo-container">
                 <span className="text-logo">Appsus</span></h3>
         </Link>
-        <nav className="flex align-center">
+        <nav className="app-menu flex">
             <NavLink exact to="/">Home</NavLink>
             <NavLink to="/about">About</NavLink>
             <NavLink to="/mail">Mister-Mail</NavLink>

@@ -1,5 +1,4 @@
 import { mailService } from "../services/mail.service.js"
-import { eventBus } from "../../../services/event-bus.service.js"
 import { MailList } from '../cmps/mail-list.jsx'
 import { MailFilter } from '../cmps/mail-filter.jsx'
 import { MailFolders } from "../cmps/mail-folders.jsx"
@@ -8,11 +7,12 @@ import { MailCompose } from "../cmps/mail-compose.jsx"
 export class MailIndex extends React.Component {
     state = {
         emails: [],
-        sentMails:[],
+        sentMails: [],
         loggedInUser: null,
         filterBy: {
             folder: 'inbox'
         },
+        isModalOpened: false,
     }
 
     componentDidMount() {
@@ -23,8 +23,9 @@ export class MailIndex extends React.Component {
                 folder
             }
         }), () => this.loadMails())
+        this.loadUser()
     }
-    
+
     componentDidUpdate(prevProps) {
         if (prevProps.match.params.folder !== this.props.match.params.folder) {
             const { folder } = this.props.match.params
@@ -39,12 +40,21 @@ export class MailIndex extends React.Component {
     loadMails = () => {
         this.setState({ emails: mailService.query(this.state.filterBy) })
     }
-
-    onSetFilter = (filterBy) => {
-        this.setState({ filterBy }, () => {
-            this.loadMails()
-        })
+    loadUser = () => {
+        mailService.getLoggedInUser()
+            .then(loggedInUser => {
+                this.setState({ loggedInUser })
+            })
     }
+    onSetFilter = (search) => {
+        this.setState((prevState) => ({
+            filterBy: {
+                ...prevState.filterBy,
+                search
+            }
+        }), () => this.loadMails())
+    }
+
     onToggleIsRead = (emailId, isRead) => {
         mailService.toggleIsRead(emailId, isRead)
             .then(() => {
@@ -54,7 +64,21 @@ export class MailIndex extends React.Component {
                 this.setState({ emails })
             })
     }
+    toggleModal = () => {
+        const { isModalOpened } = this.state
+        this.setState({ isModalOpened: !isModalOpened })
+    }
 
+    composeEmail = ({ to, subject, body }) => {
+        mailService.add(to, subject, body)
+            .then((email) => {
+                if (this.state.filterBy.folder !== 'sent') {
+                    const { emails } = this.state
+                    emails.unshift(email)
+                    this.setState({ emails })
+                }
+            })
+    }
     onRemoveEmail = (emailId) => {
         mailService.remove(emailId)
             .then(() => {
@@ -64,11 +88,18 @@ export class MailIndex extends React.Component {
             .catch(err => {
             })
     }
-
+    setStar = (emailId) => {
+        mailService.setEmailStatus(emailId, 'starred')
+            .then(() => {
+                const { emails } = this.state
+                const emailIdx = emails.findIndex(email => email.id === emailId)
+                emails[emailIdx].status = (emails[emailIdx].status === 'starred') ? null : 'starred'
+            })
+    }
 
     render() {
-        const { emails, mailSearch } = this.state
-        const { onSetFilter, getFilter, onToggleIsRead, onRemoveEmail } = this
+        const { emails, loggedInUser, isModalOpened } = this.state
+        const { onSetFilter, onToggleIsRead, onRemoveEmail, setStar, toggleModal, composeEmail } = this
         return (
             <section className="mail-index">
                 <div className="search-filter">
@@ -79,7 +110,14 @@ export class MailIndex extends React.Component {
                     <MailList
                         emails={emails}
                         onRemoveEmail={onRemoveEmail}
+                        setStar={setStar}
+                        loggedInUser={loggedInUser}
                         onToggleIsRead={onToggleIsRead} />
+                    <MailCompose
+                        toggleModal={toggleModal}
+                        isModalOpened={isModalOpened}
+                        composeEmail={composeEmail}
+                    />
 
                 </div>
             </section>

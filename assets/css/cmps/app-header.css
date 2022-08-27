@@ -1,21 +1,29 @@
-header {
-    /* background-color: #1a0dab; */
-    /* color: white; */
-    /* border-bottom: 2px solid white; */
-}
-
 .app-header {
     display: flex;
+    min-width: 100%;
     justify-content: space-between;
     padding: 20px 50px;
     background: #f1f1f1;
 }
 
-.img-logo {
-    width: 60px;
-    height: 60px;
-    /* object-fit: cover; */
+.app-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.app-menu a {
+    padding: 20px;
+    
+}
+
+.app-menu nav>*:not(:last-child) {
+    margin-inline-end: 10px;
+}
+
+.img-logo {
+    width: 65px;
+    height: 60px;
 }
 
 .text-logo {
@@ -26,16 +34,26 @@ header {
 
 nav a {
     margin: .5em;
-    vertical-align: -50%;
     color: #555555;
+    font-weight: bold;
 }
 
 nav a:active {
-    color: purple;
+    color: rgb(75, 1, 75);
 }
+nav a:hover {
+    transform: scale(110%);}
 
 nav a.active {
-    color: #1a0dab;
-    font-weight: bold;
+    color: #0e0668;
     text-decoration: overline;
+}
+
+@media only screen and (max-width: 570px) {
+
+    .app-menu a {
+        font-size: 14px;
+        padding: 0;
+    }
+  
 }

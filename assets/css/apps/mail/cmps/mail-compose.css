@@ -1,28 +1,29 @@
-.mail-letter{
-    position:absolute;
+.mail-letter {
+    position: absolute;
     right: 0;
     bottom: 0;
     width: 450px;
     height: 500px;
     box-shadow: 2px 2px 2px 2px rgb(153 149 149);
     z-index: 1;
+    background-color: white;
 }
 
-.mail-new-msg{
+.mail-new-msg {
     background-color: white;
     color: rgb(133, 131, 131);
     text-align: left;
-    
+
 }
 
-.mail-letter input{
+.mail-letter input {
     width: 100%;
     border: none;
     border-bottom: 1px solid rgb(211, 211, 211);
     flex-basis: 100%;
 }
 
-.msg-title{
+.msg-title {
     font-size: .875rem;
     font-weight: 600;
     background-color: rgb(237, 246, 252);
@@ -31,7 +32,8 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
- .mail-to, .mail-subj{
+.mail-to,
+.mail-subj {
     margin-left: 10px;
     justify-content: center;
     display: flex;
@@ -39,13 +41,13 @@
     padding-top: 10px;
 }
 
-textarea{
+textarea {
     height: 300px;
     width: 400px;
     border: none;
 }
 
-.email-send{
+.email-send {
     background: #2b7bf1;
     width: 60px;
     display: flex;
@@ -57,4 +59,24 @@ textarea{
     padding: 10px 20px 10px 20px;
     margin-top: 30px;
     margin-left: 10px;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 570px) {
+
+    .mail-letter {
+        width: 300px;
+        height: 320px;
+        font-size: 0.8rem;
+    }
+
+    .msg-title {
+        font-size: 0.8rem;
+    }
+
+    textarea {
+        width: 290px;
+        height: 200px;
+    }
+
 }

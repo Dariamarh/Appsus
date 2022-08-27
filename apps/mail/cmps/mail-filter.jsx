@@ -4,11 +4,6 @@ export class MailFilter extends React.Component {
         filterBy: ''
     }
 
-
-    componentDidMount() {
-    }
-
-
     handleChange = ({ target }) => {
         const value = target.value
         this.setState({ filterBy: value }, () => {

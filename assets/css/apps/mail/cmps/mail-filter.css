@@ -1,5 +1,4 @@
-
-.search-mail  {
+.search-mail {
     display: block;
     width: 25rem;
     padding: 0.8rem;
@@ -11,4 +10,14 @@
     color: rgb(15, 14, 14);
     font-size: 1rem;
     text-align: center;
+}
+
+@media only screen and (max-width: 570px) {
+    .search-mail {
+        height: 30px;
+        font-size: 12px;
+    }
+
+
+
 }

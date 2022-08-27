@@ -1,0 +1,108 @@
+@media only screen and (max-width: 500px) {
+    .about>span {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .about span span {
+        width: 90%;
+        margin-right: 1em;
+    }
+
+    .about-team-container:first-of-type {
+        padding-bottom: 1em;
+        margin-bottom: 1em;
+    }
+
+    .about-team-container:last-of-type {
+        margin-bottom: 1em;
+    }
+
+    .about-team-container {
+        font-size: 16px;
+    }
+}
+
+@media only screen and (min-width: 770px) {
+    .about span span {
+        width: 50%;
+    }
+}
+
+.about {
+    display: flex;
+    flex-direction: column;
+    margin: 1em;
+    border-radius: 5px;
+    color: rgb(20, 20, 20);
+    font-size: 20px;
+    background-color: #f1f1f1;
+}
+
+.about h1 {
+    text-align: center;
+    font-size: 30px;
+    color: rgb(73, 72, 72);
+}
+
+.about>* {
+    margin: 1em;
+}
+
+.about>span {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.about span span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.about-pic {
+    width: 300px;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.281);
+    width: 90%;
+    max-width: 20em;
+    margin: 20px;
+}
+
+.about-team-container p {
+    line-height: 1.5em;
+    margin-bottom: 1em;
+    width: 90%;
+    color: rgb(73, 72, 72);
+}
+
+.main-about span span p>:first-of-type {
+    margin-bottom: 0;
+}
+
+.about-contacts p {
+    margin: 1.5em;
+    font-weight: bold;
+}
+
+.about-name {
+    font-size: 30px;
+}
+
+.about-contacts {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.about-contacts div {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.about-contacts img {
+    width: 5vw;
+}

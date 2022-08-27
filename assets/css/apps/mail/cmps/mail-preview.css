@@ -12,7 +12,7 @@
 }
 
 .mail-preview h3 {
-    font-size: 15px;
+    font-size: 16px;
     font-weight: normal;
     margin-left: auto;
     margin-right: auto;
@@ -40,6 +40,7 @@
 
 .mail-btn-trash {
     margin-left: 10px;
+    margin-right: 25px;
 }
 
 .mail-star {
@@ -52,4 +53,27 @@
 
 .mail-preview .read {
     font-weight: normal;
+}
+
+@media only screen and (max-width: 570px) {
+    .mail-list {
+        width: 70%;
+    }
+
+    .mail-list h3 {
+        font-size: 10px;
+    }
+
+    .mail-list .mail-star {
+        display: none;
+    }
+
+    .mail-menu {
+        width: 50%;
+    }
+    .mail-btn-trash {
+        margin-left: 0;
+        margin-right: 0px;
+    }
+    
 }
