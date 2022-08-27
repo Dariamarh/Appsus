@@ -32,7 +32,7 @@
 .about {
     display: flex;
     flex-direction: column;
-    margin: 1em;
+    margin-top: 1px;
     border-radius: 5px;
     color: rgb(20, 20, 20);
     font-size: 20px;
@@ -65,7 +65,7 @@
 
 .about-pic {
     width: 300px;
-    height: 490px;
+    height: 470px;
     border-radius: 20px;
     border: 2px solid rgba(0, 0, 0, 0.281);
     width: 90%;
