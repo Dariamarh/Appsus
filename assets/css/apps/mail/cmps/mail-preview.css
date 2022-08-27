@@ -54,3 +54,26 @@
 .mail-preview .read {
     font-weight: normal;
 }
+
+@media only screen and (max-width: 500px) {
+    .mail-list {
+        width: 60%;
+    }
+
+    .mail-list h3 {
+        font-size: 10px;
+    }
+
+    .mail-list .mail-star {
+        display: none;
+    }
+
+    .mail-menu {
+        width: 50%;
+    }
+    .mail-btn-trash {
+        margin-left: 0;
+        margin-right: 0px;
+    }
+    
+}

@@ -8,7 +8,8 @@ li {
 
 .mail-menu {
     flex-direction: column;
-    padding: 30px;
+    padding-left: 20px;
+    padding-top: 10px;
     justify-content: center;
     align-items: left;
     text-align: left;
@@ -43,7 +44,7 @@ li {
     margin-left: 10px;
     flex-direction: column;
     width: 100px;
-    
+
 }
 
 .mail-folders {
@@ -58,6 +59,33 @@ li {
     color: rgb(189, 16, 16);
     font-weight: bold;
 }
-i{
+
+i {
     margin-right: 5px;
+}
+
+@media only screen and (max-width: 500px) {
+.main-menu{
+    padding: 1px;
+}
+    .mail-menu .mail-folders {
+        width: 30%;
+    }
+
+    .compose-btn {
+        width: 100px;
+        height: 30px;
+        font-size: 14px;
+    }
+
+    .mail-inbox,
+    .mail-starred,
+    .mail-sent,
+    .mail-drafts {
+       
+        font-size: 10px;
+        font-weight: 600;
+        text-align: left;
+        width: 80px;
+    }
 }
