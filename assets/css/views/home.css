@@ -20,12 +20,12 @@
 .logo-mail,
 .logo-keep,
 .logo-book {
-    width: 10em;
-    height: 10.25em;
+    width: 8em;
+    height: 8.5em;
     border-radius: 9px;
     border: 2px solid rgba(71, 71, 71, 0.346);
     padding: 0.7rem;
-    margin-bottom: 200px;
+    margin-bottom: 100px;
 }
 
 .logo-mail:hover,
@@ -107,4 +107,22 @@
 
 .home span:nth-child(7) {
     animation: fade-in 0.9s 0.7s forwards cubic-bezier(0.11, 0, 0.5, 0);
+}
+
+
+@media only screen and (max-width: 570px) {
+
+    .home-title {
+        font-size: 60px;
+        height: 250px;
+    }
+
+    .home h2 {
+        font-size: 18px;
+    }
+
+    .logo-mail, .logo-keep, .logo-book {
+        width: 5em;
+        height: 5em;
+    }
 }
