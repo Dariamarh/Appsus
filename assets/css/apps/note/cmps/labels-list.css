@@ -1,0 +1,20 @@
+.labels-list-container {
+    position: absolute;
+    padding: 0;
+    background-color: var(--color-red);
+    color: var(--color-yellow);
+    text-transform: capitalize;
+    z-index: 20;
+    right: -9%;
+    top: -10.1%;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.label-container {
+    text-transform: capitalize;
+}
+
+.remove-label-span{
+    cursor: pointer;
+}

@@ -1,0 +1,28 @@
+.note-container {
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0;
+}
+
+
+.note-title {
+    font-size: 1.5rem;
+    text-align: center;
+    cursor: pointer;
+}
+
+.pin-div{
+text-align: end;
+}
+
+.note-btn-container{
+    position: relative;
+}
+
+.btn-exit-edit-mode{
+    font-size: 25px;
+}
+
+.pin-note-span{
+    cursor: pointer;
+}

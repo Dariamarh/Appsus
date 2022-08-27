@@ -1,3 +1,46 @@
-.input-note-video{
+.note-video-container {
+    padding: 15px;
+    border-radius: 15px;
+    margin: 10px 0;
+    position: relative;
+}
+
+.input-note-video {
+    background-color: #00000000;
+    color: rgb(15, 14, 14);
+    /* margin-top: 20px; */
+    outline: #00000000;
+    border: none;
+    width: 225px;
+    text-overflow: ellipsis;
+
+}
+
+.note-video-title {
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.input-note-video-title {
+    background-color: #00000000;
+    color: rgb(15, 14, 14);
+    margin-top: 20px;
+    outline: #00000000;
+    border: none;
+}
+
+.video-container {
+    margin: 10px;
+}
+
+.youtube-video {
+    display: block;
     width: 100%;
+    height: 100%;
+}
+
+.youtube-logo {
+    width: 120px;
+    height: 49px;
+    vertical-align: -90%;
 }

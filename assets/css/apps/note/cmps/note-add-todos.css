@@ -3,6 +3,16 @@
     height: 200px;
 }
 
+.input-note-todos-title {
+    /* background-color: #00000000; */
+    background-color: rebeccapurple;
+    color: rgb(15, 14, 14);
+    margin-top: 20px;
+    outline: #00000000;
+    border: none;
+    font-size: 13.333px;
+}
+
 .input-note-todos-list {
     width: 400px;
     height: 100px;

@@ -5,18 +5,18 @@ export class LabelPicker extends React.Component {
     }
 
     setLabel = (labelType) => {
-        // console.log('labelType', labelType)
         return labelType
     }
 
-
     render() {
         const { currLabel, removeLabel } = this.props
-        // const { removeLabel } = this.state
-        return <div>{currLabel}
-
-            <span onClick={() => { removeLabel(currLabel) }}
-            >✔️</span>
+        return <div 
+        className="label-container">
+            {currLabel}
+            <span 
+            className="remove-label-span"
+            onClick={() => { removeLabel(currLabel) }}
+            >🏷️</span>
         </div>
     }
 

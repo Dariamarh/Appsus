@@ -30,7 +30,7 @@ export class NoteFilter extends React.Component {
                 <label
                     htmlFor="name-input"
                     className="note-filter-label"
-                >Title :
+                >Title: 
                     <input
                         type="text"
                         name="title"
@@ -43,15 +43,15 @@ export class NoteFilter extends React.Component {
                 <label
                     htmlFor="note-type-input"
                     className="filter-note-type"
-                >Note Type:
+                >Note Type: 
                     <select
                         name="noteType"
                         id="note-type-input"
-                        className="input-note-filter"
+                        className="input-note-filter selector"
                         placeholder="set min price.."
                         value={noteType}
                         onChange={handleChange}>
-                        <option value="note">Type</option>
+                        <option value="note">All</option>
                         <option value="note-txt">Text</option>
                         <option value="note-img">Image</option>
                         <option value="note-video">Video</option>

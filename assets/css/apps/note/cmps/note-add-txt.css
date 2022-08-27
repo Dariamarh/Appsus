@@ -2,16 +2,21 @@
     justify-content: center;
 }
 
-
-
-.input-note-txt {
-    width: 400px;
-    height: 25px;
-    background-color: #faf9f9;
+.editor-input-note-title {
+    background-color: #00000000;
     color: rgb(15, 14, 14);
-    margin-top: 5px;
-    border: 1px solid black;
- 
+    margin-top: 20px;
+    outline: #00000000;
+    border: none;
 }
 
+.editor-input-note-txt {
+    height: 25px;
+    background-color: #00000000;
+    outline: #00000000;
+    border: none;
+    color: rgb(15, 14, 14);
+    margin-top: 5px;
+    border: none;
+}
 

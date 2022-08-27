@@ -6,7 +6,7 @@ import { NoteAddTodos } from "./note-add-todos.jsx";
 
 export class NoteAdd extends React.Component {
     state = {
-        noteType: 'note-video',
+        noteType: 'note-txt',
     }
 
     clearInputs = () => {
@@ -20,8 +20,10 @@ export class NoteAdd extends React.Component {
                 this.elInputImgUrl.current.value = ''
                 break;
             case 'note-video':
+                this.elInputVideoUrl.current.value = ''
                 break;
             case 'note-todos':
+                this.elInputTodosList.current.value = ''
                 break;
         }
     }

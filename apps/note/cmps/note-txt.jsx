@@ -49,11 +49,14 @@ export class NoteTxt extends React.Component {
     }
 
     setLabel = ({ target }) => {
-        const { labels } = this.state
+        let { labels, isLabelsList } = this.state
         if (labels.find(label => label === target.id)) return
         labels.push(target.id)
-        this.setState({ labels })
+        isLabelsList = false
+        this.setState({ labels, isLabelsList })
     }
+
+
 
     removeLabel = (currLabel) => {
         let { labels } = this.state
@@ -68,36 +71,45 @@ export class NoteTxt extends React.Component {
         const { title, txt, editState, backgroundColor, labels, isLabelsList } = this.state
         return <section
             style={{ backgroundColor: backgroundColor }}
-            className="note-txt-container">
+            className="note-container">
+            {note.isPinned && <div className="pin-div">
+                <span
+                    className="pin-note-span"
+                    onClick={() => { pinNote(note) }}>
+                    📌
+                </span>
+            </div>}
             {!editState &&
                 <div
-                    className="note-txt-content-container"
+                    className="note-content-container"
                     onClick={onEditState}>
                     <div className="note-title">{title}</div>
                     <div className="note-txt-txt">{txt}</div>
                 </div>}
             {editState && <div
-                className="edit-container form-note-txt">
-                <input
-                    type="txt"
-                    name="title"
-                    className="input-note-title"
-                    defaultValue={title}
-                    onChange={handleChange}
-                    onClick={isInputEntry}
-                    onBlur={isInputExit} />
-                <input
-                    type="txt"
-                    name="txt"
-                    className="input-note-txt"
-                    defaultValue={txt}
-                    onChange={handleChange}
-                    onClick={isInputEntry}
-                    onBlur={isInputExit} />
+                className="edit-container form-note-txt flex space-between">
+                <div className="note-txt-inputs-container">
+                    <input
+                        type="txt"
+                        name="title"
+                        className="editor-input-note-title"
+                        defaultValue={title}
+                        onChange={handleChange}
+                        onClick={isInputEntry}
+                        onBlur={isInputExit} />
+                    <input
+                        type="txt"
+                        name="txt"
+                        className="editor-input-note-txt"
+                        defaultValue={txt}
+                        onChange={handleChange}
+                        onClick={isInputEntry}
+                        onBlur={isInputExit} />
+                </div>
                 <button
                     onClick={() => offEditState(note.id)}
                     className="btn-exit-edit-mode"
-                >Update</button>
+                >👍</button>
             </div>}
             <div
                 className="note-btn-container flex">
@@ -139,16 +151,16 @@ export class NoteTxt extends React.Component {
                     })}
                 </ul>}
 
-                {labels.map(label => <LabelPicker
-                    key={label}
-                    labels={labels}
-                    currLabel={label}
-                    removeLabel={removeLabel} />)}
                 <button
                     onClick={() => removeNote(note.id)}
                     className="btn-note"><i className="fa-solid fa-trash-can"></i>
                 </button>
             </div>
+            {labels.map(label => <LabelPicker
+                key={label}
+                labels={labels}
+                currLabel={label}
+                removeLabel={removeLabel} />)}
         </section>
     }
 }

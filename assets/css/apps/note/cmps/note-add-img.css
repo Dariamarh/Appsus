@@ -5,3 +5,7 @@
     color: rgb(15, 14, 14);
     margin-top: 5px;
 }
+
+.img-note{
+    cursor: pointer;
+}

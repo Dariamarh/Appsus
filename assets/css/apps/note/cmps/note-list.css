@@ -1,9 +1,21 @@
 .notes-gallery {
     column-count: 4;
     column-width: 250px;
+    margin-bottom: 20px;
 }
 
 .notes-gallery .note-preview {
+    break-inside: avoid-column;
+    
+}
+
+.note-list-pinned-gallery {
+    column-count: 4;
+    column-width: 250px;
+    margin-bottom: 20px;
+}
+
+.note-list-pinned-gallery .note-preview {
     break-inside: avoid-column;
 
 }

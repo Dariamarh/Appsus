@@ -18,14 +18,22 @@
     margin-bottom: 10px;
 }
 
-.input-note-filter{
+.input-note-filter {
     background-color: #faf9f9;
-    border-radius: 15px;
+    border-radius: 5px;
+    margin-inline-start: 5px;
     padding-inline-start: 5px;
     padding-inline-end: 5px;
 }
 
-.input-note-filter::placeholder{
+.input-note-filter.selector>* {
+    /* color: rebeccapurple; */
+    /* margin: 2.5px; */
+    /* text-align: center; */
+    /* padding-inline-start: 7px; */
+}
+
+.input-note-filter::placeholder {
     color: black;
 
 }

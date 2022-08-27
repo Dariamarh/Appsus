@@ -10,8 +10,8 @@ export class NoteIndex extends React.Component {
         notes: [],
         pinnedNotes: [],
         filterBy: null,
-        title: 'Click to update title 👋',
-        txt: 'Click to update text 👋',
+        title: 'Update title 👋',
+        txt: 'Update text 👋',
         imgUrl: 'assets/img/white-horse.png',
         videoUrl: 'https://www.youtube.com/embed/FWy_LbhHtug',
         todos: [{ txt: "Dominate REACT 👨‍🔬", doneAt: null, id: utilService.makeId() }],
@@ -112,7 +112,7 @@ export class NoteIndex extends React.Component {
         const { getIdxById } = noteService
         if (!note.isPinned) {
             notes.splice(getIdxById(notes, note.id), 1)
-            pinnedNotes[0] = note
+            pinnedNotes.push(note)
         }
         if (note.isPinned) {
             pinnedNotes.splice(getIdxById(pinnedNotes, note.id), 1)

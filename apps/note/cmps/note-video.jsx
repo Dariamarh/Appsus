@@ -2,7 +2,6 @@ import { noteService } from "../services/note.service.js"
 import { utilService } from "../../../services/util.service.js"
 import { LabelPicker } from "../../../cmps/label-picker.jsx";
 
-
 export class NoteVideo extends React.Component {
 
     state = {
@@ -69,10 +68,11 @@ export class NoteVideo extends React.Component {
     }
 
     setLabel = ({ target }) => {
-        const { labels } = this.state
+        let { labels, isLabelsList } = this.state
         if (labels.find(label => label === target.id)) return
         labels.push(target.id)
-        this.setState({ labels })
+        isLabelsList = false
+        this.setState({ labels, isLabelsList })
     }
 
     removeLabel = (currLabel) => {
@@ -91,30 +91,41 @@ export class NoteVideo extends React.Component {
         const { debounce } = utilService
 
         return <section
-            className="note-video-container">
+            className="note-video-container"
+            style={{ backgroundColor: backgroundColor }} >
+            {note.isPinned && <div className="pin-div">
+                <span
+                    className="pin-note-span"
+                    onClick={() => { pinNote(note) }}>
+                    📌
+                </span>
+            </div>}
             {!editState && <div
                 className="note-video-title"
-                onClick={onEditState}
-                style={{ backgroundColor: backgroundColor }}>
+                onClick={onEditState}>
                 {title}
             </div>}
-            <iframe
-                className="video-container"
-                width="420"
-                height="315"
-                src={videoUrl}>
-            </iframe>
+            <div className="video-container">
+                <iframe
+                    className="youtube-video"
+                    src={videoUrl}>
+                </iframe>
+            </div>
             {editState && <div
                 className="edit-container form-note-video flex column">
                 <input
                     type="txt"
                     name="title"
-                    className="input-note-title"
+                    className="input-note-video-title"
                     defaultValue={title}
                     onChange={handleChange}
                     onClick={isInputEntry}
                     onBlur={isInputExit} />
-                <div className="search-user-msg">Search for youTube videos here👇</div>
+                <div className="search-user-msg">Search 
+                <img
+                className="youtube-logo"
+                src="assets/img/youtube-logo.png" />
+                👇</div>
                 <div className="video-search-bar-container">
                     <input
                         type="search"
@@ -138,55 +149,58 @@ export class NoteVideo extends React.Component {
                 <button
                     onClick={() => offEditState(note.id)}
                     className="btn-exit-edit-mode">
-                    Update
+                    👍👍
                 </button>
             </div>}
-            <i className="color-picker-icon fa-solid fa-palette"></i>
-            <input
-                type="color"
-                name="backgroundColor"
-                className="color-picker"
-                onChange={handleChange} />
-            <button
-                className="btn-note"
-                onClick={onEditState}>
-                <i className="fa-solid fa-pen-to-square"></i>
-            </button>
-            <button
-                className="btn-note"
-                onClick={() => { pinNote(note) }}>
-                <i class="fa-solid fa-thumbtack"></i>
-            </button>
-            <button
-                className="btn-note"
-                onClick={() => { duplicateNote(note) }}>
-                <i className="fa-solid fa-clone"></i>
-            </button>
-            <button
-                className="btn-note"
-                onClick={() => { toggleLabel('work') }} >
-                <i className="fa-solid fa-tag"></i>
-            </button>
-            {isLabelsList && <ul className="labels-list-container">
-                {gLabels.map(label => {
-                    return <li
-                        key={label}
-                        id={label}
-                        className="label-container"
-                        onClick={setLabel}>
-                        {label}</li>
-                })}
-            </ul>}
+            <div
+                className="note-btn-container flex">
+                <i className="color-picker-icon fa-solid fa-palette"></i>
+                <input
+                    type="color"
+                    name="backgroundColor"
+                    className="color-picker"
+                    onChange={handleChange} />
+                <button
+                    className="btn-note"
+                    onClick={onEditState}>
+                    <i className="fa-solid fa-pen-to-square"></i>
+                </button>
+                <button
+                    className="btn-note"
+                    onClick={() => { pinNote(note) }}>
+                    <i class="fa-solid fa-thumbtack"></i>
+                </button>
+                <button
+                    className="btn-note"
+                    onClick={() => { duplicateNote(note) }}>
+                    <i className="fa-solid fa-clone"></i>
+                </button>
+                <button
+                    className="btn-note"
+                    onClick={() => { toggleLabel('work') }} >
+                    <i className="fa-solid fa-tag"></i>
+                </button>
+                {isLabelsList && <ul className="labels-list-container">
+                    {gLabels.map(label => {
+                        return <li
+                            key={label}
+                            id={label}
+                            className="label-container"
+                            onClick={setLabel}>
+                            {label}</li>
+                    })}
+                </ul>}
+                <button
+                    className="btn-note"
+                    onClick={() => removeNote(note.id)}>
+                    <i className="fa-solid fa-trash-can"></i>
+                </button>
+            </div>
             {labels.map(label => <LabelPicker
                 key={label}
                 labels={labels}
                 currLabel={label}
                 removeLabel={removeLabel} />)}
-            <button
-                className="btn-note"
-                onClick={() => removeNote(note.id)}>
-                <i className="fa-solid fa-trash-can"></i>
-            </button>
         </section>
     }
 }

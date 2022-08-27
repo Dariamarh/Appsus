@@ -21,7 +21,7 @@ export class NoteAddTodos extends React.Component {
             <input
                 type="txt"
                 name="title"
-                className="input-note-title"
+                className="input-note-todos-title"
                 placeholder="Enter title here"
                 ref={elInputTitle}
                 onChange={handleChange}

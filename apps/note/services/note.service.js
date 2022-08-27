@@ -236,7 +236,7 @@ const notes = [
         backgroundColor: utilService.getRandomColor(),
         info: {
             title: "Milk the milky way",
-            txt: "🌌"
+            txt: "function milky(🌌){\n return 🌌%🐄 //console.log('🍼')}"
         }
     },
 ];
