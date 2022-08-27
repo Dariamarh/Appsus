@@ -9,13 +9,7 @@
 .app-menu {
     display: flex;
     align-items: center;
-    /* justify-items: right; */
-    /* justify-content:baseline; */
-    /* justify-items:flex-end; */
-    float: right;
-    width: auto;
-    text-align: right;
-    /* align-content:space-around; */
+    margin-right: 160px;
 
 }
 
