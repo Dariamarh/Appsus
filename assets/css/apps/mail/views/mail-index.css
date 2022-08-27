@@ -1,5 +1,6 @@
 .mail-main {
     display: flex;
+    position: initial;
+    flex-direction: row;
 
 }
-

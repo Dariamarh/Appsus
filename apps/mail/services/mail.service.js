@@ -68,6 +68,96 @@ const emailsData = [
     },
     {
         id: 'e106',
+        subject: "Google Maps Platform",
+        body: "Hello hello! There’s still time to sign up! Join me and Zeplin Co-Founder",
+        isRead: false,
+        from: 'Mike from Zeplin',
+        sentAt: 1551133930594,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e107',
+        subject: "Dropbox",
+        body: "A new web browser just signed in to your Dropbox account.",
+        isRead: false,
+        from: "dropbox@appsus.com",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e108',
+        subject: "Slack",
+        body: "Welcome to your new workspace!Here are the details for your new Slack workspace",
+        isRead: false,
+        from: "Slack",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e109',
+        subject: "noreply+google",
+        body: "Potentially Compromised Credentials for My Project 64410 (id: fourth-flag-354111).",
+        isRead: false,
+        from: "Google",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e110',
+        subject: "Dropbox",
+        body: "A new web browser just signed in to your Dropbox account.",
+        isRead: false,
+        from: "dropbox@appsus.com",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e111',
+        subject: "Dropbox",
+        body: "A new web browser just signed in to your Dropbox account.",
+        isRead: false,
+        from: "dropbox@appsus.com",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e112',
+        subject: "Google Maps Platform",
+        body: "Hello hello! There’s still time to sign up! Join me and Zeplin Co-Founder",
+        isRead: false,
+        from: 'Mike from Zeplin',
+        sentAt: 1551133930594,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e113',
+        subject: "Hi Darling!",
+        body: "Coffee break?",
+        isRead: false,
+        from: "momo11@momo.com",
+        sentAt: 1641372169155,
+        to: "momo@momo.com",
+        state: 'sent'
+    },
+    {
+        id: 'e114',
+        subject: "Dropbox",
+        body: "A new web browser just signed in to your Dropbox account.",
+        isRead: false,
+        from: "dropbox@appsus.com",
+        sentAt: 1457293308000,
+        to: "momo@momo.com",
+        state: 'trash'
+    },
+    {
+        id: 'e115',
         subject: "Dropbox",
         body: "A new web browser just signed in to your Dropbox account.",
         isRead: false,

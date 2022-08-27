@@ -61,6 +61,7 @@ export class MailCompose extends React.Component {
                 </form>
 
                 <button onClick={onComposeEmail} className="email-send">Send</button>
+
             </div>
         </section>
     }
