@@ -8,13 +8,21 @@
 
 .app-menu {
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    /* justify-items: right; */
+    /* justify-content:baseline; */
+    /* justify-items:flex-end; */
+    float: right;
+    width: auto;
+    text-align: right;
+    /* align-content:space-around; */
+
 }
 
 .app-menu a {
-    padding: 20px;
-    
+    padding-left: 25px;
+    padding-right: 25px;
+    font-size: 22px;
 }
 
 .app-menu nav>*:not(:last-child) {
@@ -34,26 +42,26 @@
 
 nav a {
     margin: .5em;
-    color: #555555;
+    color: rgb(58, 56, 56);
     font-weight: bold;
 }
 
-nav a:active {
-    color: rgb(75, 1, 75);
-}
 nav a:hover {
-    transform: scale(110%);}
+    transform: scale(110%);
+}
 
 nav a.active {
-    color: #0e0668;
-    text-decoration: overline;
+    color: #080341;
+    background-color: #c9d1cb79;
+    border-radius: 15px;
+    padding: 11px;
 }
 
 @media only screen and (max-width: 570px) {
 
     .app-menu a {
-        font-size: 14px;
+        font-size: 13px;
         padding: 0;
     }
-  
+
 }

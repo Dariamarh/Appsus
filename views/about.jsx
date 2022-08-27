@@ -5,7 +5,7 @@ export function About() {
             <h1>About Our Team</h1>
             <span>
                 <span className='about-team-container'>
-                    <img className='about-pic' src='./assets/img/eshel.jfif' />
+                    <img className='about-pic' src='./assets/img/eshel.jpg' />
                     <h3 className="about-name">Eshel Eyni</h3>
                     <p>
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus nobis

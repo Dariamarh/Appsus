@@ -36,7 +36,10 @@
     border-radius: 5px;
     color: rgb(20, 20, 20);
     font-size: 20px;
-    background-color: #f1f1f1;
+    background-image: linear-gradient(to bottom,
+            rgba(241, 241, 241, 0.84),
+            rgba(255, 255, 255, 0.671),
+            rgb(187, 194, 201));
 }
 
 .about h1 {
@@ -62,6 +65,7 @@
 
 .about-pic {
     width: 300px;
+    height: 490px;
     border-radius: 20px;
     border: 2px solid rgba(0, 0, 0, 0.281);
     width: 90%;

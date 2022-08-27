@@ -8,6 +8,7 @@
 @import './basics/base.css';
 @import './basics/helpers.css';
 @import './basics/layout.css';
+@import './basics/animations.css';
 
 /* Views */
 @import './views/home.css';
@@ -31,3 +32,6 @@
 @import './apps/mail/cmps/mail-compose.css';
 @import './apps/mail/cmps/mail-details.css';
 
+body{
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}

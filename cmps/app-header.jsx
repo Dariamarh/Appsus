@@ -7,7 +7,7 @@ export function AppHeader() {
             className="logo-container flex">
 
             <img src="assets/img/logo.svg"
-                // height="60px" width="105px"
+                height="60px" width="105px"
                 className="img-logo" />
             <h3 className="text-logo-container">
                 <span className="text-logo">Appsus</span></h3>
