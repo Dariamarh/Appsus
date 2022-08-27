@@ -1,0 +1,43 @@
+.home {
+    min-height: 82vh;
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(to bottom,
+            rgba(241, 241, 241, 0.84),
+            rgba(255, 255, 255, 0.671),
+            rgb(187, 194, 201));
+    border-top: 2px solid rgba(255, 255, 255, 0.884);
+}
+
+.homepage-menu a {
+    padding: 0.4rem;
+    margin-bottom: 50px;
+}
+
+.logo-mail,
+.logo-keep,
+.logo-book {
+    width: 6.25rem;
+    height: 6.25rem;
+    border-radius: 9px;
+    border: 2px solid rgba(71, 71, 71, 0.346);
+    padding: 0.4rem;
+    margin-bottom: 200px;
+}
+
+.logo-mail:hover,
+.logo-keep:hover,
+.logo-book:hover {
+    transform: scale(110%);
+    cursor: pointer;
+}
+
+.home-title{
+    text-align: center;
+    font-size: 80px;
+    color: rgb(71, 71, 71);
+
+}
