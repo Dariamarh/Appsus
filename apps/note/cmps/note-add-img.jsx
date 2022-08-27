@@ -1,6 +1,6 @@
 export class NoteAddImg extends React.Component {
     render() {
-        const { addNoteImg, handleChange, clearInputs } = this.props
+        const { addNoteImg, handleChange, clearInputs, elInputTitle, elInputImgUrl } = this.props
         return <section className="note-add-img-container">
             <form
                 className="form-note-add-img flex column"
@@ -8,6 +8,7 @@ export class NoteAddImg extends React.Component {
                 <input
                     className="input-note-title"
                     type="text"
+                    ref={elInputTitle}
                     name="title"
                     placeholder="Enter title here"
                     onChange={handleChange}
@@ -16,6 +17,7 @@ export class NoteAddImg extends React.Component {
                     className="input-note-img-url"
                     type="text"
                     name="imgUrl"
+                    ref={elInputImgUrl}
                     id=""
                     placeholder="Enter image url"
                     onChange={handleChange}

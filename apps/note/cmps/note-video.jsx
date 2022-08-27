@@ -10,24 +10,24 @@ export class NoteVideo extends React.Component {
     }
 
     componentDidMount() {
-        const { info } = this.props.note
+        const { info, backgroundColor } = this.props.note
         const { title, videoUrl } = info
-        this.setState({ title, videoUrl })
+        this.setState({ title, videoUrl, backgroundColor })
 
 
     }
 
     componentDidUpdate(prevProps, prevState) {
         // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
-        const { isNoteUpdate } = this.props
-        if (isNoteUpdate) {
-            if (this.props.note) {
-                const { info } = this.props.note
-                const { title, videoUrl } = info
-                this.setState({ title, videoUrl },
-                    () => { console.log('this.state', this.state) })
-            }
-        }
+        // const { isNoteUpdate } = this.props
+        // if (isNoteUpdate) {
+        //     if (this.props.note) {
+        //         const { info } = this.props.note
+        //         const { title, videoUrl } = info
+        //         this.setState({ title, videoUrl },
+        //             () => { console.log('this.state', this.state) })
+        //     }
+        // }
     }
 
     onEditState = () => {
@@ -36,7 +36,7 @@ export class NoteVideo extends React.Component {
 
     offEditState = (id) => {
         this.setState({ editState: null })
-        this.props.updateNoteVideo(id)
+        this.updateNoteVideo()
     }
 
     //Blur detectors
@@ -56,7 +56,7 @@ export class NoteVideo extends React.Component {
         // this.state.inputEntry = true
         // this.state.inputExit = null
     }
-    
+
     handleSearchChange = ({ target }) => {
         // console.log('HANDLE SEARCH CHANGE');
         // console.log('target.value', target.value)
@@ -67,19 +67,53 @@ export class NoteVideo extends React.Component {
     }
 
     clearSearch = ({ target }) => {
-        target.value = '👇 Press Update to change the Video 👇'
+        target.value = this.state.videoUrl
         this.setState({ youTubeVideos: null })
     }
 
+
+    updateNoteVideo = (id) => {
+        const { title, videoUrl } = this.state
+        this.setState({ title, videoUrl })
+        // const currIdx = notes.findIndex(note => note.id === id)
+        // const currNote = utilService.getById(notes, id)
+        // currNote.info.title = title
+        // currNote.info.videoUrl = videoUrl
+        // notes[currIdx] = currNote
+        // this.setState(notes[currIdx],
+        //     () => {
+        //         this.setState({
+        //             isNoteUpdate: true,
+        //             title: 'Click to update title 👋',
+        //             txt: 'Click to update text 👋'
+        //         })
+        //     })
+    }
+
+    handleChange = ({ target }) => {
+        const { value, name } = target
+        this.setState({ [name]: value })
+        // console.log('HANDLE CHANGE');
+    }
+
+    setVideoUrl = (id) => {
+        this.setState({ videoUrl: "https://www.youtube.com/embed/" + id })
+    }
+
     render() {
-        const { removeNote, handleChange, note, setVideoUrl } = this.props
+        const { removeNote, note, pinNote,duplicateNote } = this.props
         const { onEditState, offEditState, isInputEntry, isInputExit,
-            handleSearchChange, clearSearch } = this
-        const { editState, youTubeVideos, title, videoUrl } = this.state
+            handleSearchChange, clearSearch, handleChange, setVideoUrl } = this
+        const { editState, youTubeVideos, title, videoUrl, backgroundColor } = this.state
         const { debounce } = utilService
 
-        return <section className="note-img-container">
-            {!editState && <div className="note-video-title">{title}</div>}
+        return <section
+
+            className="note-video-container">
+            {!editState && <div
+                style={{ backgroundColor: backgroundColor }}
+                onClick={onEditState}
+                className="note-video-title">{title}</div>}
 
 
             <iframe
@@ -99,7 +133,7 @@ export class NoteVideo extends React.Component {
                     onClick={isInputEntry}
                     onBlur={isInputExit} />
 
-                <div className="search-user-msg">search for youTube videos here👇</div>
+                <div className="search-user-msg">Search for youTube videos here👇</div>
                 <div className="video-search-bar-container">
                     <input
                         type="search"
@@ -128,13 +162,24 @@ export class NoteVideo extends React.Component {
                     className="btn-exit-edit-mode"
                 >Update</button>
             </div>}
-
+            <input
+                // className="color-picker"
+                onChange={handleChange}
+                type="color"
+                name="backgroundColor"
+                id="" />
 
 
             <button
                 className="btn-edit-video"
                 onClick={onEditState}
             >✏️</button>
+            <button
+                    onClick={() => { pinNote(note) }}
+                    className="btn-pin-note">📌</button>
+                     <button
+                    onClick={() => {duplicateNote(note) }}
+                    className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
             <button
                 onClick={() => removeNote(note.id)}
                 className="btn-remove-note">🗑️</button>

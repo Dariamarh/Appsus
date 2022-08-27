@@ -1,4 +1,6 @@
 @import '../cmps/note-add.css';
+@import '../cmps/note-add-todos.css';
+@import '../cmps/note-todos.css';
 @import '../cmps/note-txt.css';
 @import '../cmps/note-img.css';
 @import '../cmps/note-video.css';

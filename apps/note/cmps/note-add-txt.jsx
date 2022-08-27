@@ -25,7 +25,7 @@ export class NoteAddTxt extends React.Component {
 
 
     render() {
-        const { addNoteTxt, handleChange, clearInputs } = this.props
+        const { addNoteTxt, handleChange, clearInputs, elInputTitle, elInputTxt } = this.props
         const { isInputEntry, isInputExit } = this
 
         return <form onSubmit={addNoteTxt} className="form-note-txt flex column">
@@ -33,6 +33,7 @@ export class NoteAddTxt extends React.Component {
                 type="txt"
                 className="input-note-title"
                 name="title"
+                ref={elInputTitle}
                 placeholder="Enter title here"
                 onChange={handleChange}
                 onClick={isInputEntry}
@@ -41,6 +42,7 @@ export class NoteAddTxt extends React.Component {
                 type="txt"
                 className="input-note-txt"
                 name="txt"
+                ref={elInputTxt}
                 placeholder="Enter text here"
                 onChange={handleChange}
                 onClick={isInputEntry}

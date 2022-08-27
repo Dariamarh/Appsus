@@ -16,13 +16,13 @@ export class NoteAddVideo extends React.Component {
     }
 
     clearSearch = ({ target }) => {
-        target.value = '👇Press to add👇'
+        target.value = this.props.videoUrl
         this.setState({ youTubeVideos: null })
     }
 
 
     render() {
-        const { addNoteVideo, handleChange, clearInputs, setVideoUrl } = this.props
+        const { addNoteVideo, handleChange, clearInputs, setVideoUrl, elInputTitle, elInputVideoUrl } = this.props
         const { debounce } = utilService
         const { clearSearch, handleSearchChange } = this
         const { youTubeVideos } = this.state
@@ -35,6 +35,7 @@ export class NoteAddVideo extends React.Component {
                     className="input-note-title"
                     type="text"
                     name="title"
+                    ref={elInputTitle}
                     placeholder="Enter title here"
                     onChange={handleChange}
                 />
@@ -43,8 +44,8 @@ export class NoteAddVideo extends React.Component {
                     <input
                         type="search"
                         className="input-note-add-video"
-                        title="blabl"
                         name="videoUrl"
+                        ref={elInputVideoUrl}
                         placeholder="Search YouTube Here"
                         onBlur={debounce(clearSearch, 500)}
                         onChange={debounce(handleSearchChange, 1000)}

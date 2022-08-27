@@ -90,10 +90,7 @@ function createdAt(time) {
     var month = newDate.getMonth() + 1
     var date = newDate.getDate()
     var hours = newDate.getHours()
-    hours = hours % 12
-    hours = hours ? hours : 12
     var minutes = newDate.getMinutes()
-    var seconds = newDate.getSeconds()
 
     var monthToDisplay = (month + '').padStart(2, '0')
     var dateToDisplay = (date + '').padStart(2, '0')

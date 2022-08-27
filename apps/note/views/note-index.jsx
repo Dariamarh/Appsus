@@ -1,79 +1,66 @@
 import { NoteList } from "../cmps/note-list.jsx"
+import { NoteListPinned } from "../cmps/note-list-pinned.jsx"
 import { noteService } from "../services/note.service.js"
 import { NoteAdd } from "../cmps/note-add.jsx";
 import { utilService } from "../../../services/util.service.js";
+import { NoteFilter } from "../cmps/note-filter.jsx";
+import { LabelPicker } from "../../../cmps/label-picker.jsx";
 
 export class NoteIndex extends React.Component {
     state = {
         notes: [],
+        pinnedNotes: [],
+        filterBy: null,
         title: 'Click to update title 👋',
         txt: 'Click to update text 👋',
-        isNoteUpdate: null,
         imgUrl: 'assets/img/white-horse.png',
         videoUrl: 'https://www.youtube.com/embed/FWy_LbhHtug',
-        todos: [
-            { txt: "Finish Todos list", doneAt: null },
-            { txt: "Other required Features", doneAt: 187111111 },
-            { txt: "Integration", doneAt: 187111111 },
-            { txt: "CSS Design 🧑‍🎨", doneAt: 187111111 },
-            { txt: "Canvas Note 🖌️", doneAt: 187111111 },
-            { txt: "Drag&Drop 🤚", doneAt: 187111111 },
-            { txt: "Add note by blur 👆", doneAt: 187111111 },
-            { txt: "Clean Code 🧹", doneAt: 187111111 },
-            { txt: "Smoke a little something something 🚬🤠", doneAt: 187111111 },
-        ]
+        todos: [{ txt: "Dominate REACT 👨‍🔬", doneAt: null, id: utilService.makeId() }],
+        userAddTodos: ''
     }
 
     componentDidMount() {
+        console.log('COMPONENT DID MOUNT');
         this.loadNotes()
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log('COMPONENT DID UPDATE');
-        // console.log('this.state.videoUrl', this.state.videoUrl)
-        if (this.state.isNoteUpdate) {
-            this.loadNotes()
-            this.setState({ isNoteUpdate: null })
-        }
+        console.log('COMPONENT DID UPDATE');
+
     }
 
     loadNotes = () => {
         // console.log('LOAD NOTES');
-        let currNotes = this.state.notes
-        if (!this.state.notes.length) currNotes = noteService.getNotes()
-        this.setState({ notes: currNotes })
+        let { notes, filterBy } = this.state
+        notes = noteService.query(filterBy)
+        this.setState({ notes })
+    }
+
+    onSetFilter = (filterBy) => {
+        this.setState({ filterBy }, () => {
+            this.loadNotes()
+        })
     }
 
     // NOTE TODOS FUNCS
     addNoteTodos = (ev) => {
-        // console.log('ADD NOTE TEXT');
         if (ev) ev.preventDefault()
-        const { title, todos } = this.state
-        const { notes } = this.state
+        let { title, todos, userAddTodos, notes } = this.state
+        let todosTxts
+        if (userAddTodos) {
+            todosTxts = userAddTodos.split('\n')
+            todos = todosTxts.map(todoFromInput => {
+                return { txt: todoFromInput, doneAt: null, id: utilService.makeId() }
+            })
+        }
         const { createNoteTodos } = noteService
         this.setState({ notes: [createNoteTodos(title, todos), ...notes] },
             this.setState({
                 title: 'Click to update title 👋',
-                todos: 'Click to update text 👋'
+                todos: [{ txt: "Master CSS 🥷", doneAt: null, id: utilService.makeId() }]
             }))
     }
 
-    updateNoteTodos = (id) => {
-        const { notes, title, todos } = this.state
-        const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = utilService.getById(notes, id)
-        currNote.info.title = title
-        currNote.info.todos = todos
-        notes[currIdx] = currNote
-        this.setState(notes[currIdx],
-            () => {
-                this.setState({
-                    isNoteUpdate: true,
-                    title: 'Click to update title 👋',
-                    todos: 'Click to update text 👋'
-                })
-            })
-    }
 
     // NOTE VIDEO FUNCS
     addNoteVideo = (ev) => {
@@ -93,33 +80,6 @@ export class NoteIndex extends React.Component {
 
     }
 
-    updateNoteVideo = (id) => {
-        const { notes, title, videoUrl } = this.state
-        const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = utilService.getById(notes, id)
-        currNote.info.title = title
-        currNote.info.videoUrl = videoUrl
-        notes[currIdx] = currNote
-        this.setState(notes[currIdx],
-            () => {
-                this.setState({
-                    isNoteUpdate: true,
-                    title: 'Click to update title 👋',
-                    txt: 'Click to update text 👋'
-                })
-            })
-        }
-        
-        setVideoUrl = (id) => {
-            const currLink = "https://www.youtube.com/embed/" + id
-            console.log('currLink', currLink)
-            console.log("https://www.youtube.com/embed/" + id);
-            // const { info } = this.props.note
-            // const { videoUrl } = info
-            this.setState({ videoUrl: currLink },
-                () => console.log('this.state.videoUrl', this.state.videoUrl))
-        }
-
     // NOTE IMAGE FUNCS
     addNoteImg = (ev) => {
         // console.log('ADD NOTE IMG');
@@ -138,23 +98,6 @@ export class NoteIndex extends React.Component {
 
     }
 
-    updateNoteImg = (id) => {
-        const { notes, title, imgUrl } = this.state
-        const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = utilService.getById(notes, id)
-        currNote.info.title = title
-        currNote.info.imgUrl = imgUrl
-        notes[currIdx] = currNote
-        this.setState(notes[currIdx],
-            () => {
-                this.setState({
-                    isNoteUpdate: true,
-                    title: 'Click to update title 👋',
-                    txt: 'Click to update text 👋'
-                })
-            })
-    }
-
     // NOTE TEXT FUNCS
     addNoteTxt = (ev) => {
         // console.log('ADD NOTE TEXT');
@@ -169,23 +112,6 @@ export class NoteIndex extends React.Component {
             }))
     }
 
-    updateNoteTxt = (id) => {
-        const { notes, title, txt } = this.state
-        const currIdx = notes.findIndex(note => note.id === id)
-        const currNote = utilService.getById(notes, id)
-        currNote.info.title = title
-        currNote.info.txt = txt
-        notes[currIdx] = currNote
-        this.setState(notes[currIdx],
-            () => {
-                this.setState({
-                    isNoteUpdate: true,
-                    title: 'Click to update title 👋',
-                    txt: 'Click to update text 👋'
-                })
-            })
-    }
-
     // GENERAL FUNCS
 
     removeNote = (id) => {
@@ -194,30 +120,61 @@ export class NoteIndex extends React.Component {
         this.setState({ notes })
     }
 
+    setLabel = (labelType) => {
+        console.log('labelType', labelType)
+    }
+
     handleChange = ({ target }) => {
+        // console.log('HANDLE CHANGE');
         const { value, name } = target
         this.setState({ [name]: value })
-        // console.log('HANDLE CHANGE');
+
     }
 
-    clearInputs = (ev) => {
-        const elInputTitle = document.querySelector('.input-note-title')
-        elInputTitle.value = ''
-        const elInputTxt = document.querySelector('.input-note-txt')
-        if (elInputTxt) elInputTxt.value = ''
-        const elInputImgUrl = document.querySelector('.input-note-img-url')
-        if (elInputImgUrl) elInputImgUrl.value = ''
+    setVideoUrl = (id) => {
+        this.setState({ videoUrl: "https://www.youtube.com/embed/" + id })
     }
 
+    pinNote = (note) => {
+        const { notes, pinnedNotes } = this.state
+        const { getIdxById } = noteService
+        if (!note.isPinned) {
+            notes.splice(getIdxById(notes, note.id), 1)
+            pinnedNotes[0] = note
+        }
+        if (note.isPinned) {
+            pinnedNotes.splice(getIdxById(pinnedNotes, note.id), 1)
+            notes.unshift(note)
+        }
+        note.isPinned = !note.isPinned
+        this.setState({ notes, pinnedNotes })
+    }
+
+    duplicateNote = (note) => {
+        const { notes, pinnedNotes } = this.state
+        const { getIdxById } = noteService
+
+        const duplicatedNote = { ...note }
+        duplicatedNote.id = utilService.makeId()
+
+        if (!note.isPinned) {
+            notes.splice(getIdxById(notes, note.id) + 1, 0, duplicatedNote)
+        }
+        if (note.isPinned) {
+            pinnedNotes.splice(getIdxById(pinnedNotes, note.id) + 1, 0, duplicatedNote)
+            console.log('2nd IF');
+        }
+        this.setState({ notes, pinnedNotes })
+    }
 
     render() {
-        const { notes, title, txt, isNoteUpdate } = this.state
-        const { addNoteTxt, addNoteImg, addNoteVideo,
-            updateNoteTxt, updateNoteImg, updateNoteVideo,
-            removeNote, handleChange,
-            clearInputs, setVideoUrl } = this
+        const { notes, pinnedNotes, videoUrl, filterBy } = this.state
+        const { addNoteTxt, addNoteImg, addNoteVideo, addNoteTodos,
+            removeNote, clearInputs, setVideoUrl, handleChange, pinNote, duplicateNote, onSetFilter, setLabel } = this
         return <section className="note-app">
             <NoteAdd
+                addNoteTodos={addNoteTodos}
+                videoUrl={videoUrl}
                 setVideoUrl={setVideoUrl}
                 clearInputs={clearInputs}
                 handleChange={handleChange}
@@ -225,13 +182,21 @@ export class NoteIndex extends React.Component {
                 addNoteImg={addNoteImg}
                 addNoteTxt={addNoteTxt} />
             <hr />
+            <NoteFilter
+                filterBy={filterBy}
+                onSetFilter={onSetFilter}
+            />
+            <hr />
+            <NoteListPinned
+                duplicateNote={duplicateNote}
+                pinNote={pinNote}
+                removeNote={removeNote}
+                pinnedNotes={pinnedNotes} />
+            <hr />
             <NoteList
-                setVideoUrl={setVideoUrl}
-                handleChange={handleChange}
-                isNoteUpdate={isNoteUpdate}
-                updateNoteVideo={updateNoteVideo}
-                updateNoteImg={updateNoteImg}
-                updateNoteTxt={updateNoteTxt}
+                setLabel={setLabel}
+                duplicateNote={duplicateNote}
+                pinNote={pinNote}
                 removeNote={removeNote}
                 notes={notes} />
         </section>

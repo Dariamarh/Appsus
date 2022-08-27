@@ -6,30 +6,67 @@ import { NoteAddTodos } from "./note-add-todos.jsx";
 
 export class NoteAdd extends React.Component {
     state = {
-        noteType: 'note-todos',
+        noteType: 'note-txt',
     }
 
-
-    DynamicCmp = (props) => {
-        const { addNoteTxt, addNoteImg, addNoteVideo,
-            handleChange, clearInputs, setVideoUrl } = this.props
+    clearInputs = () => {
+        this.elInputTitle.current.value = ''
         const { noteType } = this.state
         switch (noteType) {
             case 'note-txt':
+                this.elInputTxt.current.value = ''
+                break;
+            case 'note-img':
+                this.elInputImgUrl.current.value = ''
+                break;
+            case 'note-video':
+                break;
+            case 'note-todos':
+                break;
+        }
+    }
+
+    elInputTitle = React.createRef()
+    elInputTxt = React.createRef()
+    elInputImgUrl = React.createRef()
+    elInputVideoUrl = React.createRef()
+    elInputTodosList = React.createRef()
+
+
+
+    DynamicCmp = () => {
+        const { addNoteTxt, addNoteImg, addNoteVideo,
+            handleChange, setVideoUrl, addNoteTodos, videoUrl } = this.props
+        const { noteType } = this.state
+        const { elInputTitle, elInputTxt, elInputImgUrl, elInputVideoUrl, elInputTodosList, clearInputs } = this
+        switch (noteType) {
+            case 'note-txt':
                 return <NoteAddTxt
+                    elInputTxt={elInputTxt}
+                    elInputTitle={elInputTitle}
                     clearInputs={clearInputs}
                     handleChange={handleChange}
                     addNoteTxt={addNoteTxt} />
             case 'note-img':
                 return <NoteAddImg
+                    elInputTitle={elInputTitle}
+                    elInputImgUrl={elInputImgUrl}
                     clearInputs={clearInputs}
                     addNoteImg={addNoteImg}
                     handleChange={handleChange}
                 />
             case 'note-todos':
-                return <NoteAddTodos />
+                return <NoteAddTodos
+                    elInputTodosList={elInputTodosList}
+                    elInputTitle={elInputTitle}
+                    handleChange={handleChange}
+                    addNoteTodos={addNoteTodos}
+                />
             case 'note-video':
                 return <NoteAddVideo
+                    videoUrl={videoUrl}
+                    elInputVideoUrl={elInputVideoUrl}
+                    elInputTitle={elInputTitle}
                     setVideoUrl={setVideoUrl}
                     clearInputs={clearInputs}
                     addNoteVideo={addNoteVideo}

@@ -5,30 +5,22 @@ export class NoteTxt extends React.Component {
     }
 
     componentDidMount() {
-            const { info } = this.props.note
-            const { title, txt } = info
-            this.setState({ title, txt })
+        const { info, backgroundColor } = this.props.note
+        const { title, txt } = info
+        this.setState({ title, txt, backgroundColor })
     }
 
     componentDidUpdate(prevProps, prevState) {
-        // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
-        const { isNoteUpdate } = this.props
-        if (isNoteUpdate) {
-            if (this.props.note) {
-                const { info } = this.props.note
-                const { title, txt } = info
-                this.setState({ title, txt })
-            }
-        }
+
     }
 
     onEditState = () => {
         this.setState({ editState: true })
     }
 
-    offEditState = (id) => {
+    offEditState = () => {
         this.setState({ editState: null })
-        this.props.updateNoteTxt(id)
+        this.updateNoteTxt
     }
 
     //Blur detectors
@@ -49,13 +41,26 @@ export class NoteTxt extends React.Component {
         // this.state.inputExit = null
     }
 
-    render() {
-        const { onEditState, offEditState, isInputEntry, isInputExit } = this
-        const { removeNote, note, handleChange } = this.props
-        const { title, txt, editState } = this.state
+    updateNoteTxt() {
+        const { title, txt } = this.state
+        this.setState({ title, txt })
+    }
 
+    handleChange = ({ target }) => {
+        // console.log('HANDLE CHANGE');
+        const { value, name } = target
+        this.setState({ [name]: value })
+    }
+
+
+    render() {
+        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange, } = this
+        const { removeNote, note, pinNote,duplicateNote } = this.props
+        const { title, txt, editState, backgroundColor } = this.state
         return <section className="note-txt-container">
-            <div className="note-txt">
+            <div
+                style={{ backgroundColor: backgroundColor }}
+                className="note-txt">
                 {!editState &&
                     <div
                         className="note-txt-content-container"
@@ -66,7 +71,8 @@ export class NoteTxt extends React.Component {
                         </div>
                     </div>}
 
-                {editState && <div className="edit-container form-note-txt flex column">
+                {editState && <div
+                    className="edit-container form-note-txt flex column">
                     <input
                         type="txt"
                         className="input-note-title"
@@ -88,10 +94,22 @@ export class NoteTxt extends React.Component {
                         className="btn-exit-edit-mode"
                     >Update</button>
                 </div>}
-
+                <input
+                    // className="color-picker"
+                    onChange={handleChange}
+                    type="color"
+                    name="backgroundColor"
+                    id="" />
+                <button
+                    onClick={() => { pinNote(note) }}
+                    className="btn-pin-note">📌</button>
+                     <button
+                    onClick={() => {duplicateNote(note) }}
+                    className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
                 <button
                     onClick={() => removeNote(note.id)}
                     className="btn-remove-note">🗑️</button>
+                    
             </div>
         </section>
     }

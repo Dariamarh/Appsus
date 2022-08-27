@@ -12,40 +12,44 @@ export class NotePreview extends React.Component {
 
     DynamicCmp = () => {
         const { noteType } = this.state
-        const { note, removeNote, handleChange,
-            isNoteUpdate, updateNoteTxt, updateNoteImg,
-            updateNoteVideo, setVideoUrl } = this.props
+        const { notes, note, removeNote, pinNote, duplicateNote, setLabel } = this.props
 
         switch (noteType) {
             case 'note-txt':
                 return <NoteTxt
-                    handleChange={handleChange}
-                    isNoteUpdate={isNoteUpdate}
-                    updateNoteTxt={updateNoteTxt}
-                    removeNote={removeNote}
+                    setLabel={setLabel}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
+                    notes={notes}
                     note={note}
+                    removeNote={removeNote}
                 />
             case 'note-img':
                 return <NoteImg
-                    isNoteUpdate={isNoteUpdate}
-                    handleChange={handleChange}
-                    updateNoteImg={updateNoteImg}
-                    removeNote={removeNote}
+                    setLabel={setLabel}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
+                    notes={notes}
                     note={note}
+                    removeNote={removeNote}
                 />
             case 'note-todos':
                 return <NoteTodos
-                    removeNote={removeNote}
+                    setLabel={setLabel}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
+                    notes={notes}
                     note={note}
+                    removeNote={removeNote}
                 />
             case 'note-video':
                 return <NoteVideo
-                    setVideoUrl={setVideoUrl}
-                    isNoteUpdate={isNoteUpdate}
-                    handleChange={handleChange}
-                    updateNoteVideo={updateNoteVideo}
-                    removeNote={removeNote}
+                    setLabel={setLabel}
+                    duplicateNote={duplicateNote}
+                    pinNote={pinNote}
+                    notes={notes}
                     note={note}
+                    removeNote={removeNote}
                 />
         }
     }
@@ -56,7 +60,6 @@ export class NotePreview extends React.Component {
         return <section className="note-preview">
             <br />
             <DynamicCmp />
-            <hr />
         </section>
     }
 }

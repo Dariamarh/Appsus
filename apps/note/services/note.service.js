@@ -3,20 +3,47 @@ import { storageService } from "../../../services/storage.service.js"
 
 export const noteService = {
     getNotes,
+    query,
     createNoteTxt,
     createNoteImg,
     createNoteVideo,
     getVideos,
-    createNoteTodos
+    createNoteTodos,
+    getIdxById
 }
 
 const YT_API_Key = 'AIzaSyDY1FSaJrD0PrUG8bPx8Q1lC4g3j9RT9P0'
 const KEY = 'videosDB'
+const STORAGE_KEY = 'notesDB'
+
+function query(filterBy) {
+    let notes = storageService.loadFromStorage(STORAGE_KEY)
+    if (!notes) {
+        notes = getNotes()
+       storageService.saveToStorage(STORAGE_KEY,notes)
+    }
+
+    if (filterBy) {
+        let { title, noteType, label } = filterBy
+
+        notes = notes.filter(note => (
+            note.info.title.toUpperCase().includes(title.toUpperCase()) &&
+            note.type.toUpperCase().includes(noteType.toUpperCase())
+            //  &&
+            // note.labels.includes(label) 
+        ))
+    }
+
+    return notes
+}
 
 function getNotes() {
     return notes
 }
 
+function getIdxById(notes, id) {
+    return notes.findIndex(note => note.id === id)
+}
 
 function getVideos(term) {
     const termVideosMap = storageService.loadFromStorage(KEY) || {}
@@ -42,10 +69,27 @@ function getVideos(term) {
 
 }
 
+
+function createNoteTodos(title, todos) {
+    const currNote = {
+        id: utilService.makeId(),
+        backgroundColor: utilService.getRandomColor(),
+        type: "note-todos",
+        isPinned: false,
+        info: {
+            title,
+            todos
+        }
+    }
+    return currNote
+}
+
 function createNoteVideo(title, videoUrl) {
     const currNote = {
         id: utilService.makeId(),
         type: "note-video",
+        isPinned: false,
+        backgroundColor: utilService.getRandomColor(),
         info: {
             title,
             videoUrl,
@@ -62,6 +106,8 @@ function createNoteImg(title, imgUrl) {
     const currNote = {
         id: utilService.makeId(),
         type: "note-img",
+        isPinned: false,
+        backgroundColor: utilService.getRandomColor(),
         info: {
             title,
             imgUrl,
@@ -78,6 +124,7 @@ function createNoteTxt(title, txt) {
         id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
+        backgroundColor: utilService.getRandomColor(),
         info: {
             title,
             txt
@@ -86,24 +133,15 @@ function createNoteTxt(title, txt) {
     return currNote
 }
 
-function createNoteTodos(title, todos) {
-    const currNote = {
-        id: utilService.makeId(),
-        type: "note-todos",
-        info: {
-            title,
-            todos
-        }
-    }
-    return currNote
-}
+
 
 
 const notes = [
     {
         id: "n101",
         type: "note-txt",
-        isPinned: true,
+        isPinned: false,
+        backgroundColor: utilService.getRandomColor(),
         info: {
             title: "TITLE",
             txt: "Fullstack Me Baby!"
@@ -111,7 +149,9 @@ const notes = [
     },
     {
         id: "n102",
+        backgroundColor: utilService.getRandomColor(),
         type: "note-img",
+        isPinned: false,
         info: {
             imgUrl: "assets/img/white-horse.png",
             title: "APPSUS🦾"
@@ -123,24 +163,28 @@ const notes = [
     {
         id: "n103",
         type: "note-todos",
+        isPinned: false,
+        backgroundColor: utilService.getRandomColor(),
         info: {
             title: "Sprint🥉 Todos",
             todos: [
-                { txt: "Finish Todos list", doneAt: null },
-                { txt: "Other required Features", doneAt: 187111111 },
-                { txt: "Integration", doneAt: 187111111 },
-                { txt: "CSS Design 🧑‍🎨", doneAt: 187111111 },
-                { txt: "Canvas Note 🖌️", doneAt: 187111111 },
-                { txt: "Drag&Drop 🤚", doneAt: 187111111 },
-                { txt: "Add note by blur 👆", doneAt: 187111111 },
-                { txt: "Clean Code 🧹", doneAt: 187111111 },
-                { txt: "Smoke a little something something 🚬🤠", doneAt: 187111111 },
+                { txt: "Finish Todos list", doneAt: '08/26/2022 19:08', id: utilService.makeId() },
+                { txt: "Finish Filter && Labels", doneAt: null, id: utilService.makeId() },
+                { txt: "Make it Asynchronized", doneAt: null, id: utilService.makeId() },
+                { txt: "CSS Design 🧑‍🎨", doneAt: null, id: utilService.makeId() },
+                { txt: "Integration", doneAt: null, id: utilService.makeId() },
+                { txt: "Canvas Note 🖌️", doneAt: null, id: utilService.makeId() },
+                { txt: "Drag&Drop 🤚", doneAt: null, id: utilService.makeId() },
+                { txt: "Add note by blur 👆", doneAt: null, id: utilService.makeId() },
+                { txt: "Clean Code 🧹", doneAt: null, id: utilService.makeId() },
             ]
         }
     },
     {
         id: "n104",
         type: "note-video",
+        backgroundColor: utilService.getRandomColor(),
+        isPinned: false,
         info: {
             videoUrl: "https://www.youtube.com/embed/FWy_LbhHtug",
             title: "Video killed the radio"

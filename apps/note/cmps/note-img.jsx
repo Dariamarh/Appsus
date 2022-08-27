@@ -4,32 +4,25 @@ export class NoteImg extends React.Component {
     }
 
     componentDidMount() {
-        const { info } = this.props.note
+        const { info, backgroundColor } = this.props.note
         const { title, imgUrl } = info
-        this.setState({ title, imgUrl })
+        this.setState({ title, imgUrl, backgroundColor })
 
 
     }
 
     componentDidUpdate(prevProps, prevState) {
         // console.log('COMPNENT DID UPDATE -- NOTE TEXT');
-        const { isNoteUpdate } = this.props
-        if (isNoteUpdate) {
-            if (this.props.note) {
-                const { info } = this.props.note
-                const { title, imgUrl } = info
-                this.setState({ title, imgUrl })
-            }
-        }
+
     }
 
     onEditState = () => {
         this.setState({ editState: true })
     }
 
-    offEditState = (id) => {
+    offEditState = () => {
         this.setState({ editState: null })
-        this.props.updateNoteImg(id)
+        this.updateNoteImg
     }
 
     //Blur detectors
@@ -50,15 +43,27 @@ export class NoteImg extends React.Component {
         // this.state.inputExit = null
     }
 
+    updateNoteImg() {
+        const { title, imgUrl } = this.state
+        this.setState({ title, imgUrl })
+    }
+
+
+    handleChange = ({ target }) => {
+        const { value, name } = target
+        this.setState({ [name]: value })
+        // console.log('HANDLE CHANGE');
+    }
 
     render() {
-        const { removeNote, handleChange, note } = this.props
-        const { onEditState, offEditState, isInputEntry, isInputExit } = this
-        const { editState, title, imgUrl } = this.state
+        const { removeNote, note, pinNote, duplicateNote } = this.props
+        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange } = this
+        const { editState, title, imgUrl, backgroundColor } = this.state
 
         return <section className="note-img-container">
             {!editState && <div
-                className="note-txt-content-container"
+                style={{ backgroundColor: backgroundColor }}
+                className="note-img-content-container"
                 onClick={onEditState}>
 
                 <div className="note-img-title">{title}</div>
@@ -88,7 +93,18 @@ export class NoteImg extends React.Component {
                     className="btn-exit-edit-mode"
                 >Update</button>
             </div>}
-
+            <input
+                // className="color-picker"
+                onChange={handleChange}
+                type="color"
+                name="backgroundColor"
+                id="" />
+            <button
+                onClick={() => { pinNote(note) }}
+                className="btn-pin-note">📌</button>
+            <button
+                onClick={() => { duplicateNote(note) }}
+                className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
             <button
                 onClick={() => removeNote(note.id)}
                 className="btn-remove-note">🗑️</button>
