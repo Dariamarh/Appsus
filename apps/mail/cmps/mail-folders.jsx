@@ -9,9 +9,12 @@ export class MailFolders extends React.Component {
 
     render() {
         const { compose } = this.state
-        const { toggleModal } = this
+        const { toggleModal, isModalOpened } = this
+        const modalClass = isModalOpened ? 'modal-opened' : ''
+
 
         return <section className="mail-menu">
+            {console.log(toggleModal)}
             <button className="compose-btn" onClick={toggleModal}>+ Compose</button>
             <div className="mail-folders">
                 <NavLink to={`/mail/`}>
@@ -30,7 +33,9 @@ export class MailFolders extends React.Component {
                     <button className="mail-drafts"> <i className="fa-solid fa-trash-can"></i>Trash</button>
                 </NavLink>
             </div>
-            {compose && <MailCompose />}
+            {compose && <MailCompose
+                toggleModal={toggleModal}
+            />}
         </section>
     }
 }

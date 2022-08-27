@@ -35,9 +35,5 @@ img {
     margin-inline-end: auto;
     margin-inline-start: auto;
 } 
-.main-layout>* {
-    /* max-width: 80%; */
-    margin-inline-end: auto;
-    margin-inline-start: auto;
-} 
+
 

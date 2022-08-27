@@ -186,9 +186,9 @@ function query(filterBy) {
 
         if (search) {
             emails = emails.filter(email => (
-                email.body.includes(search) ||
-                email.to.includes(search) ||
-                email.subject.includes(search)
+                email.body.includes(search.toUpperCase()) ||
+                email.to.includes(search.toUpperCase()) ||
+                email.subject.includes(search.toUpperCase())
             ))
         } else {
             switch (folder) {

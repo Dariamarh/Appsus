@@ -14,10 +14,10 @@ export function AppHeader() {
         </Link>
         <nav className="app-menu flex">
             <NavLink exact to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
             <NavLink to="/mail">Mister-Mail</NavLink>
             <NavLink to="/note">Miss-Keep</NavLink>
             <NavLink to="/book">Miss-Book</NavLink>
+            <NavLink to="/about">About</NavLink>
         </nav>
         <UserMsg />
     </header>
