@@ -1,0 +1,28 @@
+
+.form-note-txt {
+    justify-content: center;
+}
+
+
+
+.input-note-txt {
+    width: 400px;
+    height: 25px;
+    background-color: var(--color-yellow);
+    margin-top: 5px;
+}
+
+
+.btn-add-note {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 20px;
+    height: 20px;
+    align-self: center;
+    margin: 5px;
+    /* border-radius: 50%; */
+    border: none;
+    background-color: var(--color-green);
+    color: white;
+}

@@ -1,4 +1,6 @@
 import { utilService } from "../../../services/util.service.js"
+import { LabelPicker } from "../../../cmps/label-picker.jsx";
+import { noteService } from "../services/note.service.js"
 
 export class NoteTodos extends React.Component {
 
@@ -7,8 +9,12 @@ export class NoteTodos extends React.Component {
         isInstantTodo: null,
         renderTodosForEdit: true,
         todosForEdit: '',
-        instantTodo: ''
+        instantTodo: '',
+        labels: [],
+        isLabelsList: false
     }
+
+    gLabels = ['ciritcal', 'family', 'work', 'friends', 'spam', 'memories', 'romantic']
 
     inputTodosEditor = React.createRef()
 
@@ -19,7 +25,8 @@ export class NoteTodos extends React.Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-
+        // console.log('COMPONENT DID UPDATE TODOS');
+        // console.log('this.state.todos', this.state.todos)
     }
 
     onEditState = () => {
@@ -58,7 +65,7 @@ export class NoteTodos extends React.Component {
         let todosForEdit = todos.map(todo => {
             return todo.txt
         })
-        todosForEdit = todosForEdit.join('\r\n')
+        todosForEdit = todosForEdit.join('\n')
         this.state.todosForEdit = todosForEdit
         return todosForEdit
     }
@@ -74,15 +81,16 @@ export class NoteTodos extends React.Component {
     }
 
     updateNoteTodos() {
-        // console.log('UPDATE NOTE TODOS');
         let { title, todos, todosForEdit } = this.state
         let todosTxts
         todosTxts = todosForEdit.split('\n')
-        todos = todosTxts.map(todoFromInput => {
-            return { txt: todoFromInput, doneAt: null }
-        })
-        this.setState({ renderTodosForEdit: true })
-        this.setState({ title, todos })
+        for (let i = 0; i < todosTxts.length; i++) {
+            if (i > (todos.length - 1)) {
+                todos[i] = { txt: '', doneAt: null, id: utilService.makeId() }
+            }
+            todos[i].txt = todosTxts[i];
+        }
+        this.setState({ renderTodosForEdit: true, title, todos })
     }
 
     handleChange = ({ target }) => {
@@ -115,10 +123,33 @@ export class NoteTodos extends React.Component {
         this.setState({ todos })
     }
 
+
+    toggleLabel = () => {
+        let { isLabelsList } = this.state
+        isLabelsList = !isLabelsList
+        this.setState({ isLabelsList })
+    }
+
+    setLabel = ({ target }) => {
+        const { labels } = this.state
+        if (labels.find(label => label === target.id)) return
+        labels.push(target.id)
+        this.setState({ labels })
+    }
+
+
+    removeLabel = (currLabel) => {
+        let { labels } = this.state
+        labels = labels.filter(label => label !== currLabel)
+        this.setState({ labels })
+    }
+
+
     render() {
-        const { onEditState, offEditState, isInputEntry, isInputExit, isAddInstantTodo, onInstantTodo, handleChange, toggleTodo, removeTodo } = this
-        const { removeNote, note, pinNote,duplicateNote } = this.props
-        const { title, todos, editState, isInstantTodo, backgroundColor } = this.state
+        const { onEditState, offEditState, isInputEntry, isInputExit, isAddInstantTodo, onInstantTodo, handleChange, toggleTodo, removeTodo,
+            toggleLabel, setLabel, removeLabel, gLabels } = this
+        const { removeNote, note, pinNote, duplicateNote } = this.props
+        const { title, todos, editState, isInstantTodo, backgroundColor, labels, isLabelsList } = this.state
 
         return <section className="note-txt-container">
             <div className="note-txt">
@@ -202,9 +233,29 @@ export class NoteTodos extends React.Component {
                 <button
                     onClick={() => { pinNote(note) }}
                     className="btn-pin-note">📌</button>
-                     <button
-                    onClick={() => {duplicateNote(note) }}
+                <button
+                    onClick={() => { duplicateNote(note) }}
                     className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+                <button
+                    onClick={() => { toggleLabel('work') }}
+                >Label</button>
+                {isLabelsList && <ul className="labels-list-container">
+
+                    {gLabels.map(label => {
+                        return <li
+                            key={label}
+                            id={label}
+                            className="label-container"
+                            onClick={setLabel}>
+                            {label}</li>
+                    })}
+                </ul>}
+
+                {labels.map(label => <LabelPicker
+                    key={label}
+                    labels={labels}
+                    removeLabel={removeLabel}
+                    currLabel={label} />)}
                 <button
                     onClick={() => removeNote(note.id)}
                     className="btn-remove-note">🗑️</button>

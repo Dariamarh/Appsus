@@ -1,13 +1,21 @@
 import { noteService } from "../services/note.service.js"
 import { utilService } from "../../../services/util.service.js"
+import { LabelPicker } from "../../../cmps/label-picker.jsx";
 
 
 export class NoteVideo extends React.Component {
 
     state = {
         editState: null,
-        youTubeVideos: null
+        youTubeVideos: null,
+        labels: [],
+        isLabelsList: false
+
+
     }
+
+    gLabels = ['ciritcal', 'family', 'work', 'friends', 'spam', 'memories', 'romantic']
+
 
     componentDidMount() {
         const { info, backgroundColor } = this.props.note
@@ -100,11 +108,34 @@ export class NoteVideo extends React.Component {
         this.setState({ videoUrl: "https://www.youtube.com/embed/" + id })
     }
 
+
+    toggleLabel = () => {
+        let { isLabelsList } = this.state
+        isLabelsList = !isLabelsList
+        this.setState({ isLabelsList })
+    }
+
+    setLabel = ({ target }) => {
+        const { labels } = this.state
+        if (labels.find(label => label === target.id)) return
+        labels.push(target.id)
+        this.setState({ labels })
+    }
+
+
+    removeLabel = (currLabel) => {
+        let { labels } = this.state
+        labels = labels.filter(label => label !== currLabel)
+        this.setState({ labels })
+    }
+
+
     render() {
-        const { removeNote, note, pinNote,duplicateNote } = this.props
+        const { removeNote, note, pinNote, duplicateNote } = this.props
         const { onEditState, offEditState, isInputEntry, isInputExit,
-            handleSearchChange, clearSearch, handleChange, setVideoUrl } = this
-        const { editState, youTubeVideos, title, videoUrl, backgroundColor } = this.state
+            handleSearchChange, clearSearch, handleChange, setVideoUrl
+            , toggleLabel, setLabel, removeLabel, gLabels } = this
+        const { editState, youTubeVideos, title, videoUrl, backgroundColor, labels, isLabelsList } = this.state
         const { debounce } = utilService
 
         return <section
@@ -175,11 +206,31 @@ export class NoteVideo extends React.Component {
                 onClick={onEditState}
             >✏️</button>
             <button
-                    onClick={() => { pinNote(note) }}
-                    className="btn-pin-note">📌</button>
-                     <button
-                    onClick={() => {duplicateNote(note) }}
-                    className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+                onClick={() => { pinNote(note) }}
+                className="btn-pin-note">📌</button>
+            <button
+                onClick={() => { duplicateNote(note) }}
+                className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+            <button
+                onClick={() => { toggleLabel('work') }}
+            >Label</button>
+            {isLabelsList && <ul className="labels-list-container">
+
+                {gLabels.map(label => {
+                    return <li
+                        key={label}
+                        id={label}
+                        className="label-container"
+                        onClick={setLabel}>
+                        {label}</li>
+                })}
+            </ul>}
+
+            {labels.map(label => <LabelPicker
+                key={label}
+                labels={labels}
+                removeLabel={removeLabel}
+                currLabel={label} />)}
             <button
                 onClick={() => removeNote(note.id)}
                 className="btn-remove-note">🗑️</button>

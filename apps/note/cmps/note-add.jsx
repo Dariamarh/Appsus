@@ -6,7 +6,7 @@ import { NoteAddTodos } from "./note-add-todos.jsx";
 
 export class NoteAdd extends React.Component {
     state = {
-        noteType: 'note-txt',
+        noteType: 'note-video',
     }
 
     clearInputs = () => {
@@ -84,29 +84,34 @@ export class NoteAdd extends React.Component {
 
     render() {
         const { DynamicCmp, switchNoteType } = this
-        const { notes, addNoteTxt } = this.props
+        // const { clearInputs } = this.props
         return <section className="note-add-container">
             <div className="note-add flex">
                 <DynamicCmp />
                 <ul className="btn-note-type-container flex">
+                    {/* <li
+                        onClick={clearInputs}
+                        id="note-txt"
+                        className="btn-note-add">➕</li> */}
                     <li
                         onClick={switchNoteType}
                         id="note-txt"
-                        className="btn-note-txt">✏️</li>
+                        className="btn-note-add-txt">✏️</li>
                     <li
                         onClick={switchNoteType}
                         id="note-img"
-                        className="btn-note-img">🖼️</li>
+                        className="btn-note-add-img">🖼️</li>
                     <li
                         onClick={switchNoteType}
                         id="note-video"
-                        className="btn-note-video">🎥</li>
+                        className="btn-note-add-video">🎥</li>
                     <li
                         onClick={switchNoteType}
                         id="note-todos"
-                        className="btn-note-todos">📋</li>
+                        className="btn-note-add-todos">📋</li>
                 </ul>
             </div>
         </section>
     }
 }
+

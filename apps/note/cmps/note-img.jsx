@@ -1,7 +1,17 @@
+import { LabelPicker } from "../../../cmps/label-picker.jsx";
+import { noteService } from "../services/note.service.js"
+
+
 export class NoteImg extends React.Component {
     state = {
         editState: null,
+        labels: [],
+        isLabelsList: false
+
+
     }
+
+    gLabels = ['ciritcal', 'family', 'work', 'friends', 'spam', 'memories', 'romantic']
 
     componentDidMount() {
         const { info, backgroundColor } = this.props.note
@@ -55,10 +65,32 @@ export class NoteImg extends React.Component {
         // console.log('HANDLE CHANGE');
     }
 
+    toggleLabel = () => {
+        let { isLabelsList } = this.state
+        isLabelsList = !isLabelsList
+        this.setState({ isLabelsList })
+    }
+
+    setLabel = ({ target }) => {
+        const { labels } = this.state
+        if (labels.find(label => label === target.id)) return
+        labels.push(target.id)
+        this.setState({ labels })
+    }
+
+
+    removeLabel = (currLabel) => {
+        let { labels } = this.state
+        labels = labels.filter(label => label !== currLabel)
+        this.setState({ labels })
+    }
+
+
     render() {
         const { removeNote, note, pinNote, duplicateNote } = this.props
-        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange } = this
-        const { editState, title, imgUrl, backgroundColor } = this.state
+        const { onEditState, offEditState, isInputEntry, isInputExit, handleChange
+            , toggleLabel, setLabel, removeLabel, gLabels } = this
+        const { editState, title, imgUrl, backgroundColor, labels, isLabelsList } = this.state
 
         return <section className="note-img-container">
             {!editState && <div
@@ -105,6 +137,26 @@ export class NoteImg extends React.Component {
             <button
                 onClick={() => { duplicateNote(note) }}
                 className="btn-duplicate-note"><i className="fa-solid fa-clone"></i></button>
+            <button
+                onClick={() => { toggleLabel('work') }}
+            >Label</button>
+            {isLabelsList && <ul className="labels-list-container">
+
+                {gLabels.map(label => {
+                    return <li
+                        key={label}
+                        id={label}
+                        className="label-container"
+                        onClick={setLabel}>
+                        {label}</li>
+                })}
+            </ul>}
+
+            {labels.map(label => <LabelPicker
+                key={label}
+                labels={labels}
+                removeLabel={removeLabel}
+                currLabel={label} />)}
             <button
                 onClick={() => removeNote(note.id)}
                 className="btn-remove-note">🗑️</button>

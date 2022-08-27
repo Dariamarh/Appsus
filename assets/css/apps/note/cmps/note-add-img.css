@@ -1,0 +1,6 @@
+.input-note-img-url {
+    width: 400px;
+    height: 25px;
+    background-color: var(--color-yellow);
+    margin-top: 5px;
+}

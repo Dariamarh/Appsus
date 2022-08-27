@@ -1,0 +1,24 @@
+.note-add {
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0px;
+    background-color: var(--color-green);
+    border-radius: 15px;
+}
+
+.btn-note-type-container {
+    list-style: none;
+    gap: 5px;
+    cursor: pointer;
+}
+
+.input-note-title {
+    background-color: var(--color-yellow);
+    margin-top: 20px;
+
+}
+
+.btn-add-note-img {
+    height: 15px;
+    width: 15px;
+}

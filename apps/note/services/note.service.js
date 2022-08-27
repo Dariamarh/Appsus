@@ -9,7 +9,7 @@ export const noteService = {
     createNoteVideo,
     getVideos,
     createNoteTodos,
-    getIdxById
+    getIdxById,
 }
 
 const YT_API_Key = 'AIzaSyDY1FSaJrD0PrUG8bPx8Q1lC4g3j9RT9P0'
@@ -20,18 +20,18 @@ function query(filterBy) {
     let notes = storageService.loadFromStorage(STORAGE_KEY)
     if (!notes) {
         notes = getNotes()
-       storageService.saveToStorage(STORAGE_KEY,notes)
+        storageService.saveToStorage(STORAGE_KEY, notes)
     }
 
     if (filterBy) {
-        let { title, noteType, label } = filterBy
+        let { title, noteType, } = filterBy
 
-        notes = notes.filter(note => (
-            note.info.title.toUpperCase().includes(title.toUpperCase()) &&
-            note.type.toUpperCase().includes(noteType.toUpperCase())
-            //  &&
-            // note.labels.includes(label) 
-        ))
+        notes = notes.filter(note => {
+            return (
+                note.info.title.toUpperCase().includes(title.toUpperCase()) &&
+                note.type.includes(noteType)
+            )
+        })
     }
 
     return notes
@@ -76,6 +76,7 @@ function createNoteTodos(title, todos) {
         backgroundColor: utilService.getRandomColor(),
         type: "note-todos",
         isPinned: false,
+        labels: [],
         info: {
             title,
             todos
@@ -89,6 +90,7 @@ function createNoteVideo(title, videoUrl) {
         id: utilService.makeId(),
         type: "note-video",
         isPinned: false,
+        labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
             title,
@@ -107,6 +109,7 @@ function createNoteImg(title, imgUrl) {
         id: utilService.makeId(),
         type: "note-img",
         isPinned: false,
+        labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
             title,
@@ -124,6 +127,7 @@ function createNoteTxt(title, txt) {
         id: utilService.makeId(),
         type: "note-txt",
         isPinned: false,
+        labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
             title,
@@ -141,6 +145,7 @@ const notes = [
         id: "n101",
         type: "note-txt",
         isPinned: false,
+        labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
             title: "TITLE",
@@ -152,6 +157,7 @@ const notes = [
         backgroundColor: utilService.getRandomColor(),
         type: "note-img",
         isPinned: false,
+        labels: [],
         info: {
             imgUrl: "assets/img/white-horse.png",
             title: "APPSUS🦾"
@@ -164,16 +170,17 @@ const notes = [
         id: "n103",
         type: "note-todos",
         isPinned: false,
+        labels: [],
         backgroundColor: utilService.getRandomColor(),
         info: {
             title: "Sprint🥉 Todos",
             todos: [
                 { txt: "Finish Todos list", doneAt: '08/26/2022 19:08', id: utilService.makeId() },
-                { txt: "Finish Filter && Labels", doneAt: null, id: utilService.makeId() },
+                { txt: "Finish Filter && Labels", doneAt: '08/27/2022 15:11', id: utilService.makeId() },
                 { txt: "Make it Asynchronized", doneAt: null, id: utilService.makeId() },
-                { txt: "CSS Design 🧑‍🎨", doneAt: null, id: utilService.makeId() },
+                { txt: "Debugging 🐛🐛🐛", doneAt: '08/27/2022 16:45', id: utilService.makeId() },
+                { txt: "CSS Design 🧑‍🎨 && Responsivity 📱", doneAt: null, id: utilService.makeId() },
                 { txt: "Integration", doneAt: null, id: utilService.makeId() },
-                { txt: "Canvas Note 🖌️", doneAt: null, id: utilService.makeId() },
                 { txt: "Drag&Drop 🤚", doneAt: null, id: utilService.makeId() },
                 { txt: "Add note by blur 👆", doneAt: null, id: utilService.makeId() },
                 { txt: "Clean Code 🧹", doneAt: null, id: utilService.makeId() },
@@ -185,6 +192,7 @@ const notes = [
         type: "note-video",
         backgroundColor: utilService.getRandomColor(),
         isPinned: false,
+        labels: [],
         info: {
             videoUrl: "https://www.youtube.com/embed/FWy_LbhHtug",
             title: "Video killed the radio"
