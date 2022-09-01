@@ -12,7 +12,7 @@ export const noteService = {
     getIdxById,
 }
 
-const YT_API_Key = 'AIzaSyDY1FSaJrD0PrUG8bPx8Q1lC4g3j9RT9P0'
+const YT_API_Key = ''
 const KEY = 'videosDB'
 const STORAGE_KEY = 'notesDB'
 
